@@ -107,7 +107,8 @@ namespace QLSVHTC
             }
             Program.myReader.Close();
 
-            
+            //123
+            //3455
             
 
             if (Convert.IsDBNull(Program.username))
