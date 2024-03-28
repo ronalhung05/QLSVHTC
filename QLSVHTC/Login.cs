@@ -64,7 +64,7 @@ namespace QLSVHTC
             {
                 if (txbTaiKhoan.Text.Trim() == "" || txbMatKhau.Text.Trim() == "")
                 {
-                    MessageBox.Show("Login name và mật khẩu không được trống", "", MessageBoxButtons.OK);
+                    MessageBox.Show("Login name và mật khẩu không được trống!", "", MessageBoxButtons.OK);
                     return;
                 }
             }
