@@ -19,7 +19,7 @@ namespace QLSVHTC
         {
             InitializeComponent();
         }
-
+        ///ed
 
         private void frmLTC_Load(object sender, EventArgs e)
         {
