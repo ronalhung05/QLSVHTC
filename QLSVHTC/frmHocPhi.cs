@@ -8,25 +8,27 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace QLSVHTC
 {
     public partial class frmHocPhi : DevExpress.XtraEditors.XtraForm
     {
-        BindingSource bdsHocPhi = new BindingSource();
+        BindingSource bdsHocPhi = new BindingSource(); //sử dụng cho binding tự định nghĩa 
         BindingSource bdsCTHP = new BindingSource();
         int vitri = 0;
         int vitri1 = 0;
         public frmHocPhi()
         {
             InitializeComponent();
+            
         }
         void loadHP()
         {
             string cmd1 = "EXEC [dbo].[SP_GetInfoSV_HP] '" + txbMaSV.Text + "'";
             SqlDataReader reader = Program.ExecSqlDataReader(cmd1);
-            if (reader.HasRows == false)
+            if (reader.HasRows == false) //không tìm thấy id 
             {
                 MessageBox.Show("Mã sinh viên không tồn tại");
                 reader.Close();
@@ -40,9 +42,10 @@ namespace QLSVHTC
 
 
             string cmd2 = "EXEC dbo.SP_GetDSHP_SV '" + txbMaSV.Text + "'";
-            DataTable tableHocPhi = Program.ExecSqlDataTable(cmd2);
+            DataTable tableHocPhi = Program.ExecSqlDataTable(cmd2); //lấy ra bảng dữ liệu để thao tác
             this.bdsHocPhi.DataSource = tableHocPhi;
-            this.gridHocPhi.DataSource = this.bdsHocPhi;
+            this.gridHocPhi.DataSource = this.bdsHocPhi; //grid là về giao diện, bds là về dữ liệu 
+   
         }
         private void btnTim_Click(object sender, EventArgs e)
         {
@@ -107,8 +110,8 @@ namespace QLSVHTC
             string nienkhoa = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["NIENKHOA"].ToString();
             string hocki = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["HOCKY"].ToString();
             string hocphi = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["HOCPHI"].ToString();
-            bdsHocPhi.EndEdit();
-            bdsHocPhi.ResetCurrentItem();
+            bdsHocPhi.EndEdit(); //commit change made to the current row
+            bdsHocPhi.ResetCurrentItem(); //refresh current row
             SqlConnection conn = new SqlConnection(Program.connstr);
             // bắt đầu transaction
             SqlTransaction tran;
@@ -117,7 +120,7 @@ namespace QLSVHTC
             tran = conn.BeginTransaction();
             try
             {
-                SqlCommand cmd = new SqlCommand("TAO_THONGTINHOCPHI", conn);
+                SqlCommand cmd = new SqlCommand("TAO_THONGTINHOCPHI", conn); //exec sp
                 cmd.Connection = conn;
                 cmd.Transaction = tran;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -126,7 +129,7 @@ namespace QLSVHTC
                 cmd.Parameters.Add(new SqlParameter("@HocKy", hocki));
                 cmd.Parameters.Add(new SqlParameter("@HocPhi", hocphi));
                 cmd.ExecuteNonQuery();
-                tran.Commit();
+                tran.Commit(); // END TRANS
                 MessageBox.Show("Thêm học phí thành công!");
                 loadHP();
 
@@ -152,6 +155,7 @@ namespace QLSVHTC
             finally
             {
                 conn.Close();
+
             }
         }
 
@@ -273,7 +277,7 @@ namespace QLSVHTC
                 string cmd = "EXEC dbo.SP_GetCTHP_SV '" + msv + "', '" + nienkhoa + "', '" + hocki + "'";
                 DataTable tableCTHP = Program.ExecSqlDataTable(cmd);
                 this.bdsCTHP.DataSource = tableCTHP;
-                this.gridHocPhi.DataSource = this.bdsCTHP;
+                this.gridCTHP.DataSource = this.bdsCTHP;
             }
         }
 
@@ -365,6 +369,24 @@ namespace QLSVHTC
             {
                 conn.Close();
             }
+        }
+
+        private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            this.Close();   
+        }
+
+        private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            loadHP();
+        }
+
+        private void gridCTHP_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                this.contextMenuStrip1.Show(gridCTHP.PointToScreen(e.Location));
+            }   
         }
     }
 }

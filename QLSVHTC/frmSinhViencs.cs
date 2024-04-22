@@ -17,6 +17,7 @@ namespace QLSVHTC
         string macn = "";
         private string _flagOptionSinhVien;
         private string _oldMaSV;
+        private string _oldMaLop;
         public frmSinhVien()
         {
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace QLSVHTC
             this.LOPTableAdapter.Fill(this.DS.LOP);
             this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
 
-            macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString();
+            macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
             cmbKhoa.DataSource = Program.bds_dspm;
             cmbKhoa.DisplayMember = "TENKHOA";
             cmbKhoa.ValueMember = "TENSERVER";
@@ -58,9 +59,12 @@ namespace QLSVHTC
             txbMaSV.Enabled = true;
 
             bdsSinhVien.AddNew();
-            txbMaLop.Text = ((DataRowView)bdsLop[bdsLop.Position])["MALOP"].ToString();
+            txbMaLop.Enabled = false;
+            txbMaLop.Text = ((DataRowView)bdsLop[bdsLop.Position])["MALOP"].ToString().Trim();
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnGhi.Enabled = btnPhucHoi.Enabled = true;
+
+            lOPGridControl.Enabled = false;
             sINHVIENGridControl.Enabled = false;
         }
 
@@ -95,38 +99,50 @@ namespace QLSVHTC
                 this.DANGKYTableAdapter.Fill(this.DS.DANGKY);
 
 
-                macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString();
+                macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
             }
         }
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if(bdsSinhVien.Count == 0)
+            {
+                MessageBox.Show("Lớp học này không tồn tại sinh viên", "", MessageBoxButtons.OK);
+                return;
+            }
             vitri = bdsSinhVien.Position;
             _flagOptionSinhVien = "UPDATE";
             _oldMaSV = txbMaSV.Text.Trim();
-
+            _oldMaLop = txbMaLop.ToString();
 
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnPhucHoi.Enabled = false;
             btnGhi.Enabled = true;
             txbMaSV.Enabled = false;
+
+            lOPGridControl.Enabled = false;
             sINHVIENGridControl.Enabled = false;
         }
        
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string masv = "";
-            if (bdsDangKy.Count > 0)
+            if(bdsSinhVien.Count > 0 && bdsDangKy.Count > 0) 
             {
                 MessageBox.Show("Không thể xóa sinh viên này vì sinh viên đã đăng kí lớp tín chỉ", "", MessageBoxButtons.OK);
                 return;
             }
 
+            if (bdsSinhVien.Count == 0)
+            {
+                MessageBox.Show("Lớp học này không tồn tại sinh viên", "", MessageBoxButtons.OK);
+                return;
+            }
 
             if (MessageBox.Show("Bạn có thật sự muốn xóa sinh viên khỏi lớp học này ?", "", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 try
                 {
-                    masv = ((DataRowView)bdsSinhVien[bdsSinhVien.Position])["MASV"].ToString();
+                    masv = ((DataRowView)bdsSinhVien[bdsSinhVien.Position])["MASV"].ToString().Trim();
                     bdsSinhVien.RemoveCurrent();
                     this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.SINHVIENTableAdapter.Update(this.DS.SINHVIEN);
@@ -139,7 +155,7 @@ namespace QLSVHTC
                     return;
                 }
             }
-            if (bdsSinhVien.Count == 0) btnXoa.Enabled = false;
+            if (bdsLop.Count == 0) btnXoa.Enabled = false;
         }
         private bool validatorSinhVien()
         {
@@ -249,6 +265,32 @@ namespace QLSVHTC
             }
             return true;
         }
+        //private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        //{
+        //    if (validatorSinhVien() == true)
+        //    {
+        //        try
+        //        {
+        //            bdsSinhVien.EndEdit();
+        //            bdsSinhVien.ResetCurrentItem();
+        //            this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+        //            this.SINHVIENTableAdapter.Update(this.DS.SINHVIEN);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Lỗi ghi sinh viên: " + ex.Message, "", MessageBoxButtons.OK);
+        //            return;
+        //        }
+        //        lOPGridControl.Enabled = true;
+        //        sINHVIENGridControl.Enabled = true;
+        //        btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+        //        btnGhi.Enabled = btnPhucHoi.Enabled = false;
+        //    }
+        //    else
+        //    {
+        //        return;
+        //    }
+        //}
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (validatorSinhVien() == true)
@@ -258,23 +300,42 @@ namespace QLSVHTC
                     bdsSinhVien.EndEdit();
                     bdsSinhVien.ResetCurrentItem();
                     this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
-                    this.SINHVIENTableAdapter.Update(this.DS.SINHVIEN);
+
+                    string newClass = txbMaLop.ToString().Trim();
+                    bool isClassChanged = _oldMaLop.Equals(newClass); // Check department change
+                    String text = isClassChanged.ToString();
+                    if (isClassChanged == false)
+                    {
+                        if (newClass != "CNTT" && newClass != "VT")
+                        {
+                            XtraMessageBox.Show("Lớp bạn nhập không tồn tại, hãy nhập lớp đúng", "", MessageBoxButtons.OK);
+                            return;
+                        }
+
+                        // Department change confirmed 
+                        String query = "EXEC SP_ChangeClassSV \n"
+                                   + "@MASV = N'" + txbMaSV.Text + "', @HO = N'" + txbHo.Text + "', @TEB = N'" + txbTen.Text + "', @PHAI = " + (cbPhai.Checked ? 1 : 0) 
+                                   + ",@DIACHI = N'" + txbDiaChi.Text + "', @NGAYSINH = N'" + cmbNgaySinh.Text + "', @MALOP = N'" + txbMaLop.Text 
+                                   + "',@DANGHIHOC = N'" + (cbDangNghiHoc.Checked ? 1 : 0) ;
+                        if (Program.ExecSqlNonQuery(query) == 0)
+                        {
+                            MessageBox.Show("Chuyển lớp và cập nhật thành công!");
+                        }
+                    }
+                    else this.SINHVIENTableAdapter.Update(this.DS.SINHVIEN);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi ghi sinh viên: " + ex.Message, "", MessageBoxButtons.OK);
+                    MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
-                sINHVIENGridControl.Enabled = true;
+
+                lOPGridControl.Enabled = true;
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
                 btnGhi.Enabled = btnPhucHoi.Enabled = false;
-            }
-            else
-            {
-                return;
+                txbMaLop.Enabled = true; 
             }
         }
-
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsSinhVien.CancelEdit();

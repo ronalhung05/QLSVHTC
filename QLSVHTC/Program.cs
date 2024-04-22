@@ -14,7 +14,7 @@ namespace QLSVHTC
     {
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
-        public static String connstr_publisher = "Data Source=ASUS-VIVOBOOK15\\SQL;Initial Catalog=QLDSV_TC;Integrated Security=True;TrustServerCertificate=true;Encrypt=false";
+        public static String connstr_publisher = "Data Source=ASUS-VIVOBOOK15\\SQL;Initial Catalog=QLDSV_TC;Integrated Security=True;TrustServerCertificate=true";
 
         public static SqlDataReader myReader;
         public static String servername = "";
@@ -24,7 +24,7 @@ namespace QLSVHTC
 
         public static String database = "QLDSV_TC";
         public static String remotelogin = "HTKN";
-        public static String remotepassword = "234";
+        public static String remotepassword = "123";
 
         public static String mloginDN = "";
         public static String passwordDN = "";
@@ -43,7 +43,7 @@ namespace QLSVHTC
             {
                 Program.connstr = "Data Source=" + Program.servername + ";Initial Catalog=" +
                       Program.database + ";User ID=" +
-                      Program.mlogin + ";password=" + Program.password;
+                      Program.mlogin + ";password=" + Program.password + ";TrustServerCertificate=true";
                 Program.conn.ConnectionString = Program.connstr;
                 Program.conn.Open();
                 return 1;
@@ -122,7 +122,9 @@ namespace QLSVHTC
                 return -1;
             }
             dataReader.Read();
+            //only 1 row 
             int result = int.Parse(dataReader.GetValue(0).ToString());
+            //retreive value form the 1st column
             dataReader.Close();
             return result;
         }
@@ -132,7 +134,7 @@ namespace QLSVHTC
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             mainForm = new MainForm();
-            Application.Run(new Login());
+            Application.Run(new frmLogin());
         }
     }
 }

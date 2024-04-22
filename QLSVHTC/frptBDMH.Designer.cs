@@ -1,6 +1,6 @@
 ﻿namespace QLSVHTC
 {
-    partial class BDMH
+    partial class frptBDMH
     {
         /// <summary>
         /// Required designer variable.

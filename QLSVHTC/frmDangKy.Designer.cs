@@ -404,7 +404,7 @@
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl3.Location = new System.Drawing.Point(0, 152);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1226, 36);
+            this.panelControl3.Size = new System.Drawing.Size(1226, 37);
             this.panelControl3.TabIndex = 10;
             // 
             // label7
@@ -432,7 +432,7 @@
             this.panelControl4.Controls.Add(this.gridLTC);
             this.panelControl4.Controls.Add(this.gridSV);
             this.panelControl4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl4.Location = new System.Drawing.Point(0, 188);
+            this.panelControl4.Location = new System.Drawing.Point(0, 189);
             this.panelControl4.Name = "panelControl4";
             this.panelControl4.Size = new System.Drawing.Size(1226, 263);
             this.panelControl4.TabIndex = 11;
@@ -481,9 +481,9 @@
             this.panelControl5.Controls.Add(this.label9);
             this.panelControl5.Controls.Add(this.label5);
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelControl5.Location = new System.Drawing.Point(0, 451);
+            this.panelControl5.Location = new System.Drawing.Point(0, 452);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(596, 172);
+            this.panelControl5.Size = new System.Drawing.Size(596, 171);
             this.panelControl5.TabIndex = 12;
             // 
             // btnDangKi
@@ -545,19 +545,19 @@
             this.panelControl6.Controls.Add(this.gridHuyLTC);
             this.panelControl6.Controls.Add(this.panelControl7);
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl6.Location = new System.Drawing.Point(596, 451);
+            this.panelControl6.Location = new System.Drawing.Point(596, 452);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(630, 172);
+            this.panelControl6.Size = new System.Drawing.Size(630, 171);
             this.panelControl6.TabIndex = 13;
             // 
             // gridHuyLTC
             // 
             this.gridHuyLTC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridHuyLTC.Location = new System.Drawing.Point(2, 44);
+            this.gridHuyLTC.Location = new System.Drawing.Point(2, 33);
             this.gridHuyLTC.MainView = this.gridView3;
             this.gridHuyLTC.MenuManager = this.barManager1;
             this.gridHuyLTC.Name = "gridHuyLTC";
-            this.gridHuyLTC.Size = new System.Drawing.Size(626, 126);
+            this.gridHuyLTC.Size = new System.Drawing.Size(626, 136);
             this.gridHuyLTC.TabIndex = 1;
             this.gridHuyLTC.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -573,14 +573,14 @@
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl7.Location = new System.Drawing.Point(2, 2);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(626, 42);
+            this.panelControl7.Size = new System.Drawing.Size(626, 31);
             this.panelControl7.TabIndex = 0;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(203, 11);
+            this.label8.Location = new System.Drawing.Point(205, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(249, 19);
             this.label8.TabIndex = 3;

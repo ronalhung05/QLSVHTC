@@ -6,22 +6,20 @@ using System.Drawing;
 
 namespace QLSVHTC
 {
-    public partial class XtraReport1 : DevExpress.XtraReports.UI.XtraReport
+    public partial class rDSLTC : DevExpress.XtraReports.UI.XtraReport
     {
-        public XtraReport1()
+        public rDSLTC()
         {
             InitializeComponent();
         }
-
-        public XtraReport1(string nienkhoa, int hocky, int nhom, string monhoc)
+        public rDSLTC(String nienkhoa, int hocky)
         {
             InitializeComponent();
             this.sqlDataSource1.Connection.ConnectionString = Program.connstr;
             this.sqlDataSource1.Queries[0].Parameters[0].Value = nienkhoa;
             this.sqlDataSource1.Queries[0].Parameters[1].Value = hocky;
-            this.sqlDataSource1.Queries[0].Parameters[2].Value = nienkhoa;
-            this.sqlDataSource1.Queries[0].Parameters[3].Value = hocky;
             this.sqlDataSource1.Fill();
         }
+
     }
 }

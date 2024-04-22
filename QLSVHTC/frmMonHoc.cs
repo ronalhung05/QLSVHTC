@@ -55,6 +55,8 @@ namespace QLSVHTC
 
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnGhi.Enabled = btnPhucHoi.Enabled = true;
+
+            mONHOCGridControl.Enabled = false;
         }
 
         private bool validatorMonHoc()
@@ -188,10 +190,12 @@ namespace QLSVHTC
  
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
                 btnGhi.Enabled = btnPhucHoi.Enabled = false;
+                mONHOCGridControl.Enabled = true;
 
             }
             else
             {
+                mONHOCGridControl.Enabled = true;
                 return;
             }
         }
@@ -207,6 +211,7 @@ namespace QLSVHTC
             panelControl1.Enabled = true;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnPhucHoi.Enabled = false;
             btnGhi.Enabled = true;
+            mONHOCGridControl.Enabled = false;
             //MONHOCGridControl.Enabled = false;
         }
 

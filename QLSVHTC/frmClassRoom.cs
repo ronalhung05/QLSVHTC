@@ -13,7 +13,7 @@ namespace QLSVHTC
 {
     public partial class frmClassRoom : DevExpress.XtraEditors.XtraForm
     {
-        int vitri = 0;
+        int vitri = 0; //selected row in the table 
         string macn = "";
         private string _flagOptionLop;
         private string _oldMaLop = "";
@@ -32,7 +32,7 @@ namespace QLSVHTC
             this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
             this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
             this.LOPTableAdapter.Fill(this.DS.LOP);
-            macn = ((DataRowView)dbsClass[0])["MAKHOA"].ToString();
+            macn = ((DataRowView)dbsClass[0])["MAKHOA"].ToString().Trim();
             cmbKhoa.DataSource = Program.bds_dspm;
             cmbKhoa.DisplayMember = "TENKHOA";
             cmbKhoa.ValueMember = "TENSERVER";
@@ -41,6 +41,7 @@ namespace QLSVHTC
             {
                 cmbKhoa.Enabled = false;
             }
+            txbMaKhoa.Enabled = false;
         }
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
@@ -76,17 +77,15 @@ namespace QLSVHTC
         {
             vitri = dbsClass.Position;
             _flagOptionLop = "ADD";
-            //txbMaLop.Enabled = false;   
-            panelControl2.Enabled = true;
-            dbsClass.AddNew();
+            dbsClass.AddNew(); // new row in bds
             txbMaKhoa.Text = macn;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnGhi.Enabled = btnPhucHoi.Enabled = true;
-            lOPGridControl.Enabled = false;
+            lOPGridControl.Enabled = false;//disable selecting rows in table 
         }
 
         private bool validatorLopHoc()
-        {
+        { 
             if (txbMaLop.Text.Trim() == "")
             {
                 MessageBox.Show("Mã lớp không được thiếu!", "", MessageBoxButtons.OK);
@@ -164,31 +163,6 @@ namespace QLSVHTC
 
             if (_flagOptionLop == "UPDATE")
             {
-                if (!this.txbMaLop.Text.Trim().ToString().Equals(_oldMaLop))// Nếu mã lớp thay đổi so với ban đầu
-                {
-                    //TODO: Check mã lớp có tồn tại chưa
-                    string query1 = "DECLARE  @return_value int \n"
-                                + "EXEC  @return_value = SP_CHECKID \n"
-                                + "@Code = N'" + txbMaLop.Text + "',@Type = N'MALOP' \n"
-                                + "SELECT  'Return Value' = @return_value ";
-
-                    int resultMa = Program.CheckDataHelper(query1);
-                    if (resultMa == -1)
-                    {
-                        XtraMessageBox.Show("Lỗi kết nối với database. Mời ban xem lại !", "", MessageBoxButtons.OK);
-                        this.Close();
-                    }
-                    if (resultMa == 1)
-                    {
-                        XtraMessageBox.Show("Mã lớp đã tồn tại ở Khoa hiên tại !", "", MessageBoxButtons.OK);
-                        return false;
-                    }
-                    if (resultMa == 2)
-                    {
-                        XtraMessageBox.Show("Mã lớp đã tồn tại ở Khoa khác !", "", MessageBoxButtons.OK);
-                        return false;
-                    }
-                }
                 if (!this.txbTenLop.Text.Trim().ToString().Equals(_oldTenLop))
                 {
                     // TODO : Check tên lớp có tồn tại chưa
@@ -217,6 +191,33 @@ namespace QLSVHTC
 
             return true;
         }
+        //private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        //{
+        //    if (validatorLopHoc() == true)
+        //    {
+        //        try
+        //        {
+        //            dbsClass.EndEdit();
+        //            dbsClass.ResetCurrentItem();
+        //            this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
+        //            this.LOPTableAdapter.Update(this.DS.LOP); //update csdl
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
+        //            return;
+        //        }
+        //        lOPGridControl.Enabled = true;
+        //        btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+        //        btnGhi.Enabled = btnPhucHoi.Enabled = false;
+        //        //panelControl2.Enabled = true;
+        //        txbMaLop.Enabled = true;
+        //    }
+        //    else
+        //    {
+        //        return;
+        //    }
+        //}
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (validatorLopHoc() == true)
@@ -226,21 +227,39 @@ namespace QLSVHTC
                     dbsClass.EndEdit();
                     dbsClass.ResetCurrentItem();
                     this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
-                    this.LOPTableAdapter.Update(this.DS.LOP);
+
+                    string newDepartment = txbMaKhoa.Text.Trim();
+                    bool isDepartmentChanged = macn.Equals(newDepartment); // Check department change
+                    String text = isDepartmentChanged.ToString();
+                    if (isDepartmentChanged == false)
+                    {
+                        if (newDepartment != "CNTT" && newDepartment != "VT")
+                        {
+                            XtraMessageBox.Show("Lỗi kết nối về Khoa, Mời bạn nhập đúng Khoa!", "", MessageBoxButtons.OK);
+                            return;
+                        }
+
+                        // Department change confirmed 
+                        String query = "EXEC SP_ChangeClass \n"
+                                   + "@MALOP = N'" + txbMaLop.Text + "', @TENLOP = N'" + txbTenLop.Text + "', @KHOAHOC = N'" + txbKhoaHoc.Text + "', @MAKHOA = N'" + txbMaKhoa.Text + "'";
+                        if (Program.ExecSqlNonQuery(query) == 0)
+                        {
+                            MessageBox.Show("Chuyển Khoa và cập nhật thành công!");
+                        }
+                    }
+                    else this.LOPTableAdapter.Update(this.DS.LOP);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
+
                 lOPGridControl.Enabled = true;
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
                 btnGhi.Enabled = btnPhucHoi.Enabled = false;
-                panelControl2.Enabled = true;
-            }
-            else
-            {
-                return;
+                //panelControl2.Enabled = true;
+                txbMaLop.Enabled = true; // Optional: Re-enable editing class code field after update
             }
         }
 
@@ -248,10 +267,11 @@ namespace QLSVHTC
         {
             vitri = dbsClass.Position;
             _flagOptionLop = "UPDATE";
-            _oldMaLop = this.txbMaLop.Text.Trim();
+            //_oldMaLop = this.txbMaLop.Text.Trim();
             _oldTenLop = this.txbTenLop.Text.Trim();
             txbMaLop.Enabled = false;
-            panelControl2.Enabled = true;
+            txbMaKhoa.Enabled = true;
+            //panelControl2.Enabled = true;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnPhucHoi.Enabled = false;
             btnGhi.Enabled = true;
             lOPGridControl.Enabled = false;
@@ -279,7 +299,7 @@ namespace QLSVHTC
                 {
                     MessageBox.Show("Lỗi xóa lớp học: " + ex.Message, "", MessageBoxButtons.OK);
                     this.LOPTableAdapter.Fill(this.DS.LOP);
-                    dbsClass.Position = dbsClass.Find("MALOP", malop);
+                    dbsClass.Position = dbsClass.Find("MALOP", malop); //BACK TO CURRENT POSITION
                     return;
                 }
             }
@@ -293,7 +313,7 @@ namespace QLSVHTC
             dbsClass.CancelEdit();
             if (btnThem.Enabled == false) dbsClass.Position = vitri;
             lOPGridControl.Enabled = true;
-            panelControl2.Enabled = true;
+            //panelControl2.Enabled = true;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
             btnGhi.Enabled = btnPhucHoi.Enabled = false;
             frmClassRoom_Load(sender, e);
@@ -325,12 +345,12 @@ namespace QLSVHTC
             this.Close();
         }
 
-        private void btnHuy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            panelControl2.Enabled = false;
-            lOPGridControl.Enabled = true;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnGhi.Enabled = true;
-        }
+        //private void btnHuy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        //{
+        //    panelControl2.Enabled = false;
+        //    lOPGridControl.Enabled = true;
+        //    btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnGhi.Enabled = true;
+        //}
 
     }
 }

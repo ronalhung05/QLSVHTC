@@ -12,18 +12,15 @@ using System.Windows.Forms;
 
 namespace QLSVHTC
 {
-    public partial class BDMH : DevExpress.XtraEditors.XtraForm
+    public partial class frptDSLTC : DevExpress.XtraEditors.XtraForm
     {
-        public BDMH()
+        public frptDSLTC()
         {
             InitializeComponent();
         }
 
-        private void BDMH_Load(object sender, EventArgs e)
+        private void frmDSLTC_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dS.MONHOC' table. You can move, or remove it, as needed.
-            this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
-            this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
             cmbKhoa.DataSource = Program.bds_dspm;
             cmbKhoa.DisplayMember = "TENKHOA";
             cmbKhoa.ValueMember = "TENSERVER";
@@ -32,12 +29,10 @@ namespace QLSVHTC
             {
                 cmbKhoa.Enabled = false;
             }
-            cmbMonHoc.DataSource = bdsMonHoc;
-            cmbMonHoc.DisplayMember = "TENMH";
-            cmbMonHoc.ValueMember = "TENMH";
             loadcmbNienkhoa();
             cmbNienKhoa.SelectedIndex = 0;
         }
+
         void loadcmbNienkhoa()
         {
             DataTable dt = new DataTable();
@@ -50,6 +45,7 @@ namespace QLSVHTC
             cmbNienKhoa.DisplayMember = "NIENKHOA";
             cmbNienKhoa.ValueMember = "NIENKHOA";
         }
+
         void loadcmbHocKi(string nienkhoa)
         {
             DataTable dt = new DataTable();
@@ -62,29 +58,11 @@ namespace QLSVHTC
             cmbHocKi.DisplayMember = "HOCKY";
             cmbHocKi.ValueMember = "HOCKY";
         }
-        void loadcmbNhom(string nienkhoa, string hocki)
-        {
-            DataTable dt = new DataTable();
-            string cmd = "EXEC dbo.GetAllNhom '" + nienkhoa + "', " + hocki;
-            dt = Program.ExecSqlDataTable(cmd);
-
-            BindingSource bdsNhom = new BindingSource();
-            bdsNhom.DataSource = dt;
-            cmbNhom.DataSource = bdsNhom;
-            cmbNhom.DisplayMember = "NHOM";
-            cmbNhom.ValueMember = "NHOM";
-        }
 
         private void cmbNienKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadcmbHocKi(cmbNienKhoa.Text);
             //cmbHocKi.SelectedIndex = 0;
-        }
-
-        private void cmbHocKi_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadcmbNhom(cmbNienKhoa.Text, cmbHocKi.Text);
-            cmbNhom.SelectedIndex = 0;
         }
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
@@ -117,13 +95,9 @@ namespace QLSVHTC
         {
             string nienkhoa = cmbNienKhoa.Text;
             int hocky = Int32.Parse(cmbHocKi.Text);
-            int nhom = Int32.Parse(cmbNhom.Text);
-            string monhoc = cmbMonHoc.SelectedValue.ToString();
             string khoa = cmbKhoa.Text;
-            XtraReport1 rpt = new XtraReport1(nienkhoa, hocky, nhom, monhoc);
-            rpt.lbMH.Text = monhoc;
+            rDSLTC rpt = new rDSLTC(nienkhoa, hocky);
             rpt.lbHK.Text = hocky.ToString();
-            rpt.lbNhom.Text = nhom.ToString();
             rpt.lbNK.Text = nienkhoa;
             rpt.lbKhoa.Text = khoa;
             ReportPrintTool print = new ReportPrintTool(rpt);

@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace QLSVHTC
 {
-    public partial class Login : DevExpress.XtraEditors.XtraForm
+    public partial class frmLogin : DevExpress.XtraEditors.XtraForm
     {
         private bool isSinhVien = false;
         private SqlConnection conn_publisher = new SqlConnection();
-        public Login()
+        public frmLogin()
         {
             InitializeComponent();
         }

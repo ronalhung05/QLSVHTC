@@ -185,11 +185,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BDMH.cs">
+    <Compile Include="frptBDMH.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BDMH.Designer.cs">
-      <DependentUpon>BDMH.cs</DependentUpon>
+    <Compile Include="frptBDMH.Designer.cs">
+      <DependentUpon>frptBDMH.cs</DependentUpon>
     </Compile>
     <Compile Include="DS.cs">
       <DependentUpon>DS.xsd</DependentUpon>
@@ -217,11 +217,29 @@
     <Compile Include="frmDiem.Designer.cs">
       <DependentUpon>frmDiem.cs</DependentUpon>
     </Compile>
+    <Compile Include="frptDiemSV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frptDiemSV.Designer.cs">
+      <DependentUpon>frptDiemSV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frptDSLTC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frptDSLTC.Designer.cs">
+      <DependentUpon>frptDSLTC.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHocPhi.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHocPhi.Designer.cs">
       <DependentUpon>frmHocPhi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frptInHP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frptInHP.Designer.cs">
+      <DependentUpon>frptInHP.cs</DependentUpon>
     </Compile>
     <Compile Include="frmLTC.cs">
       <SubType>Form</SubType>
@@ -241,11 +259,17 @@
     <Compile Include="frmSinhViencs.Designer.cs">
       <DependentUpon>frmSinhViencs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="frptSVDKLTC.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="frptSVDKLTC.Designer.cs">
+      <DependentUpon>frptSVDKLTC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -261,14 +285,32 @@
     <Compile Include="rBDMH.Designer.cs">
       <DependentUpon>rBDMH.cs</DependentUpon>
     </Compile>
-    <Compile Include="XtraReport1.cs">
+    <Compile Include="rDSLTC.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="XtraReport1.Designer.cs">
-      <DependentUpon>XtraReport1.cs</DependentUpon>
+    <Compile Include="rDSLTC.Designer.cs">
+      <DependentUpon>rDSLTC.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BDMH.resx">
-      <DependentUpon>BDMH.cs</DependentUpon>
+    <Compile Include="rDSV.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rDSV.Designer.cs">
+      <DependentUpon>rDSV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rHocPhi.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rHocPhi.Designer.cs">
+      <DependentUpon>rHocPhi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rSVDKLTC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rSVDKLTC.Designer.cs">
+      <DependentUpon>rSVDKLTC.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frptBDMH.resx">
+      <DependentUpon>frptBDMH.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmClassRoom.resx">
       <DependentUpon>frmClassRoom.cs</DependentUpon>
@@ -279,8 +321,17 @@
     <EmbeddedResource Include="frmDiem.resx">
       <DependentUpon>frmDiem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frptDiemSV.resx">
+      <DependentUpon>frptDiemSV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frptDSLTC.resx">
+      <DependentUpon>frptDSLTC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHocPhi.resx">
       <DependentUpon>frmHocPhi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frptInHP.resx">
+      <DependentUpon>frptInHP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLTC.resx">
       <DependentUpon>frmLTC.cs</DependentUpon>
@@ -291,8 +342,11 @@
     <EmbeddedResource Include="frmSinhViencs.resx">
       <DependentUpon>frmSinhViencs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="frptSVDKLTC.resx">
+      <DependentUpon>frptSVDKLTC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -310,8 +364,17 @@
     <EmbeddedResource Include="rBDMH.resx">
       <DependentUpon>rBDMH.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="XtraReport1.resx">
-      <DependentUpon>XtraReport1.cs</DependentUpon>
+    <EmbeddedResource Include="rDSLTC.resx">
+      <DependentUpon>rDSLTC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rDSV.resx">
+      <DependentUpon>rDSV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rHocPhi.resx">
+      <DependentUpon>rHocPhi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rSVDKLTC.resx">
+      <DependentUpon>rSVDKLTC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="DS.xsc">

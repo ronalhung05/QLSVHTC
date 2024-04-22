@@ -119,14 +119,60 @@ namespace QLSVHTC
 
         private void btnBDMH_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Form frm = this.CheckExists(typeof(BDMH));
+            Form frm = this.CheckExists(typeof(frptBDMH));
             if (frm != null) { frm.Activate(); }
             else
             {
-                BDMH f = new BDMH();
+                frptBDMH f = new frptBDMH();
                 f.MdiParent = this;
                 f.Show();
             }
+        }
+
+        private void ribbonControl1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDSLTC_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frptDSLTC));
+            if (frm != null) { frm.Activate(); }
+            else
+            {
+                frptDSLTC f = new frptDSLTC();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void btnSVDKLTC_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frptSVDKLTC));
+            if (frm != null) { frm.Activate(); }
+            else
+            {
+                frptSVDKLTC f = new frptSVDKLTC();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void btnDiemSV_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frmDiemSV));
+            if (frm != null) { frm.Activate(); }
+            else
+            {
+                frmDiemSV f = new frmDiemSV();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
         }
     }
 }

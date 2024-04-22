@@ -36,8 +36,8 @@
             System.Windows.Forms.Label nGAYSINHLabel;
             System.Windows.Forms.Label dIACHILabel;
             System.Windows.Forms.Label dANGHIHOCLabel;
-            System.Windows.Forms.Label mALOPLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSinhVien));
+            System.Windows.Forms.Label mALOPLabel;
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.btnThem = new DevExpress.XtraBars.BarButtonItem();
@@ -46,13 +46,13 @@
             this.btnGhi = new DevExpress.XtraBars.BarButtonItem();
             this.btnPhucHoi = new DevExpress.XtraBars.BarButtonItem();
             this.btnLamMoi = new DevExpress.XtraBars.BarButtonItem();
-            this.btnHuy = new DevExpress.XtraBars.BarButtonItem();
             this.btnThoat = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.btnHuy = new DevExpress.XtraBars.BarButtonItem();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.cmbKhoa = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -81,7 +81,6 @@
             this.colMALOP1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDANGHIHOC = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
-            this.txbMaLop = new DevExpress.XtraEditors.TextEdit();
             this.cbDangNghiHoc = new DevExpress.XtraEditors.CheckEdit();
             this.txbDiaChi = new DevExpress.XtraEditors.TextEdit();
             this.cmbNgaySinh = new DevExpress.XtraEditors.DateEdit();
@@ -91,6 +90,7 @@
             this.txbMaSV = new DevExpress.XtraEditors.TextEdit();
             this.bdsDangKy = new System.Windows.Forms.BindingSource(this.components);
             this.DANGKYTableAdapter = new QLSVHTC.DSTableAdapters.DANGKYTableAdapter();
+            this.txbMaLop = new System.Windows.Forms.TextBox();
             mASVLabel = new System.Windows.Forms.Label();
             hOLabel = new System.Windows.Forms.Label();
             tENLabel = new System.Windows.Forms.Label();
@@ -115,7 +115,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txbMaLop.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbDangNghiHoc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDiaChi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbNgaySinh.Properties.CalendarTimeProperties)).BeginInit();
@@ -190,15 +189,6 @@
             dANGHIHOCLabel.TabIndex = 12;
             dANGHIHOCLabel.Text = "DANGHIHOC:";
             // 
-            // mALOPLabel
-            // 
-            mALOPLabel.AutoSize = true;
-            mALOPLabel.Location = new System.Drawing.Point(251, 112);
-            mALOPLabel.Name = "mALOPLabel";
-            mALOPLabel.Size = new System.Drawing.Size(45, 13);
-            mALOPLabel.TabIndex = 14;
-            mALOPLabel.Text = "MALOP:";
-            // 
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -235,7 +225,6 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnGhi),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnPhucHoi),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnLamMoi),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnHuy),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnThoat)});
             this.bar1.Text = "Tools";
             // 
@@ -293,14 +282,6 @@
             this.btnLamMoi.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnLamMoi.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLamMoi_ItemClick);
             // 
-            // btnHuy
-            // 
-            this.btnHuy.Caption = "Hủy";
-            this.btnHuy.Id = 6;
-            this.btnHuy.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnHuy.ImageOptions.SvgImage")));
-            this.btnHuy.Name = "btnHuy";
-            this.btnHuy.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            // 
             // btnThoat
             // 
             this.btnThoat.Caption = "Thoát";
@@ -353,6 +334,14 @@
             this.barDockControlRight.Location = new System.Drawing.Point(1222, 24);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 650);
+            // 
+            // btnHuy
+            // 
+            this.btnHuy.Caption = "Hủy";
+            this.btnHuy.Id = 6;
+            this.btnHuy.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnHuy.ImageOptions.SvgImage")));
+            this.btnHuy.Name = "btnHuy";
+            this.btnHuy.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // panelControl1
             // 
@@ -593,15 +582,6 @@
             this.panelControl4.Size = new System.Drawing.Size(516, 230);
             this.panelControl4.TabIndex = 12;
             // 
-            // txbMaLop
-            // 
-            this.txbMaLop.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsSinhVien, "MALOP", true));
-            this.txbMaLop.Location = new System.Drawing.Point(302, 109);
-            this.txbMaLop.MenuManager = this.barManager1;
-            this.txbMaLop.Name = "txbMaLop";
-            this.txbMaLop.Size = new System.Drawing.Size(120, 20);
-            this.txbMaLop.TabIndex = 15;
-            // 
             // cbDangNghiHoc
             // 
             this.cbDangNghiHoc.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsSinhVien, "DANGHIHOC", true));
@@ -681,6 +661,23 @@
             // 
             this.DANGKYTableAdapter.ClearBeforeFill = true;
             // 
+            // mALOPLabel
+            // 
+            mALOPLabel.AutoSize = true;
+            mALOPLabel.Location = new System.Drawing.Point(251, 119);
+            mALOPLabel.Name = "mALOPLabel";
+            mALOPLabel.Size = new System.Drawing.Size(45, 13);
+            mALOPLabel.TabIndex = 14;
+            mALOPLabel.Text = "MALOP:";
+            // 
+            // txbMaLop
+            // 
+            this.txbMaLop.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsSinhVien, "MALOP", true));
+            this.txbMaLop.Location = new System.Drawing.Point(302, 116);
+            this.txbMaLop.Name = "txbMaLop";
+            this.txbMaLop.Size = new System.Drawing.Size(100, 21);
+            this.txbMaLop.TabIndex = 15;
+            // 
             // frmSinhVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -715,7 +712,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
             this.panelControl4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txbMaLop.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbDangNghiHoc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDiaChi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbNgaySinh.Properties.CalendarTimeProperties)).EndInit();
@@ -782,8 +778,8 @@
         private DevExpress.XtraEditors.TextEdit txbDiaChi;
         private DevExpress.XtraEditors.DateEdit cmbNgaySinh;
         private DevExpress.XtraEditors.CheckEdit cbDangNghiHoc;
-        private DevExpress.XtraEditors.TextEdit txbMaLop;
         private System.Windows.Forms.BindingSource bdsDangKy;
         private DSTableAdapters.DANGKYTableAdapter DANGKYTableAdapter;
+        private System.Windows.Forms.TextBox txbMaLop;
     }
 }

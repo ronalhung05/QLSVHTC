@@ -48,15 +48,19 @@
             this.btnLopHoc = new DevExpress.XtraBars.BarButtonItem();
             this.btnSinhVien = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.btnBDMH = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDSLTC = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSVDKLTC = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDiemSV = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPage5 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.MAGV = new System.Windows.Forms.ToolStripStatusLabel();
             this.HOTEN = new System.Windows.Forms.ToolStripStatusLabel();
             this.NHOM = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPage5 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.btnBDMH = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -196,9 +200,13 @@
             this.btnDangKyLTC,
             this.btnChamDiem,
             this.BtnHocPhi,
-            this.btnBDMH});
+            this.btnBDMH,
+            this.btnDSLTC,
+            this.btnSVDKLTC,
+            this.btnDiemSV,
+            this.barButtonItem1});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 12;
+            this.ribbonControl1.MaxItemId = 16;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategory1});
@@ -206,6 +214,56 @@
             this.ribbonPage3,
             this.ribbonPage5});
             this.ribbonControl1.Size = new System.Drawing.Size(848, 158);
+            this.ribbonControl1.Click += new System.EventHandler(this.ribbonControl1_Click);
+            // 
+            // btnBDMH
+            // 
+            this.btnBDMH.Caption = "BDMH";
+            this.btnBDMH.Id = 11;
+            this.btnBDMH.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnBDMH.ImageOptions.SvgImage")));
+            this.btnBDMH.Name = "btnBDMH";
+            this.btnBDMH.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBDMH_ItemClick);
+            // 
+            // btnDSLTC
+            // 
+            this.btnDSLTC.Caption = "DSLTC";
+            this.btnDSLTC.Id = 12;
+            this.btnDSLTC.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDSLTC.ImageOptions.SvgImage")));
+            this.btnDSLTC.Name = "btnDSLTC";
+            this.btnDSLTC.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDSLTC_ItemClick);
+            // 
+            // btnSVDKLTC
+            // 
+            this.btnSVDKLTC.Caption = "SVDKLTC";
+            this.btnSVDKLTC.Id = 13;
+            this.btnSVDKLTC.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSVDKLTC.ImageOptions.SvgImage")));
+            this.btnSVDKLTC.Name = "btnSVDKLTC";
+            this.btnSVDKLTC.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSVDKLTC_ItemClick);
+            // 
+            // btnDiemSV
+            // 
+            this.btnDiemSV.Caption = "DiemSV";
+            this.btnDiemSV.Id = 14;
+            this.btnDiemSV.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDiemSV.ImageOptions.SvgImage")));
+            this.btnDiemSV.Name = "btnDiemSV";
+            this.btnDiemSV.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDiemSV_ItemClick);
+            // 
+            // ribbonPage5
+            // 
+            this.ribbonPage5.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup5});
+            this.ribbonPage5.Name = "ribbonPage5";
+            this.ribbonPage5.Text = "Báo Cáo";
+            // 
+            // ribbonPageGroup5
+            // 
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnBDMH);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnDSLTC);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnSVDKLTC);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnDiemSV);
+            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup5.Name = "ribbonPageGroup5";
+            this.ribbonPageGroup5.Text = "ribbonPageGroup5";
             // 
             // MAGV
             // 
@@ -250,26 +308,13 @@
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Quản Trị";
             // 
-            // ribbonPage5
+            // barButtonItem1
             // 
-            this.ribbonPage5.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup5});
-            this.ribbonPage5.Name = "ribbonPage5";
-            this.ribbonPage5.Text = "Báo Cáo";
-            // 
-            // ribbonPageGroup5
-            // 
-            this.ribbonPageGroup5.ItemLinks.Add(this.btnBDMH);
-            this.ribbonPageGroup5.Name = "ribbonPageGroup5";
-            this.ribbonPageGroup5.Text = "ribbonPageGroup5";
-            // 
-            // btnBDMH
-            // 
-            this.btnBDMH.Caption = "BDMH";
-            this.btnBDMH.Id = 11;
-            this.btnBDMH.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnBDMH.ImageOptions.SvgImage")));
-            this.btnBDMH.Name = "btnBDMH";
-            this.btnBDMH.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBDMH_ItemClick);
+            this.barButtonItem1.Caption = "HocPhi";
+            this.barButtonItem1.Id = 15;
+            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // MainForm
             // 
@@ -321,6 +366,10 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage5;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.BarButtonItem btnBDMH;
+        private DevExpress.XtraBars.BarButtonItem btnDSLTC;
+        private DevExpress.XtraBars.BarButtonItem btnSVDKLTC;
+        private DevExpress.XtraBars.BarButtonItem btnDiemSV;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
     }
 }
 
