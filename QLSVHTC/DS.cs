@@ -13,3 +13,10 @@
         }
     }
 }
+
+namespace QLSVHTC.DSTableAdapters {
+    
+    
+    public partial class DANGKYTableAdapter {
+    }
+}

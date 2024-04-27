@@ -35,11 +35,11 @@ namespace QLSVHTC
 
         private void btnLH_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Form frm = this.CheckExists(typeof(frmClassRoom));
+            Form frm = this.CheckExists(typeof(frmLopHoc));
             if (frm != null) { frm.Activate(); }
             else
             {
-                frmClassRoom f = new frmClassRoom();
+                frmLopHoc f = new frmLopHoc();
                 f.MdiParent = this;
                 f.Show();
             }
