@@ -24,14 +24,6 @@ namespace QLSVHTC
             InitializeComponent();
         }
 
-        private void lOPBindingNavigatorSaveItem_Click(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
         private void frmSinhVien_Load(object sender, EventArgs e)
         {
             DS.EnforceConstraints = false;
@@ -65,6 +57,7 @@ namespace QLSVHTC
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnGhi.Enabled = btnPhucHoi.Enabled = true;
 
+            _oldMaLop = txbMaLop.Text.Trim();
             LOPGridControl.Enabled = false;
             SINHVIENGridControl.Enabled = false;
         }
@@ -301,37 +294,40 @@ namespace QLSVHTC
                     bdsSinhVien.EndEdit();
                     bdsSinhVien.ResetCurrentItem();
                     this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+
                     string newClass = txbMaLop.Text.Trim();
                     bool isClassNotChange = _oldMaLop.Equals(newClass); // Check class change
                     if (isClassNotChange == false)
                     {
-                        //string query2 = " DECLARE @return_value INT " +
+                        string query2 = " DECLARE @return_value INT " +
 
-                        //    " EXEC @return_value = [dbo].[SP_CHECKID] " +
+                            " EXEC @return_value = [dbo].[SP_CHECKID] " +
 
-                        //    " @Code = N'" + newClass + "',  " +
+                            " @Code = N'" + newClass + "',  " +
 
-                        //    " @Type = N'MALOP' " +
+                            " @Type = N'MALOP' " +
 
-                        //    " SELECT  'Return Value' = @return_value ";
-                        //int resultMa = Program.CheckDataHelper(query2);
+                            " SELECT  'Return Value' = @return_value ";
+                        int resultMa = Program.CheckDataHelper(query2);
 
-                        //DateTime selectedDate = (DateTime)cmbNgaySinh.EditValue;
-                        //string formattedDate = selectedDate.ToString("dd-MM-yyyy");
-                        //if (resultMa == 0)
-                        //{
-                        //    XtraMessageBox.Show("Lớp bạn nhập không tồn tại trong các Khoa!", "", MessageBoxButtons.OK);
-                        //    return;
-                        //}
-
-                        // Department change confirmed 
-                        String query = "EXEC sp_ChangeClassSV \n"
-                                   + "@MASV = N'" + txbMaSV.Text + "', @HO = N'" + txbHo.Text + "', @TEN = N'" + txbTen.Text + "', @PHAI = " + (cbPhai.Checked ? 1 : 0)
-                                   + ",@DIACHI = N'" + txbDiaChi.Text + "', @NGAYSINH = N'" + "02-12-2022" + "', @MALOP = N'" + txbMaLop.Text
-                                   + "',@DANGHIHOC = " + (cbDangNghiHoc.Checked ? 1 : 0);
-                        if (Program.ExecSqlNonQuery(query) == 0)
+                        DateTime selectedDate = (DateTime)cmbNgaySinh.EditValue;
+                        string formattedDate = selectedDate.ToString("dd-MM-yyyy");
+                        if (_flagOptionSinhVien == "UPDATE" && resultMa == 0)
                         {
-                            MessageBox.Show("Chuyển lớp và cập nhật thành công!");
+                            XtraMessageBox.Show("Lớp bạn nhập không tồn tại trong các Khoa! ", "", MessageBoxButtons.OK);
+                            return;
+                        }
+                        if (resultMa == 2)
+                        {
+                            // Department change confirmed 
+                            String query = "EXEC sp_ChangeClassSV \n"
+                                       + "@MASV = N'" + txbMaSV.Text + "', @HO = N'" + txbHo.Text + "', @TEN = N'" + txbTen.Text + "', @PHAI = " + (cbPhai.Checked ? 1 : 0)
+                                       + ",@DIACHI = N'" + txbDiaChi.Text + "', @NGAYSINH = N'" + formattedDate + "', @MALOP = N'" + txbMaLop.Text
+                                       + "',@DANGHIHOC = " + (cbDangNghiHoc.Checked ? 1 : 0);
+                            if (Program.ExecSqlNonQuery(query) == 0)
+                            {
+                                MessageBox.Show("Chuyển lớp và cập nhật thành công!" + " " + macn + " " + newClass + " " + _oldMaLop);
+                            }
                         }
                     }
                     else

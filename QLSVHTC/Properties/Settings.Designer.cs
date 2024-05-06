@@ -12,7 +12,7 @@ namespace QLSVHTC.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -27,10 +27,32 @@ namespace QLSVHTC.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ASUS-VIVOBOOK15\\SQL1;Initial Catalog=QLDSV_TC;Persist Security Info=T" +
-            "rue;User ID=sa;Password=123;TrustServerCertificate=True")]
+            "rue;User ID=sa;Password=123")]
         public string QLDSV_TCConnectionString {
             get {
                 return ((string)(this["QLDSV_TCConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("XpoProvider=MSSqlServer;data source=ASUS-VIVOBOOK15\\SQL3;user id=sa;password=123;" +
+            "initial catalog=QLDSV_TC;Persist Security Info=true")]
+        public string QLDSV_TCConnectionString3 {
+            get {
+                return ((string)(this["QLDSV_TCConnectionString3"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ASUS-VIVOBOOK15\\SQL2;Initial Catalog=QLDSV_TC;Persist Security Info=T" +
+            "rue;User ID=sa;Password=123;TrustServerCertificate=True")]
+        public string QLDSV_TCConnectionString2 {
+            get {
+                return ((string)(this["QLDSV_TCConnectionString2"]));
             }
         }
     }

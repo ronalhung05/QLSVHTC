@@ -266,7 +266,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 24);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1140, 104);
+            this.panelControl1.Size = new System.Drawing.Size(1140, 66);
             this.panelControl1.TabIndex = 4;
             // 
             // btnTim
@@ -339,11 +339,11 @@
             // gridHocPhi
             // 
             this.gridHocPhi.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gridHocPhi.Location = new System.Drawing.Point(0, 128);
+            this.gridHocPhi.Location = new System.Drawing.Point(0, 90);
             this.gridHocPhi.MainView = this.gridView1;
             this.gridHocPhi.MenuManager = this.barManager1;
             this.gridHocPhi.Name = "gridHocPhi";
-            this.gridHocPhi.Size = new System.Drawing.Size(1140, 200);
+            this.gridHocPhi.Size = new System.Drawing.Size(1140, 128);
             this.gridHocPhi.TabIndex = 5;
             this.gridHocPhi.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -403,11 +403,11 @@
             // gridCTHP
             // 
             this.gridCTHP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridCTHP.Location = new System.Drawing.Point(0, 328);
+            this.gridCTHP.Location = new System.Drawing.Point(0, 218);
             this.gridCTHP.MainView = this.gridView2;
             this.gridCTHP.MenuManager = this.barManager1;
             this.gridCTHP.Name = "gridCTHP";
-            this.gridCTHP.Size = new System.Drawing.Size(1140, 322);
+            this.gridCTHP.Size = new System.Drawing.Size(1140, 432);
             this.gridCTHP.TabIndex = 6;
             this.gridCTHP.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});

@@ -75,7 +75,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(927, 48);
+            this.panelControl1.Size = new System.Drawing.Size(927, 30);
             this.panelControl1.TabIndex = 0;
             // 
             // label7
@@ -105,9 +105,9 @@
             this.panelControl2.Controls.Add(this.cmbKhoa);
             this.panelControl2.Controls.Add(this.label1);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl2.Location = new System.Drawing.Point(0, 48);
+            this.panelControl2.Location = new System.Drawing.Point(0, 30);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(927, 227);
+            this.panelControl2.Size = new System.Drawing.Size(927, 146);
             this.panelControl2.TabIndex = 1;
             // 
             // btnThoat
@@ -250,10 +250,10 @@
             // gridDiem
             // 
             this.gridDiem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridDiem.Location = new System.Drawing.Point(0, 275);
+            this.gridDiem.Location = new System.Drawing.Point(0, 176);
             this.gridDiem.MainView = this.gridView1;
             this.gridDiem.Name = "gridDiem";
-            this.gridDiem.Size = new System.Drawing.Size(927, 390);
+            this.gridDiem.Size = new System.Drawing.Size(927, 489);
             this.gridDiem.TabIndex = 2;
             this.gridDiem.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});

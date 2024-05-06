@@ -16,7 +16,6 @@ namespace QLSVHTC
         int vitri = 0; //selected row in the table 
         string macn = "";
         private string _flagOptionLop;
-        private string _oldMaLop = "";
         private string _oldTenLop = "";
         public frmClassRoom()
         {
@@ -25,18 +24,17 @@ namespace QLSVHTC
 
         private void frmClassRoom_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'DS.SINHVIEN' table. You can move, or remove it, as needed.
-            
             DS.EnforceConstraints = false;
             this.SINHVIENTableAdapter.Fill(this.DS.SINHVIEN);
             this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
             this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
             this.LOPTableAdapter.Fill(this.DS.LOP);
-            macn = ((DataRowView)dbsClass[0])["MAKHOA"].ToString().Trim();
+            macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
             cmbKhoa.DataSource = Program.bds_dspm;
             cmbKhoa.DisplayMember = "TENKHOA";
             cmbKhoa.ValueMember = "TENSERVER";
             cmbKhoa.SelectedIndex = Program.mChinhanh;
+
             if (Program.mGroup == "KHOA")
             {
                 cmbKhoa.Enabled = false;
@@ -69,16 +67,18 @@ namespace QLSVHTC
                 this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.LOPTableAdapter.Fill(this.DS.LOP);
                
-               // macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString();
+               macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString();
             }
         }
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            vitri = dbsClass.Position;
+            vitri = bdsLop.Position;
             _flagOptionLop = "ADD";
-            dbsClass.AddNew(); // new row in bds
+            bdsLop.AddNew(); // new row in bds
             txbMaKhoa.Text = macn;
+
+            cmbKhoa.Enabled = false;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnGhi.Enabled = btnPhucHoi.Enabled = true;
             lOPGridControl.Enabled = false;//disable selecting rows in table 
@@ -224,14 +224,15 @@ namespace QLSVHTC
             {
                 try
                 {
-                    dbsClass.EndEdit();
-                    dbsClass.ResetCurrentItem();
+                    bdsLop.EndEdit();
+                    bdsLop.ResetCurrentItem();
                     this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
 
+                    string selectedDepartment = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
                     string newDepartment = txbMaKhoa.Text.Trim();
-                    bool isDepartmentChanged = macn.Equals(newDepartment); // Check department change
-                    String text = isDepartmentChanged.ToString();
-                    if (isDepartmentChanged == false)
+                    bool isDepartmentNotChanged = selectedDepartment.Equals(newDepartment); // Check department change
+                    String text = isDepartmentNotChanged.ToString();
+                    if (isDepartmentNotChanged == false)
                     {
                         if (newDepartment != "CNTT" && newDepartment != "VT")
                         {
@@ -244,7 +245,7 @@ namespace QLSVHTC
                                    + "@MALOP = N'" + txbMaLop.Text + "', @TENLOP = N'" + txbTenLop.Text + "', @KHOAHOC = N'" + txbKhoaHoc.Text + "', @MAKHOA = N'" + txbMaKhoa.Text + "'";
                         if (Program.ExecSqlNonQuery(query) == 0)
                         {
-                            MessageBox.Show("Chuyển Khoa và cập nhật thành công!");
+                            MessageBox.Show("Chuyển Khoa và cập nhật thành công!" + selectedDepartment + " " +  newDepartment);
                         }
                     }
                     else this.LOPTableAdapter.Update(this.DS.LOP);
@@ -254,7 +255,7 @@ namespace QLSVHTC
                     MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
-
+                cmbKhoa.Enabled = true;
                 lOPGridControl.Enabled = true;
                 btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
                 btnGhi.Enabled = btnPhucHoi.Enabled = false;
@@ -265,12 +266,13 @@ namespace QLSVHTC
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            vitri = dbsClass.Position;
+            vitri = bdsLop.Position;
             _flagOptionLop = "UPDATE";
             //_oldMaLop = this.txbMaLop.Text.Trim();
             _oldTenLop = this.txbTenLop.Text.Trim();
             txbMaLop.Enabled = false;
             txbMaKhoa.Enabled = true;
+            cmbKhoa.Enabled = false;
             //panelControl2.Enabled = true;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnPhucHoi.Enabled = false;
             btnGhi.Enabled = true;
@@ -281,7 +283,7 @@ namespace QLSVHTC
         {
             
             string malop = "";
-            if (dbsSinhVien.Count > 0) //lay sinh vien ra 
+            if (bdsSinhVien.Count > 0) //lay sinh vien ra 
             {
                 MessageBox.Show("Không thể xóa lớp học này vì đã có sinh viên", "", MessageBoxButtons.OK);
                 return;
@@ -290,8 +292,8 @@ namespace QLSVHTC
             {
                 try
                 {
-                    malop = ((DataRowView)dbsClass[dbsClass.Position])["MALOP"].ToString();
-                    dbsClass.RemoveCurrent();
+                    malop = ((DataRowView)bdsLop[bdsLop.Position])["MALOP"].ToString();
+                    bdsLop.RemoveCurrent();
                     this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.LOPTableAdapter.Update(this.DS.LOP);
                 }
@@ -299,19 +301,19 @@ namespace QLSVHTC
                 {
                     MessageBox.Show("Lỗi xóa lớp học: " + ex.Message, "", MessageBoxButtons.OK);
                     this.LOPTableAdapter.Fill(this.DS.LOP);
-                    dbsClass.Position = dbsClass.Find("MALOP", malop); //BACK TO CURRENT POSITION
+                    bdsLop.Position = bdsLop.Find("MALOP", malop); //BACK TO CURRENT POSITION
                     return;
                 }
             }
-            if (dbsClass.Count == 0) btnXoa.Enabled = false;
+            if (bdsLop.Count == 0) btnXoa.Enabled = false;
             
         }
 
 
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            dbsClass.CancelEdit();
-            if (btnThem.Enabled == false) dbsClass.Position = vitri;
+            bdsLop.CancelEdit();
+            if (btnThem.Enabled == false) bdsLop.Position = vitri;
             lOPGridControl.Enabled = true;
             //panelControl2.Enabled = true;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
@@ -323,7 +325,7 @@ namespace QLSVHTC
 
             if (vitri > 0)
             {
-                dbsClass.Position = vitri;
+                bdsLop.Position = vitri;
             }
         }
 
@@ -343,6 +345,46 @@ namespace QLSVHTC
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.Close();
+        }
+
+        private void lOPBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.bdsLop.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.DS);
+
+        }
+
+        private void lOPBindingNavigatorSaveItem_Click_1(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.bdsLop.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.DS);
+
+        }
+
+        private void lOPBindingNavigatorSaveItem_Click_2(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.bdsLop.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.DS);
+
+        }
+
+        private void lOPBindingNavigatorSaveItem_Click_3(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.bdsLop.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.DS);
+
+        }
+
+        private void lOPBindingNavigatorSaveItem_Click_4(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.bdsLop.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.DS);
+
         }
 
         //private void btnHuy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
