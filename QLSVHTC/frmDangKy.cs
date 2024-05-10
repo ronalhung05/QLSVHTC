@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -91,11 +92,8 @@ namespace QLSVHTC
             this.bdsLopTinchi.DataSource = tableLopTC;
             this.gridLTC.DataSource = this.bdsLopTinchi;
         }
-
-
         private void btnDangKi_Click(object sender, EventArgs e)
         {
-
             if (txbMSVDK.Text.Trim() == "")
             {
                 MessageBox.Show("Mã sinh viên không được thiếu!", "", MessageBoxButtons.OK);
@@ -110,26 +108,45 @@ namespace QLSVHTC
             }
             if (MessageBox.Show("Bạn có chắc chắn muốn đăng kí lớp học này ?", "", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                string cmd = "EXEC [dbo].[SP_XULY_LTC] '" + txbMSVDK.Text + "' , '" + txbMLTCDK.Text + "', " + 1;
-                if (Program.ExecSqlNonQuery(cmd) == 0)
+                SqlConnection conn = new SqlConnection(Program.connstr);
+                // bắt đầu transaction
+                SqlTransaction tran;
+
+                conn.Open();
+                tran = conn.BeginTransaction();
+
+                try
                 {
-                    MessageBox.Show("Đăng kí thành công!");
+                    SqlCommand cmd = new SqlCommand("[SP_XULY_LTC]", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = conn;
+                    cmd.Transaction = tran;
+
+                    cmd.Parameters.Add(new SqlParameter("@MASV", txbMaSV.Text));
+                    cmd.Parameters.Add(new SqlParameter("@MALTC", txbMLTCDK.Text));
+                    cmd.Parameters.Add(new SqlParameter("@Type", 1));
+
+                    cmd.ExecuteNonQuery();
+                    tran.Commit();
+                    XtraMessageBox.Show("Thao tác đăng kí thành công!", "", MessageBoxButtons.OK);
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    MessageBox.Show("Lỗi trong quá trình đăng kí: " + ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
                     string cmd1 = "EXEC dbo.SP_LIST_SVHUYDANGKY '" + txbMaSV.Text + "'";
                     DataTable tableDSLTC_HUY = Program.ExecSqlDataTable(cmd1);
                     this.bdsDSLTC_HUY.DataSource = tableDSLTC_HUY;
                     this.gridHuyLTC.DataSource = this.bdsDSLTC_HUY;
-
-                    btnTimNKHK.PerformClick();  
-                }
-                else
-                {
-                    MessageBox.Show("Đăng kí thất bại");
+                    btnTimNKHK.PerformClick();
                 }
             }
-            else
-            {
-                return;
-            }
+            else return;
+            
         }
 
         private void btnHuyDangKy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -153,32 +170,44 @@ namespace QLSVHTC
                 {
                     maltc = ((DataRowView)bdsDSLTC_HUY[bdsDSLTC_HUY.Position])["MALTC"].ToString();
                 }
+                SqlConnection conn = new SqlConnection(Program.connstr);
+                // bắt đầu transaction
+                SqlTransaction tran;
 
-                string cmd = "EXEC [dbo].[SP_XULY_LTC] '" + txbMSVDK.Text + "' , '" + maltc + "', " + 2;
-                if (Program.ExecSqlNonQuery(cmd) == 0)
+                conn.Open();
+                tran = conn.BeginTransaction();
+
+                try
                 {
-                    MessageBox.Show("Hủy đăng kí thành công!");
+                    SqlCommand cmd = new SqlCommand("[SP_XULY_LTC]", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = conn;
+                    cmd.Transaction = tran;
+
+                    cmd.Parameters.Add(new SqlParameter("@MASV", txbMaSV.Text));
+                    cmd.Parameters.Add(new SqlParameter("@MALTC", maltc));
+                    cmd.Parameters.Add(new SqlParameter("@Type", 2));
+
+                    cmd.ExecuteNonQuery();
+                    tran.Commit();
+                    XtraMessageBox.Show("Thao tác hủy đăng kí thành công!", "", MessageBoxButtons.OK);
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    MessageBox.Show("Lỗi trong quá trình hủy đăng kí: " + ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
                     string cmd1 = "EXEC dbo.SP_LIST_SVHUYDANGKY '" + txbMaSV.Text + "'";
                     DataTable tableDSLTC_HUY = Program.ExecSqlDataTable(cmd1);
                     this.bdsDSLTC_HUY.DataSource = tableDSLTC_HUY;
                     this.gridHuyLTC.DataSource = this.bdsDSLTC_HUY;
-
                     btnTimNKHK.PerformClick();
                 }
-                else
-                {
-                    MessageBox.Show("Hủy đăng kí thất bại");
-                }
             }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-
+            else return;
         }
 
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -193,5 +222,6 @@ namespace QLSVHTC
                 txbMLTCDK.Text = ((DataRowView)bdsLopTinchi[bdsLopTinchi.Position])["MALTC"].ToString();
             }
         }
+
     }
 }

@@ -41,10 +41,10 @@
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(308, 239);
-            this.btnThoat.Margin = new System.Windows.Forms.Padding(4);
+            this.btnThoat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Location = new System.Drawing.Point(264, 194);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(97, 50);
+            this.btnThoat.Size = new System.Drawing.Size(83, 41);
             this.btnThoat.TabIndex = 13;
             this.btnThoat.Text = "THOÁT";
             this.btnThoat.UseVisualStyleBackColor = true;
@@ -52,10 +52,10 @@
             // 
             // btnIn
             // 
-            this.btnIn.Location = new System.Drawing.Point(180, 239);
-            this.btnIn.Margin = new System.Windows.Forms.Padding(4);
+            this.btnIn.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIn.Location = new System.Drawing.Point(154, 194);
             this.btnIn.Name = "btnIn";
-            this.btnIn.Size = new System.Drawing.Size(97, 50);
+            this.btnIn.Size = new System.Drawing.Size(83, 41);
             this.btnIn.TabIndex = 14;
             this.btnIn.Text = "IN";
             this.btnIn.UseVisualStyleBackColor = true;
@@ -64,63 +64,59 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(113, 175);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(97, 142);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 16);
+            this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "HỌC KÌ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(113, 142);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(97, 115);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 16);
+            this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "NIÊN KHÓA";
             // 
             // cmbLop
             // 
             this.cmbLop.FormattingEnabled = true;
-            this.cmbLop.Location = new System.Drawing.Point(198, 105);
-            this.cmbLop.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbLop.Location = new System.Drawing.Point(170, 85);
             this.cmbLop.Name = "cmbLop";
-            this.cmbLop.Size = new System.Drawing.Size(283, 24);
+            this.cmbLop.Size = new System.Drawing.Size(243, 21);
             this.cmbLop.TabIndex = 12;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(113, 109);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(97, 89);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 16);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "MÃ LỚP";
             // 
             // nmHocKy
             // 
-            this.nmHocKy.Location = new System.Drawing.Point(198, 175);
+            this.nmHocKy.Location = new System.Drawing.Point(170, 142);
             this.nmHocKy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nmHocKy.Name = "nmHocKy";
-            this.nmHocKy.Size = new System.Drawing.Size(283, 23);
+            this.nmHocKy.Size = new System.Drawing.Size(243, 21);
             this.nmHocKy.TabIndex = 15;
             // 
             // txbNienKhoa
             // 
-            this.txbNienKhoa.Location = new System.Drawing.Point(198, 142);
+            this.txbNienKhoa.Location = new System.Drawing.Point(170, 115);
             this.txbNienKhoa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbNienKhoa.Name = "txbNienKhoa";
-            this.txbNienKhoa.Size = new System.Drawing.Size(283, 23);
+            this.txbNienKhoa.Size = new System.Drawing.Size(243, 21);
             this.txbNienKhoa.TabIndex = 16;
             // 
             // frmInHP
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 424);
+            this.ClientSize = new System.Drawing.Size(510, 344);
             this.Controls.Add(this.txbNienKhoa);
             this.Controls.Add(this.nmHocKy);
             this.Controls.Add(this.btnThoat);
@@ -129,7 +125,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbLop);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmInHP";
             this.Text = "frmInHP";
             this.Load += new System.EventHandler(this.frmInHP_Load);

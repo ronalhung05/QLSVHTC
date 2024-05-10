@@ -43,23 +43,43 @@ namespace QLSVHTC
             {
                 cmbKhoa.Enabled = false;
             }
+
+            btnGhi.Enabled = false; 
+            btnPhucHoi.Enabled = false;
         }
 
+        private void beforeButton()
+        {
+            //===cmb===
+            cmbKhoa.Enabled = false;
+
+            //===button===
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
+            btnGhi.Enabled = btnPhucHoi.Enabled = true;
+
+            //==grid==
+            LOPGridControl.Enabled = SINHVIENGridControl.Enabled = false;
+        }
+        private void afterButton()
+        {
+            //===cmb===
+            cmbKhoa.Enabled = true;
+            //===btn===
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            //==grid==
+            LOPGridControl.Enabled = SINHVIENGridControl.Enabled = true;
+        }
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsSinhVien.Position;
             _flagOptionSinhVien = "ADD";
-            txbMaSV.Enabled = true;
-
+            beforeButton();
             bdsSinhVien.AddNew();
+
             txbMaLop.Enabled = false;
             txbMaLop.Text = ((DataRowView)bdsLop[bdsLop.Position])["MALOP"].ToString();
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
-            btnGhi.Enabled = btnPhucHoi.Enabled = true;
-
             _oldMaLop = txbMaLop.Text.Trim();
-            LOPGridControl.Enabled = false;
-            SINHVIENGridControl.Enabled = false;
         }
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,6 +117,7 @@ namespace QLSVHTC
             }
         }
 
+
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if(bdsSinhVien.Count == 0)
@@ -109,12 +130,8 @@ namespace QLSVHTC
             _oldMaSV = txbMaSV.Text.Trim();
             _oldMaLop = txbMaLop.Text.Trim();
 
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnPhucHoi.Enabled = false;
-            btnGhi.Enabled = true;
+            beforeButton();
             txbMaSV.Enabled = false;
-
-            LOPGridControl.Enabled = false;
-            SINHVIENGridControl.Enabled = false;
         }
        
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -259,32 +276,6 @@ namespace QLSVHTC
             }
             return true;
         }
-        //private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        //{
-        //    if (validatorSinhVien() == true)
-        //    {
-        //        try
-        //        {
-        //            bdsSinhVien.EndEdit();
-        //            bdsSinhVien.ResetCurrentItem();
-        //            this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
-        //            this.SINHVIENTableAdapter.Update(this.DS.SINHVIEN);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Lỗi ghi sinh viên: " + ex.Message, "", MessageBoxButtons.OK);
-        //            return;
-        //        }
-        //        LOPGridControl.Enabled = true;
-        //        SINHVIENGridControl.Enabled = true;
-        //        btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-        //        btnGhi.Enabled = btnPhucHoi.Enabled = false;
-        //    }
-        //    else
-        //    {
-        //        return;
-        //    }
-        //}
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (validatorSinhVien() == true)
@@ -340,31 +331,16 @@ namespace QLSVHTC
                     MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
-                LOPGridControl.Enabled = true;
-                SINHVIENGridControl.Enabled = true;
-
-                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-                btnGhi.Enabled = btnPhucHoi.Enabled = false;
+                afterButton();
                 txbMaLop.Enabled = true;
             }
         }
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsSinhVien.CancelEdit();
-            if (btnThem.Enabled == false) bdsLop.Position = vitri;
-            SINHVIENGridControl.Enabled = true;
- 
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            afterButton();
             frmSinhVien_Load(sender, e);
-
-            // load lại cả form...
-
-
-            if (vitri > 0)
-            {
-                bdsSinhVien.Position = vitri;
-            }
+            if (vitri > 0) bdsLop.Position = vitri;
         }
 
         private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -384,58 +360,6 @@ namespace QLSVHTC
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.Close();
-        }
-
-        private void txbMaLop_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lOPBindingNavigatorSaveItem_Click_1(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
-        private void lOPBindingNavigatorSaveItem_Click_2(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
-        private void lOPBindingNavigatorSaveItem_Click_3(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
-        private void lOPBindingNavigatorSaveItem_Click_4(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
-        private void lOPGridControl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nGAYSINHLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nGAYSINHDateEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

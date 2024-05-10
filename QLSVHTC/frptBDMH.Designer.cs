@@ -52,7 +52,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(172, 60);
+            this.label1.Location = new System.Drawing.Point(103, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
@@ -61,7 +61,7 @@
             // cmbKhoa
             // 
             this.cmbKhoa.FormattingEnabled = true;
-            this.cmbKhoa.Location = new System.Drawing.Point(245, 57);
+            this.cmbKhoa.Location = new System.Drawing.Point(176, 53);
             this.cmbKhoa.Name = "cmbKhoa";
             this.cmbKhoa.Size = new System.Drawing.Size(243, 21);
             this.cmbKhoa.TabIndex = 1;
@@ -70,7 +70,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(172, 87);
+            this.label2.Location = new System.Drawing.Point(103, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 0;
@@ -79,7 +79,7 @@
             // cmbNienKhoa
             // 
             this.cmbNienKhoa.FormattingEnabled = true;
-            this.cmbNienKhoa.Location = new System.Drawing.Point(245, 84);
+            this.cmbNienKhoa.Location = new System.Drawing.Point(176, 80);
             this.cmbNienKhoa.Name = "cmbNienKhoa";
             this.cmbNienKhoa.Size = new System.Drawing.Size(243, 21);
             this.cmbNienKhoa.TabIndex = 1;
@@ -88,7 +88,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(172, 114);
+            this.label3.Location = new System.Drawing.Point(103, 110);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 0;
@@ -97,7 +97,7 @@
             // cmbHocKi
             // 
             this.cmbHocKi.FormattingEnabled = true;
-            this.cmbHocKi.Location = new System.Drawing.Point(245, 111);
+            this.cmbHocKi.Location = new System.Drawing.Point(176, 107);
             this.cmbHocKi.Name = "cmbHocKi";
             this.cmbHocKi.Size = new System.Drawing.Size(243, 21);
             this.cmbHocKi.TabIndex = 1;
@@ -106,7 +106,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(172, 141);
+            this.label4.Location = new System.Drawing.Point(103, 137);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 13);
             this.label4.TabIndex = 0;
@@ -115,7 +115,7 @@
             // cmbNhom
             // 
             this.cmbNhom.FormattingEnabled = true;
-            this.cmbNhom.Location = new System.Drawing.Point(245, 138);
+            this.cmbNhom.Location = new System.Drawing.Point(176, 134);
             this.cmbNhom.Name = "cmbNhom";
             this.cmbNhom.Size = new System.Drawing.Size(243, 21);
             this.cmbNhom.TabIndex = 1;
@@ -123,7 +123,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(172, 168);
+            this.label5.Location = new System.Drawing.Point(103, 164);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 0;
@@ -132,14 +132,15 @@
             // cmbMonHoc
             // 
             this.cmbMonHoc.FormattingEnabled = true;
-            this.cmbMonHoc.Location = new System.Drawing.Point(245, 165);
+            this.cmbMonHoc.Location = new System.Drawing.Point(176, 161);
             this.cmbMonHoc.Name = "cmbMonHoc";
             this.cmbMonHoc.Size = new System.Drawing.Size(243, 21);
             this.cmbMonHoc.TabIndex = 1;
             // 
             // btnIn
             // 
-            this.btnIn.Location = new System.Drawing.Point(245, 223);
+            this.btnIn.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIn.Location = new System.Drawing.Point(176, 219);
             this.btnIn.Name = "btnIn";
             this.btnIn.Size = new System.Drawing.Size(83, 41);
             this.btnIn.TabIndex = 2;
@@ -149,7 +150,8 @@
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(355, 223);
+            this.btnThoat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Location = new System.Drawing.Point(286, 219);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(83, 41);
             this.btnThoat.TabIndex = 2;
@@ -182,11 +184,11 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = QLSVHTC.DSTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // BDMH
+            // frptBDMH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 482);
+            this.ClientSize = new System.Drawing.Size(529, 321);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnIn);
             this.Controls.Add(this.cmbMonHoc);
@@ -199,7 +201,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbKhoa);
             this.Controls.Add(this.label1);
-            this.Name = "BDMH";
+            this.Name = "frptBDMH";
             this.Text = "BDMH";
             this.Load += new System.EventHandler(this.BDMH_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DS)).EndInit();

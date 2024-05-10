@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraReports.Wizards.Templates;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,9 @@ namespace QLSVHTC
                 cmbKhoa.Enabled = false;
             }
             txbMaKhoa.Enabled = false;
+
+            btnGhi.Enabled = false;
+            btnPhucHoi.Enabled = false;
         }
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
@@ -66,26 +70,45 @@ namespace QLSVHTC
             {
                 this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.LOPTableAdapter.Fill(this.DS.LOP);
-               
-               macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString();
+
+                macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
             }
         }
+        private void beforeButton()
+        {
+            //===cmb===
+            cmbKhoa.Enabled = false;
 
+            //===button===
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
+            btnGhi.Enabled = btnPhucHoi.Enabled = true;
+
+            //==grid==
+            lOPGridControl.Enabled = false;
+        }
+        private void afterButton()
+        {
+            //===cmb===
+            cmbKhoa.Enabled = true;
+            //===btn===
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            txbMaLop.Enabled = true;
+            txbMaKhoa.Enabled = false;
+            //==grid==
+            lOPGridControl.Enabled = true;
+        }
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsLop.Position;
+            beforeButton();
             _flagOptionLop = "ADD";
             bdsLop.AddNew(); // new row in bds
             txbMaKhoa.Text = macn;
-
-            cmbKhoa.Enabled = false;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
-            btnGhi.Enabled = btnPhucHoi.Enabled = true;
-            lOPGridControl.Enabled = false;//disable selecting rows in table 
         }
 
         private bool validatorLopHoc()
-        { 
+        {
             if (txbMaLop.Text.Trim() == "")
             {
                 MessageBox.Show("Mã lớp không được thiếu!", "", MessageBoxButtons.OK);
@@ -110,6 +133,8 @@ namespace QLSVHTC
                 txbMaKhoa.Focus();
                 return false;
             }
+
+            //==check ADD==
             if (_flagOptionLop == "ADD")
             {
                 //TODO: Check mã lớp có tồn tại chưa
@@ -161,11 +186,12 @@ namespace QLSVHTC
                 }
             }
 
+            //==check UPDATE==
             if (_flagOptionLop == "UPDATE")
             {
                 if (!this.txbTenLop.Text.Trim().ToString().Equals(_oldTenLop))
                 {
-                    // TODO : Check tên lớp có tồn tại chưa
+                    // TODO : Check tên lớp có tồn tại chưa => Mã lớp không cho sửa 
                     string query2 = "DECLARE @return_value int \n"
                                    + "EXEC @return_value = SP_CHECKNAME \n"
                                    + "@Name = N'" + txbTenLop.Text + "', @Type = N'TENLOP' \n"
@@ -191,33 +217,6 @@ namespace QLSVHTC
 
             return true;
         }
-        //private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        //{
-        //    if (validatorLopHoc() == true)
-        //    {
-        //        try
-        //        {
-        //            dbsClass.EndEdit();
-        //            dbsClass.ResetCurrentItem();
-        //            this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
-        //            this.LOPTableAdapter.Update(this.DS.LOP); //update csdl
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
-        //            return;
-        //        }
-        //        lOPGridControl.Enabled = true;
-        //        btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-        //        btnGhi.Enabled = btnPhucHoi.Enabled = false;
-        //        panelControl2.Enabled = true;
-        //        txbMaLop.Enabled = true;
-        //    }
-        //    else
-        //    {
-        //        return;
-        //    }
-        //}
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (validatorLopHoc() == true)
@@ -232,7 +231,7 @@ namespace QLSVHTC
                     string newDepartment = txbMaKhoa.Text.Trim();
                     bool isDepartmentNotChanged = selectedDepartment.Equals(newDepartment); // Check department change
                     String text = isDepartmentNotChanged.ToString();
-                    if (isDepartmentNotChanged == false)
+                    if (isDepartmentNotChanged == false) //có thay đổi 
                     {
                         if (newDepartment != "CNTT" && newDepartment != "VT")
                         {
@@ -245,43 +244,34 @@ namespace QLSVHTC
                                    + "@MALOP = N'" + txbMaLop.Text + "', @TENLOP = N'" + txbTenLop.Text + "', @KHOAHOC = N'" + txbKhoaHoc.Text + "', @MAKHOA = N'" + txbMaKhoa.Text + "'";
                         if (Program.ExecSqlNonQuery(query) == 0)
                         {
-                            MessageBox.Show("Chuyển Khoa và cập nhật thành công!" + selectedDepartment + " " +  newDepartment);
+                            MessageBox.Show("Chuyển Khoa và cập nhật thành công!" + selectedDepartment + " " + newDepartment);
                         }
                     }
-                    else this.LOPTableAdapter.Update(this.DS.LOP);
+                    else this.LOPTableAdapter.Update(this.DS.LOP); //không có thay đổi mã khoa
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
-                cmbKhoa.Enabled = true;
-                lOPGridControl.Enabled = true;
-                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-                btnGhi.Enabled = btnPhucHoi.Enabled = false;
-                //panelControl2.Enabled = true;
-                txbMaLop.Enabled = true; // Optional: Re-enable editing class code field after update
+                afterButton();
             }
         }
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsLop.Position;
-            _flagOptionLop = "UPDATE";
-            //_oldMaLop = this.txbMaLop.Text.Trim();
-            _oldTenLop = this.txbTenLop.Text.Trim();
-            txbMaLop.Enabled = false;
+            beforeButton();
             txbMaKhoa.Enabled = true;
-            cmbKhoa.Enabled = false;
-            //panelControl2.Enabled = true;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnPhucHoi.Enabled = false;
-            btnGhi.Enabled = true;
-            lOPGridControl.Enabled = false;
+            txbMaLop.Enabled = false;
+            _flagOptionLop = "UPDATE";
+            _oldTenLop = this.txbTenLop.Text.Trim();
+
         }
 
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            
+
             string malop = "";
             if (bdsSinhVien.Count > 0) //lay sinh vien ra 
             {
@@ -306,27 +296,16 @@ namespace QLSVHTC
                 }
             }
             if (bdsLop.Count == 0) btnXoa.Enabled = false;
-            
+
         }
 
 
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsLop.CancelEdit();
-            if (btnThem.Enabled == false) bdsLop.Position = vitri;
-            lOPGridControl.Enabled = true;
-            //panelControl2.Enabled = true;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            afterButton();
             frmClassRoom_Load(sender, e);
-
-            // load lại cả form...
-
-
-            if (vitri > 0)
-            {
-                bdsLop.Position = vitri;
-            }
+            if (vitri > 0) bdsLop.Position = vitri;
         }
 
         private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -346,53 +325,5 @@ namespace QLSVHTC
         {
             this.Close();
         }
-
-        private void lOPBindingNavigatorSaveItem_Click(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
-        private void lOPBindingNavigatorSaveItem_Click_1(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
-        private void lOPBindingNavigatorSaveItem_Click_2(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
-        private void lOPBindingNavigatorSaveItem_Click_3(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
-        private void lOPBindingNavigatorSaveItem_Click_4(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsLop.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.DS);
-
-        }
-
-        //private void btnHuy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        //{
-        //    panelControl2.Enabled = false;
-        //    lOPGridControl.Enabled = true;
-        //    btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnGhi.Enabled = true;
-        //}
-
     }
 }

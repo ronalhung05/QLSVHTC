@@ -75,7 +75,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(927, 30);
+            this.panelControl1.Size = new System.Drawing.Size(927, 51);
             this.panelControl1.TabIndex = 0;
             // 
             // label7
@@ -105,16 +105,17 @@
             this.panelControl2.Controls.Add(this.cmbKhoa);
             this.panelControl2.Controls.Add(this.label1);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl2.Location = new System.Drawing.Point(0, 30);
+            this.panelControl2.Location = new System.Drawing.Point(0, 51);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(927, 146);
+            this.panelControl2.Size = new System.Drawing.Size(927, 211);
             this.panelControl2.TabIndex = 1;
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(274, 158);
+            this.btnThoat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Location = new System.Drawing.Point(282, 158);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(75, 23);
+            this.btnThoat.Size = new System.Drawing.Size(79, 35);
             this.btnThoat.TabIndex = 7;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
@@ -122,9 +123,10 @@
             // 
             // btnCapNhat
             // 
+            this.btnCapNhat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCapNhat.Location = new System.Drawing.Point(179, 158);
             this.btnCapNhat.Name = "btnCapNhat";
-            this.btnCapNhat.Size = new System.Drawing.Size(75, 23);
+            this.btnCapNhat.Size = new System.Drawing.Size(82, 35);
             this.btnCapNhat.TabIndex = 6;
             this.btnCapNhat.Text = "Cập nhật";
             this.btnCapNhat.UseVisualStyleBackColor = true;
@@ -132,9 +134,10 @@
             // 
             // btnBatDau
             // 
+            this.btnBatDau.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBatDau.Location = new System.Drawing.Point(80, 158);
             this.btnBatDau.Name = "btnBatDau";
-            this.btnBatDau.Size = new System.Drawing.Size(75, 23);
+            this.btnBatDau.Size = new System.Drawing.Size(78, 35);
             this.btnBatDau.TabIndex = 5;
             this.btnBatDau.Text = "Bắt Đầu";
             this.btnBatDau.UseVisualStyleBackColor = true;
@@ -143,7 +146,7 @@
             // cmbHocKi
             // 
             this.cmbHocKi.FormattingEnabled = true;
-            this.cmbHocKi.Location = new System.Drawing.Point(67, 107);
+            this.cmbHocKi.Location = new System.Drawing.Point(80, 107);
             this.cmbHocKi.Name = "cmbHocKi";
             this.cmbHocKi.Size = new System.Drawing.Size(121, 21);
             this.cmbHocKi.TabIndex = 4;
@@ -154,14 +157,14 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(26, 110);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 13);
+            this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Học Kì";
+            this.label4.Text = "HOCKI:";
             // 
             // cmbMonHoc
             // 
             this.cmbMonHoc.FormattingEnabled = true;
-            this.cmbMonHoc.Location = new System.Drawing.Point(274, 107);
+            this.cmbMonHoc.Location = new System.Drawing.Point(282, 107);
             this.cmbMonHoc.Name = "cmbMonHoc";
             this.cmbMonHoc.Size = new System.Drawing.Size(121, 21);
             this.cmbMonHoc.TabIndex = 4;
@@ -171,14 +174,14 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(220, 110);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 13);
+            this.label6.Size = new System.Drawing.Size(56, 13);
             this.label6.TabIndex = 3;
-            this.label6.Text = "Môn Học";
+            this.label6.Text = "MONHOC:";
             // 
             // cmbNhom
             // 
             this.cmbNhom.FormattingEnabled = true;
-            this.cmbNhom.Location = new System.Drawing.Point(274, 65);
+            this.cmbNhom.Location = new System.Drawing.Point(282, 65);
             this.cmbNhom.Name = "cmbNhom";
             this.cmbNhom.Size = new System.Drawing.Size(121, 21);
             this.cmbNhom.TabIndex = 4;
@@ -188,14 +191,14 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(220, 68);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 13);
+            this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 3;
-            this.label5.Text = "Nhóm";
+            this.label5.Text = "NHOM:";
             // 
             // cmbNienKhoa
             // 
             this.cmbNienKhoa.FormattingEnabled = true;
-            this.cmbNienKhoa.Location = new System.Drawing.Point(67, 65);
+            this.cmbNienKhoa.Location = new System.Drawing.Point(80, 65);
             this.cmbNienKhoa.Name = "cmbNienKhoa";
             this.cmbNienKhoa.Size = new System.Drawing.Size(121, 21);
             this.cmbNienKhoa.TabIndex = 4;
@@ -206,23 +209,24 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 68);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Niên Khóa";
+            this.label3.Text = "NIENKHOA:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(26, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.Size = new System.Drawing.Size(115, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "NHẬP THÔNG TIN ";
             // 
             // cmbKhoa
             // 
             this.cmbKhoa.FormattingEnabled = true;
-            this.cmbKhoa.Location = new System.Drawing.Point(722, 21);
+            this.cmbKhoa.Location = new System.Drawing.Point(670, 21);
             this.cmbKhoa.Name = "cmbKhoa";
             this.cmbKhoa.Size = new System.Drawing.Size(185, 21);
             this.cmbKhoa.TabIndex = 1;
@@ -231,7 +235,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(681, 24);
+            this.label1.Location = new System.Drawing.Point(629, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
@@ -250,13 +254,14 @@
             // gridDiem
             // 
             this.gridDiem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridDiem.Location = new System.Drawing.Point(0, 176);
+            this.gridDiem.Location = new System.Drawing.Point(0, 262);
             this.gridDiem.MainView = this.gridView1;
             this.gridDiem.Name = "gridDiem";
-            this.gridDiem.Size = new System.Drawing.Size(927, 489);
+            this.gridDiem.Size = new System.Drawing.Size(927, 403);
             this.gridDiem.TabIndex = 2;
             this.gridDiem.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gridDiem.Click += new System.EventHandler(this.gridDiem_Click);
             // 
             // gridView1
             // 

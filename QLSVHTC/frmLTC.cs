@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.DataAccess.Native.EntityFramework;
+using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,13 +21,12 @@ namespace QLSVHTC
         {
             InitializeComponent();
         }
-        ///ed
 
         private void frmLTC_Load(object sender, EventArgs e)
         {
-            loadGVcombobox();
             DS.EnforceConstraints = false;
-            
+            this.DANGKYTableAdapter.Fill(this.DS.DANGKY);
+            this.DANGKYTableAdapter.Connection.ConnectionString = Program.connstr;
             // TODO: This line of code loads data into the 'DS.MONHOC' table. You can move, or remove it, as needed.
             this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
             this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
@@ -46,28 +46,39 @@ namespace QLSVHTC
             {
                 cmbKhoa.Enabled = false;
             }
-            cmbTenMH.DataSource = bdsMH;
+            
             cmbTenMH.DisplayMember = "TENMH";
             cmbTenMH.ValueMember = "MAMH";
+            cmbTenMH.DataSource = bdsMH;
+
             
-            cmbTenGV.DataSource = bdsGV;
             cmbTenGV.DisplayMember = "TEN";
             cmbTenGV.ValueMember = "MAGV";
-        }
-        void loadGVcombobox()
-        {
-            DataTable dt = new DataTable();
-            string cmd = "EXEC dbo.SP_GetDSGV";
-            dt = Program.ExecSqlDataTable(cmd);
-            BindingSource bdsgv = new BindingSource();
-            bdsgv.DataSource = dt;
-            cmbTenGV.DataSource = bdsgv;
-            cmbTenGV.DisplayMember = "HOTEN";
-            cmbTenGV.ValueMember = "MAGV";
-        }
-        private void hOCKYSpinEdit_EditValueChanged(object sender, EventArgs e)
-        {
+            cmbTenGV.DataSource = bdsGV;
 
+            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+        }
+        private void beforeButton()
+        {
+            //===cmb===
+            cmbKhoa.Enabled = false;
+
+            //===button===
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
+            btnGhi.Enabled = btnPhucHoi.Enabled = true;
+
+            //==grid==
+            LOPTINCHIGridControl.Enabled = false;
+        }
+        private void afterButton()
+        {
+            //===cmb===
+            cmbKhoa.Enabled = true;
+            //===btn===
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            //==grid==
+            LOPTINCHIGridControl.Enabled = true;
         }
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
@@ -91,7 +102,6 @@ namespace QLSVHTC
             }
             else
             {
-                //loadGVcombobox();
                 this.LOPTINCHITableAdapter.Connection.ConnectionString = Program.connstr;
                 this.LOPTINCHITableAdapter.Fill(this.DS.LOPTINCHI);
                 this.GIANGVIENTableAdapter.Connection.ConnectionString = Program.connstr;
@@ -116,23 +126,19 @@ namespace QLSVHTC
         }
         private void txbMaMH_EditValueChanged(object sender, EventArgs e)
         {
-            //cmbTenMH.SelectedValue = txbMaMH.Text;
+            cmbTenMH.SelectedValue = txbMaMH.Text;
         }
 
         private void txbMaGV_EditValueChanged(object sender, EventArgs e)
         {
-            //cmbTenGV.SelectedValue = txbMaGV.Text;
+            cmbTenGV.SelectedValue = txbMaGV.Text;
         }
 
-        private void txbMaKhoa_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string maloptc = "";
-            if (bdsGV.Count > 0)
+            if (bdsDangKy.Count > 0)
             {
                 MessageBox.Show("Không thể xóa lớp này vì đã có sinh viên", "", MessageBoxButtons.OK);
                 return;
@@ -213,14 +219,26 @@ namespace QLSVHTC
                 MessageBox.Show("Lỗi ghi lớp tín chỉ: " + ex.Message, "", MessageBoxButtons.OK);
                 return;
             }
-            lOPTINCHIGridControl.Enabled = true;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-            btnGhi.Enabled = btnPhucHoi.Enabled = true;
+            afterButton();
         }
 
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            bdsLTC.CancelEdit();
+            if (btnThem.Enabled == false || btnGhi.Enabled == false) bdsLTC.Position = vitri;
+            LOPTINCHIGridControl.Enabled = true;
 
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            frmLTC_Load(sender, e);
+
+            // load lại cả form...
+
+
+            if (vitri > 0)
+            {
+                bdsLTC.Position = vitri;
+            }
         }
 
         private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -244,23 +262,17 @@ namespace QLSVHTC
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsLTC.Position;
-            panelControl2.Enabled = true;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnPhucHoi.Enabled = false;
-            btnGhi.Enabled = true;
-            lOPTINCHIGridControl.Enabled = false;
+            beforeButton();
         }
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsLTC.Position;
-            panelControl2.Enabled = true;
             bdsLTC.AddNew();
             txbMaKhoa.Text = macn;
             cmbTenGV.SelectedIndex = 0;
             cmbTenMH.SelectedIndex = 0;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
-            btnGhi.Enabled = btnPhucHoi.Enabled = true;
-            lOPTINCHIGridControl.Enabled = false;
+            beforeButton();
         }
     }
 }

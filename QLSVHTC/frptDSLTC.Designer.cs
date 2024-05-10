@@ -40,20 +40,20 @@
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(335, 259);
-            this.btnThoat.Margin = new System.Windows.Forms.Padding(4);
+            this.btnThoat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Location = new System.Drawing.Point(267, 200);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(97, 50);
+            this.btnThoat.Size = new System.Drawing.Size(83, 41);
             this.btnThoat.TabIndex = 13;
             this.btnThoat.Text = "THOÁT";
             this.btnThoat.UseVisualStyleBackColor = true;
             // 
             // btnIn
             // 
-            this.btnIn.Location = new System.Drawing.Point(207, 259);
-            this.btnIn.Margin = new System.Windows.Forms.Padding(4);
+            this.btnIn.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIn.Location = new System.Drawing.Point(157, 200);
             this.btnIn.Name = "btnIn";
-            this.btnIn.Size = new System.Drawing.Size(97, 50);
+            this.btnIn.Size = new System.Drawing.Size(83, 41);
             this.btnIn.TabIndex = 14;
             this.btnIn.Text = "IN";
             this.btnIn.UseVisualStyleBackColor = true;
@@ -62,67 +62,61 @@
             // cmbHocKi
             // 
             this.cmbHocKi.FormattingEnabled = true;
-            this.cmbHocKi.Location = new System.Drawing.Point(226, 196);
-            this.cmbHocKi.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbHocKi.Location = new System.Drawing.Point(174, 149);
             this.cmbHocKi.Name = "cmbHocKi";
-            this.cmbHocKi.Size = new System.Drawing.Size(283, 24);
+            this.cmbHocKi.Size = new System.Drawing.Size(243, 21);
             this.cmbHocKi.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(141, 199);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(101, 152);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 16);
+            this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "HỌC KÌ";
             // 
             // cmbNienKhoa
             // 
             this.cmbNienKhoa.FormattingEnabled = true;
-            this.cmbNienKhoa.Location = new System.Drawing.Point(226, 162);
-            this.cmbNienKhoa.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbNienKhoa.Location = new System.Drawing.Point(174, 122);
             this.cmbNienKhoa.Name = "cmbNienKhoa";
-            this.cmbNienKhoa.Size = new System.Drawing.Size(283, 24);
+            this.cmbNienKhoa.Size = new System.Drawing.Size(243, 21);
             this.cmbNienKhoa.TabIndex = 11;
             this.cmbNienKhoa.SelectedIndexChanged += new System.EventHandler(this.cmbNienKhoa_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(141, 166);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(101, 125);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 16);
+            this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "NIÊN KHÓA";
             // 
             // cmbKhoa
             // 
             this.cmbKhoa.FormattingEnabled = true;
-            this.cmbKhoa.Location = new System.Drawing.Point(226, 129);
-            this.cmbKhoa.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbKhoa.Location = new System.Drawing.Point(174, 95);
             this.cmbKhoa.Name = "cmbKhoa";
-            this.cmbKhoa.Size = new System.Drawing.Size(283, 24);
+            this.cmbKhoa.Size = new System.Drawing.Size(243, 21);
             this.cmbKhoa.TabIndex = 12;
             this.cmbKhoa.SelectedIndexChanged += new System.EventHandler(this.cmbKhoa_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(141, 133);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(101, 98);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 16);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "KHOA";
             // 
-            // frmDSLTC
+            // frptDSLTC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 490);
+            this.ClientSize = new System.Drawing.Size(531, 349);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnIn);
             this.Controls.Add(this.cmbHocKi);
@@ -131,7 +125,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbKhoa);
             this.Controls.Add(this.label1);
-            this.Name = "frmDSLTC";
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "frptDSLTC";
             this.Text = "frmDSLTC";
             this.Load += new System.EventHandler(this.frmDSLTC_Load);
             this.ResumeLayout(false);

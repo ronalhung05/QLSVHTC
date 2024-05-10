@@ -185,12 +185,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmSV.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmSV.Designer.cs">
-      <DependentUpon>frmSV.cs</DependentUpon>
-    </Compile>
     <Compile Include="frptBDMH.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,9 +309,6 @@
     <Compile Include="rSVDKLTC.Designer.cs">
       <DependentUpon>rSVDKLTC.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frmSV.resx">
-      <DependentUpon>frmSV.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frptBDMH.resx">
       <DependentUpon>frptBDMH.cs</DependentUpon>
     </EmbeddedResource>

@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace QLSVHTC
 {
-    public partial class frmDiemSV : DevExpress.XtraEditors.XtraForm
+    public partial class frptDiemSV : DevExpress.XtraEditors.XtraForm
     {
-        public frmDiemSV()
+        public frptDiemSV()
         {
             InitializeComponent();
         }

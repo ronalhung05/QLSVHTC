@@ -1,6 +1,6 @@
 ﻿namespace QLSVHTC
 {
-    partial class frmDiemSV
+    partial class frptDiemSV
     {
         /// <summary>
         /// Required designer variable.
@@ -37,22 +37,23 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(88, 93);
+            this.label1.Location = new System.Drawing.Point(65, 93);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.Size = new System.Drawing.Size(73, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Sinh Vien";
+            this.label1.Text = "MASINHVIEN:";
             // 
             // txbMaSV
             // 
             this.txbMaSV.Location = new System.Drawing.Point(144, 90);
             this.txbMaSV.Name = "txbMaSV";
-            this.txbMaSV.Size = new System.Drawing.Size(100, 21);
+            this.txbMaSV.Size = new System.Drawing.Size(124, 21);
             this.txbMaSV.TabIndex = 1;
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(194, 151);
+            this.btnThoat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Location = new System.Drawing.Point(185, 151);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(83, 41);
             this.btnThoat.TabIndex = 15;
@@ -62,7 +63,8 @@
             // 
             // btnIn
             // 
-            this.btnIn.Location = new System.Drawing.Point(84, 151);
+            this.btnIn.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIn.Location = new System.Drawing.Point(75, 151);
             this.btnIn.Name = "btnIn";
             this.btnIn.Size = new System.Drawing.Size(83, 41);
             this.btnIn.TabIndex = 16;
@@ -74,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 300);
+            this.ClientSize = new System.Drawing.Size(328, 256);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnIn);
             this.Controls.Add(this.txbMaSV);

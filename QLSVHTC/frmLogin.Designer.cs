@@ -42,34 +42,34 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 41);
+            this.label1.Location = new System.Drawing.Point(50, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Chi Nhánh";
+            this.label1.Text = "KHOA:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 81);
+            this.label2.Location = new System.Drawing.Point(30, 89);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Tên Đăng Nhập";
+            this.label2.Text = "TAIKHOAN:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 127);
+            this.label3.Location = new System.Drawing.Point(30, 135);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Mật Khẩu";
+            this.label3.Text = "MATKHAU:";
             // 
             // cmbChiNhanh
             // 
             this.cmbChiNhanh.FormattingEnabled = true;
-            this.cmbChiNhanh.Location = new System.Drawing.Point(133, 41);
+            this.cmbChiNhanh.Location = new System.Drawing.Point(108, 46);
             this.cmbChiNhanh.Name = "cmbChiNhanh";
             this.cmbChiNhanh.Size = new System.Drawing.Size(189, 21);
             this.cmbChiNhanh.TabIndex = 3;
@@ -77,7 +77,7 @@
             // 
             // txbTaiKhoan
             // 
-            this.txbTaiKhoan.Location = new System.Drawing.Point(133, 81);
+            this.txbTaiKhoan.Location = new System.Drawing.Point(108, 86);
             this.txbTaiKhoan.Name = "txbTaiKhoan";
             this.txbTaiKhoan.Size = new System.Drawing.Size(189, 21);
             this.txbTaiKhoan.TabIndex = 4;
@@ -85,7 +85,7 @@
             // 
             // txbMatKhau
             // 
-            this.txbMatKhau.Location = new System.Drawing.Point(133, 124);
+            this.txbMatKhau.Location = new System.Drawing.Point(108, 132);
             this.txbMatKhau.Name = "txbMatKhau";
             this.txbMatKhau.Size = new System.Drawing.Size(189, 21);
             this.txbMatKhau.TabIndex = 5;
@@ -95,9 +95,11 @@
             // cbSinhVien
             // 
             this.cbSinhVien.AutoSize = true;
-            this.cbSinhVien.Location = new System.Drawing.Point(133, 170);
+            this.cbSinhVien.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbSinhVien.ForeColor = System.Drawing.Color.Olive;
+            this.cbSinhVien.Location = new System.Drawing.Point(138, 169);
             this.cbSinhVien.Name = "cbSinhVien";
-            this.cbSinhVien.Size = new System.Drawing.Size(69, 17);
+            this.cbSinhVien.Size = new System.Drawing.Size(77, 17);
             this.cbSinhVien.TabIndex = 6;
             this.cbSinhVien.Text = "Sinh Viên";
             this.cbSinhVien.UseVisualStyleBackColor = true;
@@ -105,9 +107,10 @@
             // 
             // btnDangNhap
             // 
+            this.btnDangNhap.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangNhap.Location = new System.Drawing.Point(68, 202);
             this.btnDangNhap.Name = "btnDangNhap";
-            this.btnDangNhap.Size = new System.Drawing.Size(81, 29);
+            this.btnDangNhap.Size = new System.Drawing.Size(91, 40);
             this.btnDangNhap.TabIndex = 7;
             this.btnDangNhap.Text = "Đăng Nhập";
             this.btnDangNhap.UseVisualStyleBackColor = true;
@@ -115,15 +118,16 @@
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(180, 202);
+            this.btnThoat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Location = new System.Drawing.Point(194, 202);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(80, 29);
+            this.btnThoat.Size = new System.Drawing.Size(93, 40);
             this.btnThoat.TabIndex = 8;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
-            // Login
+            // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -137,7 +141,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Login";
+            this.Name = "frmLogin";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);

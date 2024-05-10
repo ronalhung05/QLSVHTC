@@ -30,33 +30,37 @@ namespace QLSVHTC
             this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
             this.LOPTINCHITableAdapter.Fill(this.DS.LOPTINCHI);
             this.LOPTINCHITableAdapter.Connection.ConnectionString = Program.connstr;
-            
 
             if (Program.mGroup == "SV")
             {
-
-                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnPhucHoi.Enabled = false;
+                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             }
-            else
-            {
+            else btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled  = true;
 
-                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnGhi.Enabled = btnPhucHoi.Enabled = true;
-            }
-
+            btnGhi.Enabled = btnPhucHoi.Enabled = false;
         }
-
-        private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void beforeButton()
         {
-            vitri = dbsMonHoc.Position;
-            _flagOption = "ADD";
-
-            txbMaMh.Enabled = true;
-            dbsMonHoc.AddNew();
-
+            //===button===
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnGhi.Enabled = btnPhucHoi.Enabled = true;
-
-            mONHOCGridControl.Enabled = false;
+            //==grid==
+            MONHOCGridControl.Enabled =  false;
+        }
+        private void afterButton()
+        {
+            //===btn===
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            //==grid==
+            MONHOCGridControl.Enabled = true;
+        }
+        private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            vitri = bdsMonHoc.Position;
+            _flagOption = "ADD";
+            beforeButton();
+            bdsMonHoc.AddNew();
         }
 
         private bool validatorMonHoc()
@@ -177,8 +181,8 @@ namespace QLSVHTC
             {
                 try
                 {
-                    dbsMonHoc.EndEdit();
-                    dbsMonHoc.ResetCurrentItem();
+                    bdsMonHoc.EndEdit();
+                    bdsMonHoc.ResetCurrentItem();
                     this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.MONHOCTableAdapter.Update(this.DS.MONHOC);
                 }
@@ -187,32 +191,17 @@ namespace QLSVHTC
                     MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
- 
-                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-                btnGhi.Enabled = btnPhucHoi.Enabled = false;
-                mONHOCGridControl.Enabled = true;
-
-            }
-            else
-            {
-                mONHOCGridControl.Enabled = true;
-                return;
+                afterButton();
             }
         }
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            vitri = dbsMonHoc.Position;
+            vitri = bdsMonHoc.Position;
             _flagOption = "UPDATE";
-
+            beforeButton();
             oldMaMonHoc = txbMaMh.Text.Trim();
             oldTenMonHoc = txbTenMH.Text.Trim();
-            txbMaMh.Enabled = false;
-            panelControl1.Enabled = true;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnPhucHoi.Enabled = false;
-            btnGhi.Enabled = true;
-            mONHOCGridControl.Enabled = false;
-            //MONHOCGridControl.Enabled = false;
         }
 
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -220,7 +209,6 @@ namespace QLSVHTC
             string mamh = "";
             if (dbsLTC.Count > 0)
             {
-                //MessageBox.Show("Không thể xóa môn học này vì đã có trong lớp học", "", MessageBoxButtons.OK);
                 MessageBox.Show("Không thể xóa môn học này vì đã có trong lớp học", "", MessageBoxButtons.OK);
                 return;
             }
@@ -228,8 +216,8 @@ namespace QLSVHTC
             {
                 try
                 {
-                    mamh = ((DataRowView)dbsMonHoc[dbsMonHoc.Position])["MAMH"].ToString();
-                    dbsMonHoc.RemoveCurrent();
+                    mamh = ((DataRowView)bdsMonHoc[bdsMonHoc.Position])["MAMH"].ToString();
+                    bdsMonHoc.RemoveCurrent();
                     this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.MONHOCTableAdapter.Update(this.DS.MONHOC);
                 }
@@ -237,31 +225,20 @@ namespace QLSVHTC
                 {
                     MessageBox.Show("Lỗi xóa môn học: " + ex.Message, "", MessageBoxButtons.OK);
                     this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
-                    dbsMonHoc.Position = dbsMonHoc.Find("MALOP", mamh);
+                    bdsMonHoc.Position = bdsMonHoc.Find("MALOP", mamh);
                     return;
                 }
             }
-            if (dbsMonHoc.Count == 0) btnXoa.Enabled = false;
+            if (bdsMonHoc.Count == 0) btnXoa.Enabled = false;
 
         }
 
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            dbsMonHoc.CancelEdit();
-            if (btnThem.Enabled == false) dbsMonHoc.Position = vitri;
-            //MONHOCGridControl.Enabled = true;
-            panelControl1.Enabled = false;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            bdsMonHoc.CancelEdit();
+            afterButton();
             frmMonHoc_Load(sender, e);
-
-            // load lại cả form...
-
-
-            if (vitri > 0)
-            {
-                dbsMonHoc.Position = vitri;
-            }
+            if (vitri > 0) bdsMonHoc.Position = vitri;
         }
 
         private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -280,13 +257,6 @@ namespace QLSVHTC
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.Close();
-        }
-
-        private void btnHuy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            panelControl1.Enabled = false;
-            //MONHOCGridControl.Enabled = true;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnGhi.Enabled = true;
         }
     }
 }
