@@ -266,14 +266,16 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 24);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1140, 66);
+            this.panelControl1.Size = new System.Drawing.Size(1140, 124);
             this.panelControl1.TabIndex = 4;
+            this.panelControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl1_Paint);
             // 
             // btnTim
             // 
-            this.btnTim.Location = new System.Drawing.Point(782, 44);
+            this.btnTim.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTim.Location = new System.Drawing.Point(679, 35);
             this.btnTim.Name = "btnTim";
-            this.btnTim.Size = new System.Drawing.Size(75, 23);
+            this.btnTim.Size = new System.Drawing.Size(104, 43);
             this.btnTim.TabIndex = 2;
             this.btnTim.Text = "Tìm";
             this.btnTim.UseVisualStyleBackColor = true;
@@ -281,14 +283,14 @@
             // 
             // txbMaLop
             // 
-            this.txbMaLop.Location = new System.Drawing.Point(598, 44);
+            this.txbMaLop.Location = new System.Drawing.Point(525, 46);
             this.txbMaLop.Name = "txbMaLop";
             this.txbMaLop.Size = new System.Drawing.Size(100, 21);
             this.txbMaLop.TabIndex = 1;
             // 
             // txbTenSV
             // 
-            this.txbTenSV.Location = new System.Drawing.Point(321, 42);
+            this.txbTenSV.Location = new System.Drawing.Point(292, 43);
             this.txbTenSV.Name = "txbTenSV";
             this.txbTenSV.Size = new System.Drawing.Size(100, 21);
             this.txbTenSV.TabIndex = 1;
@@ -296,15 +298,15 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 44);
+            this.label3.Location = new System.Drawing.Point(238, 48);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Họ Tên";
+            this.label3.Text = "HOTEN: ";
             // 
             // txbMaSV
             // 
-            this.txbMaSV.Location = new System.Drawing.Point(74, 40);
+            this.txbMaSV.Location = new System.Drawing.Point(65, 43);
             this.txbMaSV.Name = "txbMaSV";
             this.txbMaSV.Size = new System.Drawing.Size(100, 21);
             this.txbMaSV.TabIndex = 1;
@@ -312,38 +314,39 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(538, 47);
+            this.label4.Location = new System.Drawing.Point(471, 49);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Mã Lớp";
+            this.label4.Text = "MALOP: ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 42);
+            this.label2.Location = new System.Drawing.Point(18, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 13);
+            this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Mã SV";
+            this.label2.Text = "MASV: ";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(14, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 13);
+            this.label1.Size = new System.Drawing.Size(139, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "THÔNG TIN SINH VIÊN";
             // 
             // gridHocPhi
             // 
             this.gridHocPhi.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gridHocPhi.Location = new System.Drawing.Point(0, 90);
+            this.gridHocPhi.Location = new System.Drawing.Point(0, 148);
             this.gridHocPhi.MainView = this.gridView1;
             this.gridHocPhi.MenuManager = this.barManager1;
             this.gridHocPhi.Name = "gridHocPhi";
-            this.gridHocPhi.Size = new System.Drawing.Size(1140, 128);
+            this.gridHocPhi.Size = new System.Drawing.Size(1140, 208);
             this.gridHocPhi.TabIndex = 5;
             this.gridHocPhi.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -403,11 +406,11 @@
             // gridCTHP
             // 
             this.gridCTHP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridCTHP.Location = new System.Drawing.Point(0, 218);
+            this.gridCTHP.Location = new System.Drawing.Point(0, 356);
             this.gridCTHP.MainView = this.gridView2;
             this.gridCTHP.MenuManager = this.barManager1;
             this.gridCTHP.Name = "gridCTHP";
-            this.gridCTHP.Size = new System.Drawing.Size(1140, 432);
+            this.gridCTHP.Size = new System.Drawing.Size(1140, 294);
             this.gridCTHP.TabIndex = 6;
             this.gridCTHP.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});

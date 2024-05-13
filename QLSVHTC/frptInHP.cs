@@ -1,28 +1,22 @@
-﻿using DevExpress.XtraEditors;
-using DevExpress.XtraReports.UI;
+﻿using DevExpress.XtraReports.UI;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLSVHTC
 {
-    public partial class frmInHP : DevExpress.XtraEditors.XtraForm
+    public partial class frptInHP : DevExpress.XtraEditors.XtraForm
     {
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
         public static String database = "QLDSV_TC";
         public int type;
-        public frmInHP()
+        public frptInHP()
         {
             InitializeComponent();
         }
+
         public static string NumberToText(double inputNumber, bool suffix = true)
         {
             string[] unitNumbers = new string[] { "không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín" };
@@ -118,7 +112,7 @@ namespace QLSVHTC
             {
                 connstr = "Data Source=" + severname + ";Initial Catalog=" +
                     database + ";User ID=" +
-                    mlogin + ";password=" + password +";TrustServerCertificate=true";
+                    mlogin + ";password=" + password + ";TrustServerCertificate=true";
                 conn.ConnectionString = connstr;
                 conn.Open();
                 return 1;
@@ -138,15 +132,15 @@ namespace QLSVHTC
 
             BindingSource bdslh = new BindingSource();
             bdslh.DataSource = dt;
-            cmbLop.DataSource = bdslh;
-            cmbLop.DisplayMember = "MALOP";
-            cmbLop.ValueMember = "TENLOP";
+            cbLop.DataSource = bdslh;
+            cbLop.DisplayMember = "MALOP";
+            cbLop.ValueMember = "TENLOP";
         }
-        private void frmInHP_Load(object sender, EventArgs e)
+        private void frptInHP_Load(object sender, EventArgs e)
         {
             if (Program.mGroup.Equals("PGV") || Program.mGroup.Equals("KHOA"))
             {
-                if (KetNoiSql("LAPTOP-K21D5PFV\\MSSQL3", Program.remotelogin, Program.remotepassword) == 0)
+                if (KetNoiSql("MSI\\MSSQLSERVER3", Program.remotelogin, Program.remotepassword) == 0)
                 {
                     MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
                 }
@@ -155,7 +149,6 @@ namespace QLSVHTC
             else type = 1;
             loadLOPcombobox();
         }
-
         public static SqlDataReader ExecSqlDataReader(string strlenh)
         {
             SqlDataReader myreader;
@@ -191,7 +184,7 @@ namespace QLSVHTC
             }
             string nienkhoa = txbNienKhoa.Text;
             int hocky = (int)nmHocKy.Value;
-            string malop = cmbLop.Text;
+            string malop = cbLop.Text;
             string tongtien = "";
             string cmd = "SELECT TENKHOA FROM dbo.LOP,dbo.KHOA WHERE MALOP = '" + malop + "' AND KHOA.MAKHOA = LOP.MAKHOA";
             SqlDataReader reader = ExecSqlDataReader(cmd);
@@ -213,7 +206,7 @@ namespace QLSVHTC
             }
 
 
-            rHocPhi rpt = new rHocPhi(malop, nienkhoa, hocky);
+            XtraReport_SinhVienDongHocPhi rpt = new XtraReport_SinhVienDongHocPhi(malop, nienkhoa, hocky, connstr);
             rpt.lbMaLop.Text = malop;
             rpt.lbKhoa.Text = tenkhoa;
             rpt.lbTienChu.Text = tongtien;
@@ -222,11 +215,14 @@ namespace QLSVHTC
             ReportPrintTool print = new ReportPrintTool(rpt);
             print.ShowPreviewDialog();
 
+
+
+
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            this.Close();   
+            this.Close();
         }
     }
 }

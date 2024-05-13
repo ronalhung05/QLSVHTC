@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace QLSVHTC
 {
-    public partial class frmDiemSV : DevExpress.XtraEditors.XtraForm
+    public partial class frptDiemSV : DevExpress.XtraEditors.XtraForm
     {
-        public frmDiemSV()
+        public frptDiemSV()
         {
             InitializeComponent();
         }
@@ -85,7 +85,7 @@ namespace QLSVHTC
                 {
                     type = 0;
                 }
-                rDSV rpt = new rDSV(msv, type);
+                XtraReport_PhieuDiemSV rpt = new XtraReport_PhieuDiemSV(msv, type);
                 rpt.lbMaSV.Text = msv;
 
                 ReportPrintTool print = new ReportPrintTool(rpt);

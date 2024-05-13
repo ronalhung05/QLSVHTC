@@ -6,13 +6,13 @@ using System.Drawing;
 
 namespace QLSVHTC
 {
-    public partial class rDSV : DevExpress.XtraReports.UI.XtraReport
+    public partial class XtraReport_PhieuDiemSV : DevExpress.XtraReports.UI.XtraReport
     {
-        public rDSV()
+        public XtraReport_PhieuDiemSV()
         {
             InitializeComponent();
         }
-        public rDSV(string msv, int type)
+        public XtraReport_PhieuDiemSV(string msv, int type)
         {
             InitializeComponent();
             this.sqlDataSource1.Connection.ConnectionString = Program.connstr;

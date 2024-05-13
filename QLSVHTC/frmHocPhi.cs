@@ -62,6 +62,8 @@ namespace QLSVHTC
         {
             vitri1 = bdsHocPhi.Position;
             bdsHocPhi.AddNew();
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
+            btnPhucHoi.Enabled = btnGhi.Enabled = true;
         }
 
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -155,7 +157,8 @@ namespace QLSVHTC
             finally
             {
                 conn.Close();
-
+                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+                btnGhi.Enabled = btnPhucHoi.Enabled = false;
             }
         }
 
@@ -163,12 +166,17 @@ namespace QLSVHTC
         {
             bdsHocPhi.CancelEdit();
             frmHocPhi_Load(sender, e);
+            gridHocPhi.Enabled = true;
+            gridCTHP.Enabled = true;
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+            btnGhi.Enabled = btnPhucHoi.Enabled = false;
             if (vitri > 0) bdsHocPhi.Position = vitri1;
         }
 
         private void frmHocPhi_Load(object sender, EventArgs e)
         {
-
+            btnPhucHoi.Enabled = false;
+            btnGhi.Enabled = false;
         }
 
         private void btnThemCTHP_Click(object sender, EventArgs e)
@@ -387,6 +395,11 @@ namespace QLSVHTC
             {
                 this.contextMenuStrip1.Show(gridCTHP.PointToScreen(e.Location));
             }   
+        }
+
+        private void panelControl1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -6,13 +6,13 @@ using System.Drawing;
 
 namespace QLSVHTC
 {
-    public partial class rSVDKLTC : DevExpress.XtraReports.UI.XtraReport
+    public partial class XtraReport_SinhVienDKLopTinChi : DevExpress.XtraReports.UI.XtraReport
     {
-        public rSVDKLTC()
+        public XtraReport_SinhVienDKLopTinChi()
         {
             InitializeComponent();
         }
-        public rSVDKLTC(String nienkhoa, int hocky,int nhom, string monhoc)
+        public XtraReport_SinhVienDKLopTinChi(String nienkhoa, int hocky,int nhom, string monhoc)
         {
             InitializeComponent();
             this.sqlDataSource1.Connection.ConnectionString = Program.connstr;

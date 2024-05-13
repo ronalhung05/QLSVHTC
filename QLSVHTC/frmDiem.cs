@@ -148,16 +148,11 @@ namespace QLSVHTC
             tran = conn.BeginTransaction();
             try
             {
-
-
                 for (int i = 0; i < bdsTemp.Count; i++)
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_XULY_DIEM", conn);
                     cmd.Connection = conn;
                     cmd.Transaction = tran;
-
-
 
                     cmd.CommandType = CommandType.StoredProcedure;
                     string masv = ((DataRowView)bdsTemp[i])["MASV"].ToString();
@@ -172,11 +167,11 @@ namespace QLSVHTC
                     }
                     if (((DataRowView)bdsTemp[i])["DIEM_GK"].ToString() != "")
                     {
-                        diemgk = float.Parse(((DataRowView)bdsTemp[i])["DIEM_GK"].ToString());
+                        diemgk = RoundToHalf(float.Parse(((DataRowView)bdsTemp[i])["DIEM_GK"].ToString()));
                     }
                     if (((DataRowView)bdsTemp[i])["DIEM_CK"].ToString() != "")
                     {
-                        diemck = float.Parse(((DataRowView)bdsTemp[i])["DIEM_CK"].ToString());
+                        diemck = RoundToHalf(float.Parse(((DataRowView)bdsTemp[i])["DIEM_CK"].ToString()));
                     }
                     if (diemcc < 0 || diemcc > 10 || diemck < 0 || diemck > 10 || diemgk < 0 || diemgk > 10)
                     {
@@ -190,10 +185,7 @@ namespace QLSVHTC
                     cmd.Parameters.Add(new SqlParameter("@DIEMGK", diemgk));
                     cmd.Parameters.Add(new SqlParameter("@DIEMCK", diemck));
                     cmd.ExecuteNonQuery();
-
-
                 }
-
 
                 tran.Commit();
             }
@@ -201,7 +193,6 @@ namespace QLSVHTC
             {
                 try
                 {
-
                     tran.Rollback();
                     XtraMessageBox.Show("Lỗi ghi toàn bộ điểm vào Database. Bạn hãy xem lại ! " + sqlex.Message, "", MessageBoxButtons.OK);
                     loadBDMH();
@@ -226,9 +217,38 @@ namespace QLSVHTC
             return;
         }
 
+        private float RoundToHalf(float number)
+        {
+            double lower = Math.Floor(number);
+            double upper = lower + 0.5;
+            double upperNext = lower + 1.0;
+
+            double lowerDiff = number - lower;
+            double upperDiff = upper - number;
+            double upperNextDiff = upperNext - number;
+
+            if (lowerDiff <= 0.25)
+            {
+                return (float)lower;
+            }
+            else if (lowerDiff > 0.25 && lowerDiff < 0.75)
+            {
+                return (float)upper;
+            }
+            else
+            {
+                return (float)upperNext;
+            }
+        }
+
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void gridDiem_Click(object sender, EventArgs e)
+        {
+
+        } 
     }
 }

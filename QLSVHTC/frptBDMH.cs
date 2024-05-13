@@ -120,7 +120,7 @@ namespace QLSVHTC
             int nhom = Int32.Parse(cmbNhom.Text);
             string monhoc = cmbMonHoc.SelectedValue.ToString();
             string khoa = cmbKhoa.Text;
-            rBDMH rpt = new rBDMH(nienkhoa, hocky, nhom, monhoc);
+            XtraReport_InBangDiemMonHoc rpt = new XtraReport_InBangDiemMonHoc(nienkhoa, hocky, nhom, monhoc);
             rpt.lbMH.Text = monhoc;
             rpt.lbHK.Text = hocky.ToString();
             rpt.lbNhom.Text = nhom.ToString();

@@ -96,7 +96,7 @@ namespace QLSVHTC
             string nienkhoa = cmbNienKhoa.Text;
             int hocky = Int32.Parse(cmbHocKi.Text);
             string khoa = cmbKhoa.Text;
-            rDSLTC rpt = new rDSLTC(nienkhoa, hocky);
+            XtraReport_DanhSachLopTC rpt = new XtraReport_DanhSachLopTC(nienkhoa, hocky);
             rpt.lbHK.Text = hocky.ToString();
             rpt.lbNK.Text = nienkhoa;
             rpt.lbKhoa.Text = khoa;
