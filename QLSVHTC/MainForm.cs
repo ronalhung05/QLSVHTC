@@ -32,11 +32,11 @@ namespace QLSVHTC
         {
             if (this.group.Equals("PGV") || this.group.Equals("KHOA"))
             {
-                Form frm = this.CheckExists(typeof(frmClassRoom));
+                Form frm = this.CheckExists(typeof(frmLopHoc));
                 if (frm != null) { frm.Activate(); }
                 else
                 {
-                    frmClassRoom f = new frmClassRoom();
+                    frmLopHoc f = new frmLopHoc();
                     f.MdiParent = this;
                     f.Show();
                 }
@@ -106,7 +106,8 @@ namespace QLSVHTC
 
         private void btnDangKyLTC_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (this.group.Equals("SV")) { 
+            if (this.group.Equals("SV"))
+            {
                 Form frm = this.CheckExists(typeof(frmDangKy));
                 if (frm != null) { frm.Activate(); }
                 else
@@ -255,7 +256,7 @@ namespace QLSVHTC
             {
                 f.Close();
             }
-            Form frmLogin = new frmLogin();
+            Form frmDangNhap = new frmDangNhap();
 
             this.Close();
         }

@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace QLSVHTC
 {
-    public partial class frmClassRoom : DevExpress.XtraEditors.XtraForm
+    public partial class frmLopHoc : DevExpress.XtraEditors.XtraForm
     {
         int vitri = 0; //selected row in the table 
         string macn = "";
         private string _flagOptionLop;
         private string _oldTenLop = "";
-        public frmClassRoom()
+        public frmLopHoc()
         {
             InitializeComponent();
         }
@@ -324,6 +324,11 @@ namespace QLSVHTC
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.Close();
+        }
+
+        private void panelControl2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
