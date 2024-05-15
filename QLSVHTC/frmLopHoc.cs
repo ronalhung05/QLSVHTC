@@ -68,6 +68,9 @@ namespace QLSVHTC
             }
             else
             {
+                this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+                this.SINHVIENTableAdapter.Fill(this.DS.SINHVIEN);
+
                 this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.LOPTableAdapter.Fill(this.DS.LOP);
 
