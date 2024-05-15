@@ -88,36 +88,40 @@
             // mAMHLabel
             // 
             mAMHLabel.AutoSize = true;
-            mAMHLabel.Location = new System.Drawing.Point(42, 464);
+            mAMHLabel.Location = new System.Drawing.Point(49, 571);
+            mAMHLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             mAMHLabel.Name = "mAMHLabel";
-            mAMHLabel.Size = new System.Drawing.Size(41, 13);
+            mAMHLabel.Size = new System.Drawing.Size(48, 16);
             mAMHLabel.TabIndex = 44;
             mAMHLabel.Text = "MAMH:";
             // 
             // tENMHLabel
             // 
             tENMHLabel.AutoSize = true;
-            tENMHLabel.Location = new System.Drawing.Point(38, 490);
+            tENMHLabel.Location = new System.Drawing.Point(44, 603);
+            tENMHLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             tENMHLabel.Name = "tENMHLabel";
-            tENMHLabel.Size = new System.Drawing.Size(45, 13);
+            tENMHLabel.Size = new System.Drawing.Size(53, 16);
             tENMHLabel.TabIndex = 45;
             tENMHLabel.Text = "TENMH:";
             // 
             // sOTIET_LTLabel
             // 
             sOTIET_LTLabel.AutoSize = true;
-            sOTIET_LTLabel.Location = new System.Drawing.Point(22, 516);
+            sOTIET_LTLabel.Location = new System.Drawing.Point(26, 635);
+            sOTIET_LTLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             sOTIET_LTLabel.Name = "sOTIET_LTLabel";
-            sOTIET_LTLabel.Size = new System.Drawing.Size(61, 13);
+            sOTIET_LTLabel.Size = new System.Drawing.Size(74, 16);
             sOTIET_LTLabel.TabIndex = 46;
             sOTIET_LTLabel.Text = "SOTIET LT:";
             // 
             // sOTIET_THLabel
             // 
             sOTIET_THLabel.AutoSize = true;
-            sOTIET_THLabel.Location = new System.Drawing.Point(20, 542);
+            sOTIET_THLabel.Location = new System.Drawing.Point(23, 667);
+            sOTIET_THLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             sOTIET_THLabel.Name = "sOTIET_THLabel";
-            sOTIET_THLabel.Size = new System.Drawing.Size(63, 13);
+            sOTIET_THLabel.Size = new System.Drawing.Size(76, 16);
             sOTIET_THLabel.TabIndex = 47;
             sOTIET_THLabel.Text = "SOTIET TH:";
             // 
@@ -241,31 +245,35 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1022, 24);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlTop.Size = new System.Drawing.Size(1192, 30);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 627);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 776);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1022, 20);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1192, 20);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 30);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 603);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 746);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1022, 24);
+            this.barDockControlRight.Location = new System.Drawing.Point(1192, 30);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 603);
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 746);
             // 
             // btnHuy
             // 
@@ -284,20 +292,23 @@
             // 
             this.panelControl1.Controls.Add(this.MONHOCGridControl);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 24);
+            this.panelControl1.Location = new System.Drawing.Point(0, 30);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1022, 377);
+            this.panelControl1.Size = new System.Drawing.Size(1192, 464);
             this.panelControl1.TabIndex = 44;
             // 
             // MONHOCGridControl
             // 
             this.MONHOCGridControl.DataSource = this.bdsMonHoc;
             this.MONHOCGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MONHOCGridControl.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MONHOCGridControl.Location = new System.Drawing.Point(2, 2);
             this.MONHOCGridControl.MainView = this.gridView1;
+            this.MONHOCGridControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MONHOCGridControl.MenuManager = this.barManager1;
             this.MONHOCGridControl.Name = "MONHOCGridControl";
-            this.MONHOCGridControl.Size = new System.Drawing.Size(1018, 373);
+            this.MONHOCGridControl.Size = new System.Drawing.Size(1188, 460);
             this.MONHOCGridControl.TabIndex = 0;
             this.MONHOCGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -314,36 +325,45 @@
             this.colTENMH,
             this.colSOTIET_LT,
             this.colSOTIET_TH});
+            this.gridView1.DetailHeight = 431;
             this.gridView1.GridControl = this.MONHOCGridControl;
             this.gridView1.Name = "gridView1";
             // 
             // colMAMH
             // 
             this.colMAMH.FieldName = "MAMH";
+            this.colMAMH.MinWidth = 23;
             this.colMAMH.Name = "colMAMH";
             this.colMAMH.Visible = true;
             this.colMAMH.VisibleIndex = 0;
+            this.colMAMH.Width = 87;
             // 
             // colTENMH
             // 
             this.colTENMH.FieldName = "TENMH";
+            this.colTENMH.MinWidth = 23;
             this.colTENMH.Name = "colTENMH";
             this.colTENMH.Visible = true;
             this.colTENMH.VisibleIndex = 1;
+            this.colTENMH.Width = 87;
             // 
             // colSOTIET_LT
             // 
             this.colSOTIET_LT.FieldName = "SOTIET_LT";
+            this.colSOTIET_LT.MinWidth = 23;
             this.colSOTIET_LT.Name = "colSOTIET_LT";
             this.colSOTIET_LT.Visible = true;
             this.colSOTIET_LT.VisibleIndex = 2;
+            this.colSOTIET_LT.Width = 87;
             // 
             // colSOTIET_TH
             // 
             this.colSOTIET_TH.FieldName = "SOTIET_TH";
+            this.colSOTIET_TH.MinWidth = 23;
             this.colSOTIET_TH.Name = "colSOTIET_TH";
             this.colSOTIET_TH.Visible = true;
             this.colSOTIET_TH.VisibleIndex = 3;
+            this.colSOTIET_TH.Width = 87;
             // 
             // MONHOCTableAdapter
             // 
@@ -364,19 +384,21 @@
             // txbMaMh
             // 
             this.txbMaMh.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsMonHoc, "MAMH", true));
-            this.txbMaMh.Location = new System.Drawing.Point(89, 461);
+            this.txbMaMh.Location = new System.Drawing.Point(104, 567);
+            this.txbMaMh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txbMaMh.MenuManager = this.barManager1;
             this.txbMaMh.Name = "txbMaMh";
-            this.txbMaMh.Size = new System.Drawing.Size(195, 20);
+            this.txbMaMh.Size = new System.Drawing.Size(227, 22);
             this.txbMaMh.TabIndex = 45;
             // 
             // txbTenMH
             // 
             this.txbTenMH.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsMonHoc, "TENMH", true));
-            this.txbTenMH.Location = new System.Drawing.Point(89, 487);
+            this.txbTenMH.Location = new System.Drawing.Point(104, 599);
+            this.txbTenMH.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txbTenMH.MenuManager = this.barManager1;
             this.txbTenMH.Name = "txbTenMH";
-            this.txbTenMH.Size = new System.Drawing.Size(195, 20);
+            this.txbTenMH.Size = new System.Drawing.Size(227, 22);
             this.txbTenMH.TabIndex = 46;
             // 
             // speSoTietLT
@@ -387,12 +409,18 @@
             0,
             0,
             0});
-            this.speSoTietLT.Location = new System.Drawing.Point(89, 513);
+            this.speSoTietLT.Location = new System.Drawing.Point(104, 631);
+            this.speSoTietLT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.speSoTietLT.MenuManager = this.barManager1;
             this.speSoTietLT.Name = "speSoTietLT";
             this.speSoTietLT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.speSoTietLT.Size = new System.Drawing.Size(195, 20);
+            this.speSoTietLT.Properties.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.speSoTietLT.Size = new System.Drawing.Size(227, 24);
             this.speSoTietLT.TabIndex = 47;
             // 
             // speSoTietTH
@@ -403,12 +431,18 @@
             0,
             0,
             0});
-            this.speSoTietTH.Location = new System.Drawing.Point(89, 539);
+            this.speSoTietTH.Location = new System.Drawing.Point(104, 663);
+            this.speSoTietTH.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.speSoTietTH.MenuManager = this.barManager1;
             this.speSoTietTH.Name = "speSoTietTH";
             this.speSoTietTH.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.speSoTietTH.Size = new System.Drawing.Size(195, 20);
+            this.speSoTietTH.Properties.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.speSoTietTH.Size = new System.Drawing.Size(227, 24);
             this.speSoTietTH.TabIndex = 48;
             // 
             // dbsLTC
@@ -424,17 +458,18 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(106, 423);
+            this.label1.Location = new System.Drawing.Point(124, 521);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 16);
+            this.label1.Size = new System.Drawing.Size(196, 21);
             this.label1.TabIndex = 53;
             this.label1.Text = "THÔNG TIN MÔN HỌC";
             // 
             // frmMonHoc
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1022, 647);
+            this.ClientSize = new System.Drawing.Size(1192, 796);
             this.Controls.Add(this.label1);
             this.Controls.Add(sOTIET_THLabel);
             this.Controls.Add(this.speSoTietTH);
@@ -449,6 +484,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmMonHoc";
             this.Text = "frmMonHoc";
             this.Load += new System.EventHandler(this.frmMonHoc_Load);

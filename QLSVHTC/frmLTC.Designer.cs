@@ -320,7 +320,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4);
             this.barDockControlTop.Size = new System.Drawing.Size(1114, 30);
             // 
             // barDockControlBottom
@@ -329,7 +329,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 710);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4);
             this.barDockControlBottom.Size = new System.Drawing.Size(1114, 20);
             // 
             // barDockControlLeft
@@ -338,7 +338,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 30);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4);
             this.barDockControlLeft.Size = new System.Drawing.Size(0, 680);
             // 
             // barDockControlRight
@@ -347,7 +347,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1114, 30);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 680);
             // 
             // btnHuy
@@ -364,7 +364,7 @@
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 30);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1114, 81);
             this.panelControl1.TabIndex = 10;
@@ -373,7 +373,7 @@
             // 
             this.cmbKhoa.FormattingEnabled = true;
             this.cmbKhoa.Location = new System.Drawing.Point(85, 26);
-            this.cmbKhoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbKhoa.Margin = new System.Windows.Forms.Padding(4);
             this.cmbKhoa.Name = "cmbKhoa";
             this.cmbKhoa.Size = new System.Drawing.Size(270, 24);
             this.cmbKhoa.TabIndex = 1;
@@ -394,7 +394,7 @@
             this.panelControl2.Controls.Add(this.LOPTINCHIGridControl);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 111);
-            this.panelControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelControl2.Margin = new System.Windows.Forms.Padding(4);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(1114, 325);
             this.panelControl2.TabIndex = 11;
@@ -403,10 +403,10 @@
             // 
             this.LOPTINCHIGridControl.DataSource = this.bdsLTC;
             this.LOPTINCHIGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LOPTINCHIGridControl.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.LOPTINCHIGridControl.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.LOPTINCHIGridControl.Location = new System.Drawing.Point(2, 2);
             this.LOPTINCHIGridControl.MainView = this.gridView1;
-            this.LOPTINCHIGridControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.LOPTINCHIGridControl.Margin = new System.Windows.Forms.Padding(4);
             this.LOPTINCHIGridControl.MenuManager = this.barManager1;
             this.LOPTINCHIGridControl.Name = "LOPTINCHIGridControl";
             this.LOPTINCHIGridControl.Size = new System.Drawing.Size(1110, 321);
@@ -549,7 +549,7 @@
             // 
             this.txbNienKhoa.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsLTC, "NIENKHOA", true));
             this.txbNienKhoa.Location = new System.Drawing.Point(366, 460);
-            this.txbNienKhoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbNienKhoa.Margin = new System.Windows.Forms.Padding(4);
             this.txbNienKhoa.MenuManager = this.barManager1;
             this.txbNienKhoa.Name = "txbNienKhoa";
             this.txbNienKhoa.Size = new System.Drawing.Size(138, 22);
@@ -559,18 +559,23 @@
             // 
             this.SpinHocKy.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsLTC, "HOCKY", true));
             this.SpinHocKy.EditValue = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
             this.SpinHocKy.Location = new System.Drawing.Point(119, 508);
-            this.SpinHocKy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SpinHocKy.Margin = new System.Windows.Forms.Padding(4);
             this.SpinHocKy.MenuManager = this.barManager1;
             this.SpinHocKy.Name = "SpinHocKy";
             this.SpinHocKy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.SpinHocKy.Properties.MaxValue = new decimal(new int[] {
             4,
+            0,
+            0,
+            0});
+            this.SpinHocKy.Properties.MinValue = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -581,7 +586,7 @@
             // 
             this.txbMaMH.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsLTC, "MAMH", true));
             this.txbMaMH.Location = new System.Drawing.Point(366, 554);
-            this.txbMaMH.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbMaMH.Margin = new System.Windows.Forms.Padding(4);
             this.txbMaMH.MenuManager = this.barManager1;
             this.txbMaMH.Name = "txbMaMH";
             this.txbMaMH.Size = new System.Drawing.Size(138, 22);
@@ -597,7 +602,7 @@
             0,
             0});
             this.SpinNhom.Location = new System.Drawing.Point(366, 508);
-            this.SpinNhom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SpinNhom.Margin = new System.Windows.Forms.Padding(4);
             this.SpinNhom.MenuManager = this.barManager1;
             this.SpinNhom.Name = "SpinNhom";
             this.SpinNhom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -619,7 +624,7 @@
             // 
             this.txbMaGV.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsLTC, "MAGV", true));
             this.txbMaGV.Location = new System.Drawing.Point(366, 604);
-            this.txbMaGV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbMaGV.Margin = new System.Windows.Forms.Padding(4);
             this.txbMaGV.MenuManager = this.barManager1;
             this.txbMaGV.Name = "txbMaGV";
             this.txbMaGV.Size = new System.Drawing.Size(138, 22);
@@ -630,7 +635,7 @@
             // 
             this.txbMaKhoa.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsLTC, "MAKHOA", true));
             this.txbMaKhoa.Location = new System.Drawing.Point(119, 460);
-            this.txbMaKhoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbMaKhoa.Margin = new System.Windows.Forms.Padding(4);
             this.txbMaKhoa.MenuManager = this.barManager1;
             this.txbMaKhoa.Name = "txbMaKhoa";
             this.txbMaKhoa.Size = new System.Drawing.Size(141, 22);
@@ -645,7 +650,7 @@
             0,
             0});
             this.SpinSVTT.Location = new System.Drawing.Point(119, 650);
-            this.SpinSVTT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SpinSVTT.Margin = new System.Windows.Forms.Padding(4);
             this.SpinSVTT.MenuManager = this.barManager1;
             this.SpinSVTT.Name = "SpinSVTT";
             this.SpinSVTT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -662,7 +667,7 @@
             // 
             this.CheckHuyLop.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsLTC, "HUYLOP", true));
             this.CheckHuyLop.Location = new System.Drawing.Point(366, 650);
-            this.CheckHuyLop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CheckHuyLop.Margin = new System.Windows.Forms.Padding(4);
             this.CheckHuyLop.MenuManager = this.barManager1;
             this.CheckHuyLop.Name = "CheckHuyLop";
             this.CheckHuyLop.Properties.Caption = "";
@@ -683,7 +688,7 @@
             // 
             this.cmbTenMH.FormattingEnabled = true;
             this.cmbTenMH.Location = new System.Drawing.Point(119, 553);
-            this.cmbTenMH.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbTenMH.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTenMH.Name = "cmbTenMH";
             this.cmbTenMH.Size = new System.Drawing.Size(140, 24);
             this.cmbTenMH.TabIndex = 25;
@@ -703,7 +708,7 @@
             // 
             this.cmbTenGV.FormattingEnabled = true;
             this.cmbTenGV.Location = new System.Drawing.Point(119, 603);
-            this.cmbTenGV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbTenGV.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTenGV.Name = "cmbTenGV";
             this.cmbTenGV.Size = new System.Drawing.Size(140, 24);
             this.cmbTenGV.TabIndex = 25;
@@ -759,7 +764,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLTC";
             this.Text = "frmLTC";
             this.Load += new System.EventHandler(this.frmLTC_Load);

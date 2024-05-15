@@ -78,7 +78,7 @@ namespace QLSVHTC
                 txbTenMH.Focus();
                 return false;
             }
-            if ((speSoTietLT.Value + speSoTietTH.Value) % 15 != 0)
+            if ((speSoTietLT.Value + speSoTietTH.Value) % 15 != 0 || (speSoTietLT.Value == 0 && speSoTietTH.Value == 0))
             {
                 MessageBox.Show("Số tiết lý thuyết và thực hành phải là bội của 15!", "", MessageBoxButtons.OK);
                 speSoTietLT.Focus();

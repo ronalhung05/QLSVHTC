@@ -333,6 +333,7 @@ namespace QLSVHTC
                 }
                 afterButton();
                 txbMaLop.Enabled = true;
+                txbMaSV.Enabled = true; 
             }
         }
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

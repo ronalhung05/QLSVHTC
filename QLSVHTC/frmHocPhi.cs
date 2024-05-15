@@ -235,22 +235,14 @@ namespace QLSVHTC
                 cmd.Parameters.Add(new SqlParameter("@HocKy", hocki));
                 cmd.Parameters.Add(new SqlParameter("@SoTienDong", sotiendong));
                 cmd.ExecuteNonQuery();
-
-
-
-
-
                 tran.Commit();
                 MessageBox.Show("Thêm chi tiết học phí thành công!");
                 loadHP();
-
-
             }
             catch (SqlException sqlex)
             {
                 try
                 {
-
                     tran.Rollback();
                     XtraMessageBox.Show("Lỗi ghi chit tiết học phí vào Database. Bạn hãy xem lại ! " + sqlex.Message, "", MessageBoxButtons.OK);
 

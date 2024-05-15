@@ -265,5 +265,10 @@ namespace QLSVHTC
         {
 
         }
+
+        private void btnTaoTaiKhoan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
     }
 }
