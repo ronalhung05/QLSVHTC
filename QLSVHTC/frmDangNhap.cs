@@ -1,13 +1,6 @@
-﻿using DevExpress.XtraEditors;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLSVHTC
@@ -64,7 +57,7 @@ namespace QLSVHTC
             {
                 if (txbTaiKhoan.Text.Trim() == "" || txbMatKhau.Text.Trim() == "")
                 {
-                    MessageBox.Show("Login name và mật khẩu không được trống!", "", MessageBoxButtons.OK);
+                    MessageBox.Show("Login name và mật khẩu không được trống", "", MessageBoxButtons.OK);
                     return;
                 }
             }
@@ -72,14 +65,14 @@ namespace QLSVHTC
             {
                 if (txbTaiKhoan.Text.Trim() == "")
                 {
-              MessageBox.Show("Login name không được trống!", "", MessageBoxButtons.OK);
+                    MessageBox.Show("Login name không được trống", "", MessageBoxButtons.OK);
                     return;
                 }
             }
 
             if (isSinhVien == true)
             {
-                Program.mlogin = "SVKN"; //SVKN
+                Program.mlogin = "SVKN";
                 Program.password = "123";
                 if (Program.KetNoi() == 0) return;
             }
@@ -97,6 +90,7 @@ namespace QLSVHTC
             string strLenh = "EXEC dbo.SP_Lay_Thong_Tin_GV_Tu_Login '" + Program.mlogin + "'";
             Program.myReader = Program.ExecSqlDataReader(strLenh);
             if (Program.myReader == null) return;
+            
             Program.myReader.Read(); // Đọc 1 dòng nếu dữ liệu có nhiều dùng thì dùng for lặp nếu null thì break
             Program.mGroup = Program.myReader.GetString(2);
 
@@ -107,9 +101,16 @@ namespace QLSVHTC
             }
             Program.myReader.Close();
 
-            //123
-            //3455
-            
+            string strlenh1 = "EXEC [dbo].[SP_LayThongTinSV_DangNhap] '" + txbTaiKhoan.Text + "', '" + txbMatKhau.Text + "'";
+            SqlDataReader reader = Program.ExecSqlDataReader(strlenh1);
+
+            if (reader.HasRows == false && isSinhVien == true)
+            {
+                MessageBox.Show("Đăng nhập thất bại! \nMã sinh viên không tồn tại");
+                return;
+            }
+
+            reader.Read();
 
             if (Convert.IsDBNull(Program.username))
             {
@@ -119,29 +120,19 @@ namespace QLSVHTC
 
             if (isSinhVien == true)
             {
-                string strlenh1 = "EXEC [dbo].[SP_LayThongTinSV_DangNhap] '" + txbTaiKhoan.Text + "', '" + txbMatKhau.Text + "'";
-                SqlDataReader reader = Program.ExecSqlDataReader(strlenh1);
-
-                if (reader.HasRows == false && isSinhVien == true)
-                {
-                    MessageBox.Show("Đăng nhập thất bại! \nMã sinh viên không tồn tại");
-                    return;
-                }
-
-                reader.Read();
                 try
                 {
                     Program.mHoten = reader.GetString(1);
                     Program.username = reader.GetString(0);
                 }
                 catch (Exception) { }
-                Program.conn.Close();
-                reader.Close();
             }
-            
+            Program.conn.Close();
+            reader.Close();
             MessageBox.Show("Đăng nhập thành công !!!");
             Form f = new MainForm();
             f.ShowDialog();
+
         }
 
         private void cmbChiNhanh_SelectedIndexChanged(object sender, EventArgs e)

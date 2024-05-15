@@ -10,8 +10,8 @@ namespace QLSVHTC
         public frpt_InBangDiemTK()
         {
             InitializeComponent();
-            //if (Program.mGroup == "PGV")
-            //    cbKhoa.Enabled = true;
+            if (Program.mGroup == "PGV")
+                cbKhoa.Enabled = true;
         }
 
         private void btnIn_Click(object sender, EventArgs e)
