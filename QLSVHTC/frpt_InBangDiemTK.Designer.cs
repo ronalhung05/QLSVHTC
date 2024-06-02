@@ -150,7 +150,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frpt_InBangDiemTK";
-            this.Text = "fprt_InBangDiemTK";
+            this.Text = "In bảng điểm tổng kết";
             this.Load += new System.EventHandler(this.fprt_InBangDiemTK_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsLop)).EndInit();

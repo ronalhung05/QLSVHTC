@@ -1,13 +1,6 @@
-﻿using DevExpress.XtraEditors;
-using DevExpress.XtraReports.UI;
+﻿using DevExpress.XtraReports.UI;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLSVHTC
@@ -17,6 +10,8 @@ namespace QLSVHTC
         public frptBDMH()
         {
             InitializeComponent();
+            if (Program.mGroup == "PGV")
+                cbKhoa.Enabled = true;
         }
 
         private void BDMH_Load(object sender, EventArgs e)
@@ -24,13 +19,13 @@ namespace QLSVHTC
             // TODO: This line of code loads data into the 'dS.MONHOC' table. You can move, or remove it, as needed.
             this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
             this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
-            cmbKhoa.DataSource = Program.bds_dspm;
-            cmbKhoa.DisplayMember = "TENKHOA";
-            cmbKhoa.ValueMember = "TENSERVER";
-            cmbKhoa.SelectedIndex = Program.mChinhanh;
+            cbKhoa.DataSource = Program.bds_dspm;
+            cbKhoa.DisplayMember = "TENKHOA";
+            cbKhoa.ValueMember = "TENSERVER";
+            cbKhoa.SelectedIndex = Program.mChinhanh;
             if (Program.mGroup == "KHOA")
             {
-                cmbKhoa.Enabled = false;
+                cbKhoa.Enabled = false;
             }
             cmbMonHoc.DataSource = bdsMonHoc;
             cmbMonHoc.DisplayMember = "TENMH";
@@ -89,10 +84,10 @@ namespace QLSVHTC
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
+            if (cbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
                 return;
-            Program.servername = cmbKhoa.SelectedValue.ToString();
-            if (cmbKhoa.SelectedIndex != Program.mChinhanh)
+            Program.servername = cbKhoa.SelectedValue.ToString();
+            if (cbKhoa.SelectedIndex != Program.mChinhanh)
             {
                 Program.mlogin = Program.remotelogin;
                 Program.password = Program.remotepassword;
@@ -119,7 +114,7 @@ namespace QLSVHTC
             int hocky = Int32.Parse(cmbHocKi.Text);
             int nhom = Int32.Parse(cmbNhom.Text);
             string monhoc = cmbMonHoc.SelectedValue.ToString();
-            string khoa = cmbKhoa.Text;
+            string khoa = cbKhoa.Text;
             XtraReport_InBangDiemMonHoc rpt = new XtraReport_InBangDiemMonHoc(nienkhoa, hocky, nhom, monhoc);
             rpt.lbMH.Text = monhoc;
             rpt.lbHK.Text = hocky.ToString();

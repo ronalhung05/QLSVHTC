@@ -138,7 +138,7 @@ namespace QLSVHTC
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frptInHP";
-            this.Text = "frptInHP";
+            this.Text = "In học phí";
             this.Load += new System.EventHandler(this.frptInHP_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nmHocKy)).EndInit();
             this.ResumeLayout(false);

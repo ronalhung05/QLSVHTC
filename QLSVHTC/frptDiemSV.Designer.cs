@@ -37,25 +37,28 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 93);
+            this.label1.Location = new System.Drawing.Point(98, 136);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.Size = new System.Drawing.Size(111, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "MASINHVIEN:";
             // 
             // txbMaSV
             // 
-            this.txbMaSV.Location = new System.Drawing.Point(144, 90);
+            this.txbMaSV.Location = new System.Drawing.Point(216, 132);
+            this.txbMaSV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txbMaSV.Name = "txbMaSV";
-            this.txbMaSV.Size = new System.Drawing.Size(124, 21);
+            this.txbMaSV.Size = new System.Drawing.Size(184, 27);
             this.txbMaSV.TabIndex = 1;
             // 
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(185, 151);
+            this.btnThoat.Location = new System.Drawing.Point(278, 221);
+            this.btnThoat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(83, 41);
+            this.btnThoat.Size = new System.Drawing.Size(124, 60);
             this.btnThoat.TabIndex = 15;
             this.btnThoat.Text = "THOÁT";
             this.btnThoat.UseVisualStyleBackColor = true;
@@ -64,25 +67,27 @@
             // btnIn
             // 
             this.btnIn.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIn.Location = new System.Drawing.Point(75, 151);
+            this.btnIn.Location = new System.Drawing.Point(112, 221);
+            this.btnIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnIn.Name = "btnIn";
-            this.btnIn.Size = new System.Drawing.Size(83, 41);
+            this.btnIn.Size = new System.Drawing.Size(124, 60);
             this.btnIn.TabIndex = 16;
             this.btnIn.Text = "IN";
             this.btnIn.UseVisualStyleBackColor = true;
             this.btnIn.Click += new System.EventHandler(this.btnIn_Click);
             // 
-            // frmDiemSV
+            // frptDiemSV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 256);
+            this.ClientSize = new System.Drawing.Size(492, 374);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnIn);
             this.Controls.Add(this.txbMaSV);
             this.Controls.Add(this.label1);
-            this.Name = "frmDiemSV";
-            this.Text = "frmDiemSV";
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "frptDiemSV";
+            this.Text = "Điểm sinh viên";
             this.Load += new System.EventHandler(this.frmDiemSV_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
