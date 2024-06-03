@@ -11,7 +11,6 @@ namespace QLSVHTC
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
         public static String database = "QLDSV_TC";
-        public int type;
         public frptInHP()
         {
             InitializeComponent();
@@ -119,7 +118,7 @@ namespace QLSVHTC
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu. \nBạn xem lại username và password.");
+                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu. \nBạn xem lại username và password.\n" + e);
                 return 0;
             }
 
@@ -127,7 +126,7 @@ namespace QLSVHTC
         void loadLOPcombobox()
         {
             DataTable dt = new DataTable();
-            string cmd = "EXEC [dbo].[getAllLopByRole] " + type;
+            string cmd = "EXEC [dbo].[SP_GetAllLopByRole] ";
             dt = Program.ExecSqlDataTable(cmd);
 
             BindingSource bdslh = new BindingSource();
@@ -140,13 +139,11 @@ namespace QLSVHTC
         {
             if (Program.mGroup.Equals("PGV") || Program.mGroup.Equals("KHOA"))
             {
-                if (KetNoiSql("MSI\\MSSQLSERVER3", Program.remotelogin, Program.remotepassword) == 0)
+                if (KetNoiSql("ASUS-VIVOBOOK15\\SQL3", Program.remotelogin, Program.remotepassword) == 0)
                 {
                     MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
                 }
             }
-            if (Program.mGroup.Equals("PGV")) type = 0;
-            else type = 1;
             loadLOPcombobox();
         }
         public static SqlDataReader ExecSqlDataReader(string strlenh)
@@ -156,7 +153,7 @@ namespace QLSVHTC
             sqlcmd.CommandType = CommandType.Text;
             if (conn.State == ConnectionState.Closed) conn.Open();
             try
-            {
+            {   
                 myreader = sqlcmd.ExecuteReader();
                 return myreader;
             }
