@@ -103,26 +103,6 @@ namespace QLSVHTC
             if (isNegative) result = "Âm " + result;
             return "(" + result + (suffix ? " đồng chẵn)" : ")");
         }
-        public static int KetNoiSql(string severname, string mlogin, string password)
-        {
-            if (conn != null && conn.State == ConnectionState.Open)
-                conn.Close();
-            try
-            {
-                connstr = "Data Source=" + severname + ";Initial Catalog=" +
-                    database + ";User ID=" +
-                    mlogin + ";password=" + password + ";TrustServerCertificate=true";
-                conn.ConnectionString = connstr;
-                conn.Open();
-                return 1;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu. \nBạn xem lại username và password.\n" + e);
-                return 0;
-            }
-
-        }
         void loadLOPcombobox()
         {
             DataTable dt = new DataTable();
@@ -137,34 +117,8 @@ namespace QLSVHTC
         }
         private void frptInHP_Load(object sender, EventArgs e)
         {
-            if (Program.mGroup.Equals("PGV") || Program.mGroup.Equals("KHOA"))
-            {
-                if (KetNoiSql("ASUS-VIVOBOOK15\\SQL3", Program.remotelogin, Program.remotepassword) == 0)
-                {
-                    MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
-                }
-            }
             loadLOPcombobox();
         }
-        public static SqlDataReader ExecSqlDataReader(string strlenh)
-        {
-            SqlDataReader myreader;
-            SqlCommand sqlcmd = new SqlCommand(strlenh, conn);
-            sqlcmd.CommandType = CommandType.Text;
-            if (conn.State == ConnectionState.Closed) conn.Open();
-            try
-            {   
-                myreader = sqlcmd.ExecuteReader();
-                return myreader;
-            }
-            catch (SqlException ex)
-            {
-                conn.Close();
-                MessageBox.Show(ex.Message);
-                return null;
-            }
-        }
-
         private void btnIn_Click(object sender, EventArgs e)
         {
             if (txbNienKhoa.Text.Trim() == "")
@@ -184,36 +138,27 @@ namespace QLSVHTC
             string malop = cbLop.Text;
             string tongtien = "";
             string cmd = "SELECT TENKHOA FROM dbo.LOP,dbo.KHOA WHERE MALOP = '" + malop + "' AND KHOA.MAKHOA = LOP.MAKHOA";
-            SqlDataReader reader = ExecSqlDataReader(cmd);
+            SqlDataReader reader = Program.ExecSqlDataReader(cmd);
             reader.Read();
             string tenkhoa = reader.GetString(0);
             reader.Close();
 
             string cmd1 = "EXEC [dbo].[SP_TongTienHocPhi] '" + malop + "', '" + nienkhoa + "', " + hocky;
-            SqlDataReader reader1 = ExecSqlDataReader(cmd1);
+            SqlDataReader reader1 = Program.ExecSqlDataReader(cmd1);
             reader1.Read();
             tongtien = reader1.GetInt32(0).ToString();
             reader1.Close();
-
-
 
             if (tongtien != "0")
             {
                 tongtien = NumberToText(double.Parse(tongtien));
             }
-
-
-            XtraReport_SinhVienDongHocPhi rpt = new XtraReport_SinhVienDongHocPhi(malop, nienkhoa, hocky, connstr);
+            XtraReport_SinhVienDongHocPhi rpt = new XtraReport_SinhVienDongHocPhi(malop, nienkhoa, hocky);
             rpt.lbMaLop.Text = malop;
             rpt.lbKhoa.Text = tenkhoa;
             rpt.lbTienChu.Text = tongtien;
-
-
             ReportPrintTool print = new ReportPrintTool(rpt);
             print.ShowPreviewDialog();
-
-
-
 
         }
 
