@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.DXperience.Demos.CodeDemo.Helpers;
+using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,13 +18,18 @@ namespace QLSVHTC
     {
         BindingSource bdsHocPhi = new BindingSource(); //sử dụng cho binding tự định nghĩa 
         BindingSource bdsCTHP = new BindingSource();
-        int vitri = 0;
-        int vitri1 = 0;
+
+        int vitri_HP = 0;
+        int vitri_CTHP = 0;
+
+        DataTable dtOriginalHocPhi;
+        DataTable dtOriginalCTHP;
+
         public frmHocPhi()
         {
             InitializeComponent();
-            
         }
+
         void loadHP()
         {
             string cmd1 = "EXEC [dbo].[SP_GetInfoSV_HP] '" + txbMaSV.Text + "'";
@@ -40,13 +46,14 @@ namespace QLSVHTC
             reader.Close();
             Program.conn.Close();
 
-
             string cmd2 = "EXEC dbo.SP_GetDSHP_SV '" + txbMaSV.Text + "'";
             DataTable tableHocPhi = Program.ExecSqlDataTable(cmd2); //lấy ra bảng dữ liệu để thao tác
             this.bdsHocPhi.DataSource = tableHocPhi;
             this.gridHocPhi.DataSource = this.bdsHocPhi; //grid là về giao diện, bds là về dữ liệu 
-   
+
+            dtOriginalHocPhi = tableHocPhi.Copy();
         }
+
         private void btnTim_Click(object sender, EventArgs e)
         {
             if (txbMaSV.Text.Trim() == "")
@@ -55,12 +62,17 @@ namespace QLSVHTC
                 txbMaSV.Focus();
                 return;
             }
+            btnThem.Enabled = true;
+            btnLamMoi.Enabled = true;
+            btnPhucHoi.Enabled = false;
+            btnGhi.Enabled = false;
             loadHP();
         }
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            vitri1 = bdsHocPhi.Position;
+            vitri_HP = bdsHocPhi.Position;
+            vitri_CTHP = bdsCTHP.Position;
             bdsHocPhi.AddNew();
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnPhucHoi.Enabled = btnGhi.Enabled = true;
@@ -116,72 +128,40 @@ namespace QLSVHTC
             bdsHocPhi.ResetCurrentItem(); //refresh current row
             SqlConnection conn = new SqlConnection(Program.connstr);
             // bắt đầu transaction
-            SqlTransaction tran;
-
-            conn.Open();
-            tran = conn.BeginTransaction();
-            try
+            string cmd = "EXEC [dbo].[TAO_THONGTINHOCPHI] '" + msv + "' , '" + nienkhoa + "', " + hocki + " , " + hocphi;
+            if (Program.ExecSqlNonQuery(cmd) == 0)
             {
-                SqlCommand cmd = new SqlCommand("TAO_THONGTINHOCPHI", conn); //exec sp
-                cmd.Connection = conn;
-                cmd.Transaction = tran;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@MASV", msv));
-                cmd.Parameters.Add(new SqlParameter("@NienKhoa", nienkhoa));
-                cmd.Parameters.Add(new SqlParameter("@HocKy", hocki));
-                cmd.Parameters.Add(new SqlParameter("@HocPhi", hocphi));
-                cmd.ExecuteNonQuery();
-                tran.Commit(); // END TRANS
                 MessageBox.Show("Thêm học phí thành công!");
-                loadHP();
-
-
             }
-            catch (SqlException sqlex)
+            else
             {
-                try
-                {
-
-                    tran.Rollback();
-                    XtraMessageBox.Show("Lỗi ghi học phí vào Database. Bạn hãy xem lại ! " + sqlex.Message, "", MessageBoxButtons.OK);
-
-                }
-                catch (Exception ex2)
-                {
-                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                    Console.WriteLine("  Message: {0}", ex2.Message);
-                }
-                conn.Close();
-                return;
-            }
-            finally
-            {
-                conn.Close();
-                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-                btnGhi.Enabled = btnPhucHoi.Enabled = false;
+                MessageBox.Show("Thêm học phí thất bại!");
             }
         }
 
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsHocPhi.CancelEdit();
-            frmHocPhi_Load(sender, e);
+            bdsHocPhi.DataSource = dtOriginalHocPhi.Copy();
             gridHocPhi.Enabled = true;
             gridCTHP.Enabled = true;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
             btnGhi.Enabled = btnPhucHoi.Enabled = false;
-            if (vitri > 0) bdsHocPhi.Position = vitri1;
+            bdsHocPhi.Position = vitri_HP;
+            bdsCTHP.Position = vitri_CTHP;
         }
 
         private void frmHocPhi_Load(object sender, EventArgs e)
         {
+            btnThem.Enabled = false;
+            btnLamMoi.Enabled = false;
             btnPhucHoi.Enabled = false;
             btnGhi.Enabled = false;
         }
 
         private void btnThemCTHP_Click(object sender, EventArgs e)
         {
-            vitri = bdsCTHP.Position;
+            vitri_CTHP = bdsCTHP.Position;
             bdsCTHP.AddNew();
         }
 
@@ -211,7 +191,6 @@ namespace QLSVHTC
                 MessageBox.Show(ex.Message);
             }
 
-
             string nienkhoa = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["NIENKHOA"].ToString();
             string hocki = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["HOCKY"].ToString();
             string msv = txbMaSV.Text;
@@ -220,50 +199,27 @@ namespace QLSVHTC
             bdsCTHP.ResetCurrentItem();
             SqlConnection conn = new SqlConnection(Program.connstr);
             // bắt đầu transaction
-            SqlTransaction tran;
-
-            conn.Open();
-            tran = conn.BeginTransaction();
-            try
+            string cmd = "EXEC [dbo].[SV_DONGTIEN] '" + msv + "' , '" + nienkhoa + "', " + hocki + " , " + sotiendong;
+            if (Program.ExecSqlNonQuery(cmd) == 0)
             {
-                SqlCommand cmd = new SqlCommand("SV_DONGTIEN", conn);
-                cmd.Connection = conn;
-                cmd.Transaction = tran;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@MASV", msv));
-                cmd.Parameters.Add(new SqlParameter("@NienKhoa", nienkhoa));
-                cmd.Parameters.Add(new SqlParameter("@HocKy", hocki));
-                cmd.Parameters.Add(new SqlParameter("@SoTienDong", sotiendong));
-                cmd.ExecuteNonQuery();
-                tran.Commit();
                 MessageBox.Show("Thêm chi tiết học phí thành công!");
-                loadHP();
             }
-            catch (SqlException sqlex)
+            else
             {
-                try
-                {
-                    tran.Rollback();
-                    XtraMessageBox.Show("Lỗi ghi chit tiết học phí vào Database. Bạn hãy xem lại ! " + sqlex.Message, "", MessageBoxButtons.OK);
-
-                }
-                catch (Exception ex2)
-                {
-                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                    Console.WriteLine("  Message: {0}", ex2.Message);
-                }
-                conn.Close();
-                return;
-            }
-            finally
-            {
-                conn.Close();
+                MessageBox.Show("Lỗi thêm chi tiết học phí!");
             }
         }
 
         private void btnPhucHoiCTHP_Click(object sender, EventArgs e)
         {
-
+            bdsCTHP.CancelEdit();
+            bdsCTHP.DataSource = dtOriginalCTHP.Copy();
+            gridHocPhi.Enabled = true;
+            gridCTHP.Enabled = true;
+            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
+            btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            bdsHocPhi.Position = vitri_HP;
+            bdsCTHP.Position = vitri_CTHP;
         }
 
         private void gridHocPhi_MouseClick(object sender, MouseEventArgs e)
@@ -278,120 +234,29 @@ namespace QLSVHTC
                 DataTable tableCTHP = Program.ExecSqlDataTable(cmd);
                 this.bdsCTHP.DataSource = tableCTHP;
                 this.gridCTHP.DataSource = this.bdsCTHP;
-            }
-        }
 
-        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            vitri = bdsCTHP.Position;
-            bdsCTHP.AddNew();
-        }
-
-        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            try
-            {
-                if (((DataRowView)bdsCTHP[bdsCTHP.Position])["SOTIENDONG"].ToString() == "")
-                {
-                    MessageBox.Show("Số tiền không được bỏ trống");
-                    return;
-                }
-                if (float.Parse(((DataRowView)bdsCTHP[bdsCTHP.Position])["SOTIENDONG"].ToString()) <= 0)
-                {
-                    MessageBox.Show("Số tiền không được nhỏ hơn 0đ");
-                    return;
-                }
-
-                if (float.Parse(((DataRowView)bdsCTHP[bdsCTHP.Position])["SOTIENDONG"].ToString()) > float.Parse(((DataRowView)bdsHocPhi[bdsHocPhi.Position])["SOTIENCANDONG"].ToString()))
-                {
-                    MessageBox.Show("Số tiền đóng không được lớn hơn số tiền cần đóng!");
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-
-            string nienkhoa = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["NIENKHOA"].ToString();
-            string hocki = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["HOCKY"].ToString();
-            string msv = txbMaSV.Text;
-            string sotiendong = ((DataRowView)bdsCTHP[bdsCTHP.Position])["SOTIENDONG"].ToString();
-            bdsCTHP.EndEdit();
-            bdsCTHP.ResetCurrentItem();
-            SqlConnection conn = new SqlConnection(Program.connstr);
-            // bắt đầu transaction
-            SqlTransaction tran;
-
-            conn.Open();
-            tran = conn.BeginTransaction();
-            try
-            {
-                SqlCommand cmd = new SqlCommand("SV_DONGTIEN", conn);
-                cmd.Connection = conn;
-                cmd.Transaction = tran;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@MASV", msv));
-                cmd.Parameters.Add(new SqlParameter("@NienKhoa", nienkhoa));
-                cmd.Parameters.Add(new SqlParameter("@HocKy", hocki));
-                cmd.Parameters.Add(new SqlParameter("@SoTienDong", sotiendong));
-                cmd.ExecuteNonQuery();
-
-
-
-
-
-                tran.Commit();
-                MessageBox.Show("Thêm chi tiết học phí thành công!");
-                loadHP();
-
-
-            }
-            catch (SqlException sqlex)
-            {
-                try
-                {
-
-                    tran.Rollback();
-                    XtraMessageBox.Show("Lỗi ghi chit tiết học phí vào Database. Bạn hãy xem lại ! " + sqlex.Message, "", MessageBoxButtons.OK);
-
-                }
-                catch (Exception ex2)
-                {
-                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                    Console.WriteLine("  Message: {0}", ex2.Message);
-                }
-                conn.Close();
-                return;
-            }
-            finally
-            {
-                conn.Close();
+                dtOriginalCTHP = tableCTHP.Copy();
             }
         }
 
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            this.Close();   
+            this.Close();
         }
 
         private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             loadHP();
+            bdsHocPhi.Position = 0;
+            bdsCTHP.Position = 0;
         }
 
         private void gridCTHP_MouseDown(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 this.contextMenuStrip1.Show(gridCTHP.PointToScreen(e.Location));
-            }   
-        }
-
-        private void panelControl1_Paint(object sender, PaintEventArgs e)
-        {
-
+            }
         }
     }
 }

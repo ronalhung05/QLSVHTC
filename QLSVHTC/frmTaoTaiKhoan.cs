@@ -35,13 +35,13 @@ namespace QLSVHTC
         void loadGVcombobox()
         {
             DataTable dt = new DataTable();
-            string cmd = "EXEC dbo.SP_LayDSGV";
+            string cmd = "EXEC dbo.SP_GetDSGV";
             dt = Program.ExecSqlDataTable(cmd);
 
             BindingSource bdsgv = new BindingSource();
             bdsgv.DataSource = dt;
             cbGiangVien.DataSource = bdsgv;
-            cbGiangVien.DisplayMember = "MAGV";
+            cbGiangVien.DisplayMember = "HOTEN";
             cbGiangVien.ValueMember = "MAGV";
         }
 

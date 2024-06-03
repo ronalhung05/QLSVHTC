@@ -134,7 +134,7 @@ namespace QLSVHTC
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             mainForm = new MainForm();
-            Application.Run(new frmLogin());
+            Application.Run(new frmDangNhap());
         }
     }
 }

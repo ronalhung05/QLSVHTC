@@ -75,7 +75,7 @@ namespace QLSVHTC
         {
             if (ValidatorSV() == false)
             {
-                string msv = txbMaSV.Text;
+                string msv = txbMaSV.Text.Trim();
                 int type = 0;
                 if (Program.mGroup.Equals("KHOA"))
                 {
@@ -103,6 +103,11 @@ namespace QLSVHTC
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txbMaSV_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

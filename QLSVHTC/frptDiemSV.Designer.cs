@@ -37,28 +37,26 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(98, 136);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(76, 115);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 19);
+            this.label1.Size = new System.Drawing.Size(85, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "MASINHVIEN:";
             // 
             // txbMaSV
             // 
-            this.txbMaSV.Location = new System.Drawing.Point(216, 132);
-            this.txbMaSV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbMaSV.Location = new System.Drawing.Point(168, 111);
             this.txbMaSV.Name = "txbMaSV";
-            this.txbMaSV.Size = new System.Drawing.Size(184, 27);
+            this.txbMaSV.Size = new System.Drawing.Size(144, 23);
             this.txbMaSV.TabIndex = 1;
+            this.txbMaSV.TextChanged += new System.EventHandler(this.txbMaSV_TextChanged);
             // 
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(278, 221);
-            this.btnThoat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnThoat.Location = new System.Drawing.Point(216, 186);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(124, 60);
+            this.btnThoat.Size = new System.Drawing.Size(96, 51);
             this.btnThoat.TabIndex = 15;
             this.btnThoat.Text = "THOÁT";
             this.btnThoat.UseVisualStyleBackColor = true;
@@ -67,10 +65,9 @@
             // btnIn
             // 
             this.btnIn.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIn.Location = new System.Drawing.Point(112, 221);
-            this.btnIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnIn.Location = new System.Drawing.Point(87, 186);
             this.btnIn.Name = "btnIn";
-            this.btnIn.Size = new System.Drawing.Size(124, 60);
+            this.btnIn.Size = new System.Drawing.Size(96, 51);
             this.btnIn.TabIndex = 16;
             this.btnIn.Text = "IN";
             this.btnIn.UseVisualStyleBackColor = true;
@@ -78,14 +75,13 @@
             // 
             // frptDiemSV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 374);
+            this.ClientSize = new System.Drawing.Size(383, 315);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnIn);
             this.Controls.Add(this.txbMaSV);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frptDiemSV";
             this.Text = "Điểm sinh viên";
             this.Load += new System.EventHandler(this.frmDiemSV_Load);

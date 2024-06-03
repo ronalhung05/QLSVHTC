@@ -28,6 +28,7 @@ namespace QLSVHTC
                     btnInHocPhi.Enabled = false;
                     btnHocPhi.Enabled = false;
                     btnDangKyLTC.Enabled = false;
+                    btnTaoTaiKhoan.Enabled = false;
                     break;
 
                 case "PKT":
@@ -284,9 +285,5 @@ namespace QLSVHTC
             }
         }
 
-        private void btnTaoTaiKhoan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-
-        }
     }
 }

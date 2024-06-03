@@ -14,8 +14,6 @@ namespace QLSVHTC
 {
     public partial class frmDiem : DevExpress.XtraEditors.XtraForm
     {
-        int vitri = 0;
-        string macn = "";
         private BindingSource bdsDiem = new BindingSource();
         public frmDiem()
         {
@@ -59,7 +57,6 @@ namespace QLSVHTC
         }
         private void frmDiem_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dS.MONHOC' table. You can move, or remove it, as needed.
             this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
             this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
 
@@ -130,86 +127,63 @@ namespace QLSVHTC
             loadBDMH();
         }
 
+
         private void btnCapNhat_Click(object sender, EventArgs e)
         {
             BindingSource bdsTemp = (BindingSource)this.gridDiem.DataSource;
-            if (bdsTemp == null)
+            if (bdsTemp == null || bdsTemp.Count == 0)
             {
                 MessageBox.Show("Chưa có thông tin để ghi điểm!", "", MessageBoxButtons.OK);
                 return;
             }
 
-            bdsTemp.EndEdit();
-            SqlConnection conn = new SqlConnection(Program.connstr);
-            // bắt đầu transaction
-            SqlTransaction tran;
+            // Create a DataTable to hold the scores
+            DataTable dtDiem = new DataTable();
+            dtDiem.Columns.Add("MALC", typeof(int));
+            dtDiem.Columns.Add("MASV", typeof(string));
+            dtDiem.Columns.Add("DIEM_CC", typeof(int));
+            dtDiem.Columns.Add("DIEM_GK", typeof(float));
+            dtDiem.Columns.Add("DIEM_CK", typeof(float));
 
-            conn.Open();
-            tran = conn.BeginTransaction();
-            try
+            // Populate the DataTable
+            foreach (DataRowView row in bdsTemp)
             {
-                for (int i = 0; i < bdsTemp.Count; i++)
-                {
-                    SqlCommand cmd = new SqlCommand("SP_XULY_DIEM", conn);
-                    cmd.Connection = conn;
-                    cmd.Transaction = tran;
-
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    string masv = ((DataRowView)bdsTemp[i])["MASV"].ToString();
-                    cmd.Parameters.Add(new SqlParameter("@MSSV", masv));
-                    cmd.Parameters.Add(new SqlParameter("@MALTC", ((DataRowView)bdsTemp[i])["MALC"].ToString()));
-                    float diemcc = 0;
-                    float diemgk = 0;
-                    float diemck = 0;
-                    if (((DataRowView)bdsTemp[i])["DIEM_CC"].ToString() != "")
-                    {
-                        diemcc = float.Parse(((DataRowView)bdsTemp[i])["DIEM_CC"].ToString());
-                    }
-                    if (((DataRowView)bdsTemp[i])["DIEM_GK"].ToString() != "")
-                    {
-                        diemgk = RoundToHalf(float.Parse(((DataRowView)bdsTemp[i])["DIEM_GK"].ToString()));
-                    }
-                    if (((DataRowView)bdsTemp[i])["DIEM_CK"].ToString() != "")
-                    {
-                        diemck = RoundToHalf(float.Parse(((DataRowView)bdsTemp[i])["DIEM_CK"].ToString()));
-                    }
-                    if (diemcc < 0 || diemcc > 10 || diemck < 0 || diemck > 10 || diemgk < 0 || diemgk > 10)
-                    {
-                        tran.Rollback();
-                        XtraMessageBox.Show("Điểm số chỉ được nhập từ 0 đến 10! Xin vui lòng nhập lại");
-                        conn.Close();
-                        loadBDMH();
-                        return;
-                    }
-                    cmd.Parameters.Add(new SqlParameter("@DIEMCC", diemcc));
-                    cmd.Parameters.Add(new SqlParameter("@DIEMGK", diemgk));
-                    cmd.Parameters.Add(new SqlParameter("@DIEMCK", diemck));
-                    cmd.ExecuteNonQuery();
-                }
-
-                tran.Commit();
+                DataRow newRow = dtDiem.NewRow();
+                newRow["MALC"] = row["MALC"] == DBNull.Value ? (int?)null : Convert.ToInt32(row["MALC"]);
+                newRow["MASV"] = row["MASV"].ToString();
+                newRow["DIEM_CC"] = row["DIEM_CC"] == DBNull.Value ? (int?)null : Convert.ToInt32(row["DIEM_CC"]);
+                newRow["DIEM_GK"] = row["DIEM_GK"] == DBNull.Value ? (float?)null : RoundToHalf(Convert.ToSingle(row["DIEM_GK"]));
+                newRow["DIEM_CK"] = row["DIEM_CK"] == DBNull.Value ? (float?)null : RoundToHalf(Convert.ToSingle(row["DIEM_CK"]));
+                dtDiem.Rows.Add(newRow);
             }
-            catch (SqlException sqlex)
+
+            using (SqlConnection conn = new SqlConnection(Program.connstr))
             {
+                conn.Open();
+
                 try
                 {
-                    tran.Rollback();
-                    XtraMessageBox.Show("Lỗi ghi toàn bộ điểm vào Database. Bạn hãy xem lại ! " + sqlex.Message, "", MessageBoxButtons.OK);
-                    loadBDMH();
+                    using (SqlCommand cmd = new SqlCommand("SP_UpdateDiem", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        SqlParameter tvpParam = cmd.Parameters.AddWithValue("@BANGDIEM", dtDiem);
+                        tvpParam.SqlDbType = SqlDbType.Structured;
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    XtraMessageBox.Show("Thao tác thành công!", "", MessageBoxButtons.OK);
                 }
-                catch (Exception ex2)
+                catch (SqlException sqlex)
                 {
-                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                    Console.WriteLine("  Message: {0}", ex2.Message);
+                    XtraMessageBox.Show("Lỗi ghi toàn bộ điểm vào Database. Bạn hãy xem lại ! " + sqlex.Message, "", MessageBoxButtons.OK);
                 }
-                conn.Close();
-                return;
+                finally
+                {
+                    conn.Close();
+                }
             }
-            finally
-            {
-                conn.Close();
-            }
-            XtraMessageBox.Show("Thao tác thành công!", "", MessageBoxButtons.OK);
+
             string cmd1 = "EXEC [dbo].[SP_BDMH] '" + cmbNienKhoa.Text + "', " + cmbHocKi.Text + ", " + cmbNhom.Text + ", N'" + cmbMonHoc.SelectedValue.ToString() + "'";
             DataTable diemTable = Program.ExecSqlDataTable(cmd1);
             this.bdsDiem.DataSource = diemTable;
@@ -240,7 +214,6 @@ namespace QLSVHTC
                 return (float)upperNext;
             }
         }
-
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();

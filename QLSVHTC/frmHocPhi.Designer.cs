@@ -37,8 +37,6 @@
             this.btnPhucHoi = new DevExpress.XtraBars.BarButtonItem();
             this.btnLamMoi = new DevExpress.XtraBars.BarButtonItem();
             this.btnThoat = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -47,6 +45,8 @@
             this.btnSua = new DevExpress.XtraBars.BarButtonItem();
             this.btnXoa = new DevExpress.XtraBars.BarButtonItem();
             this.btnHuy = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnTim = new System.Windows.Forms.Button();
             this.txbMaLop = new System.Windows.Forms.TextBox();
@@ -165,24 +165,6 @@
             this.btnThoat.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnThoat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThoat_ItemClick);
             // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "Thêm CTHP";
-            this.barButtonItem1.Id = 8;
-            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "Ghi CTHP";
-            this.barButtonItem2.Id = 9;
-            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
-            this.barButtonItem2.Name = "barButtonItem2";
-            this.barButtonItem2.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
-            // 
             // bar3
             // 
             this.bar3.BarName = "Status bar";
@@ -251,6 +233,22 @@
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Thêm CTHP";
+            this.barButtonItem1.Id = 8;
+            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Ghi CTHP";
+            this.barButtonItem2.Id = 9;
+            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
             // panelControl1
             // 
             this.panelControl1.Controls.Add(this.btnTim);
@@ -266,7 +264,6 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1330, 152);
             this.panelControl1.TabIndex = 4;
-            this.panelControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl1_Paint);
             // 
             // btnTim
             // 
@@ -468,26 +465,26 @@
             this.btnGhiCTHP,
             this.btnPhucHoiCTHP});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(138, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 104);
             // 
             // btnThemCTHP
             // 
             this.btnThemCTHP.Name = "btnThemCTHP";
-            this.btnThemCTHP.Size = new System.Drawing.Size(137, 24);
+            this.btnThemCTHP.Size = new System.Drawing.Size(210, 24);
             this.btnThemCTHP.Text = "Thêm ";
             this.btnThemCTHP.Click += new System.EventHandler(this.btnThemCTHP_Click);
             // 
             // btnGhiCTHP
             // 
             this.btnGhiCTHP.Name = "btnGhiCTHP";
-            this.btnGhiCTHP.Size = new System.Drawing.Size(137, 24);
+            this.btnGhiCTHP.Size = new System.Drawing.Size(210, 24);
             this.btnGhiCTHP.Text = "Ghi";
             this.btnGhiCTHP.Click += new System.EventHandler(this.btnGhiCTHP_Click);
             // 
             // btnPhucHoiCTHP
             // 
             this.btnPhucHoiCTHP.Name = "btnPhucHoiCTHP";
-            this.btnPhucHoiCTHP.Size = new System.Drawing.Size(137, 24);
+            this.btnPhucHoiCTHP.Size = new System.Drawing.Size(210, 24);
             this.btnPhucHoiCTHP.Text = "Phục Hồi";
             this.btnPhucHoiCTHP.Click += new System.EventHandler(this.btnPhucHoiCTHP_Click);
             // 

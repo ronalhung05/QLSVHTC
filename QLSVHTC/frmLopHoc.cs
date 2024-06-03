@@ -36,6 +36,7 @@ namespace QLSVHTC
             cmbKhoa.ValueMember = "TENSERVER";
             cmbKhoa.SelectedIndex = Program.mChinhanh;
 
+
             if (Program.mGroup == "KHOA")
             {
                 cmbKhoa.Enabled = false;

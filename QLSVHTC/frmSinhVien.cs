@@ -15,6 +15,7 @@ namespace QLSVHTC
     public partial class frmSinhVien : DevExpress.XtraEditors.XtraForm
     {
         int vitri = 0;
+        int sub_vitri = 0;
         string macn = "";
         private string _flagOptionSinhVien;
         private string _oldMaSV = "";
@@ -56,7 +57,7 @@ namespace QLSVHTC
             //===button===
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnGhi.Enabled = btnPhucHoi.Enabled = true;
-
+            
             //==grid==
             LOPGridControl.Enabled = SINHVIENGridControl.Enabled = false;
         }
@@ -64,20 +65,25 @@ namespace QLSVHTC
         {
             //===cmb===
             cmbKhoa.Enabled = true;
+
             //===btn===
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
             btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            txbMaLop.Enabled = true;
+            txbMaSV.Enabled = true;
             //==grid==
             LOPGridControl.Enabled = SINHVIENGridControl.Enabled = true;
         }
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            vitri = bdsSinhVien.Position;
+            vitri = bdsLop.Position;
+            sub_vitri = bdsSinhVien.Position;
             _flagOptionSinhVien = "ADD";
             beforeButton();
-            bdsSinhVien.AddNew();
-
+            txbMaSV.Enabled = true;
             txbMaLop.Enabled = false;
+
+            bdsSinhVien.AddNew();
             txbMaLop.Text = ((DataRowView)bdsLop[bdsLop.Position])["MALOP"].ToString();
             _oldMaLop = txbMaLop.Text.Trim();
         }
@@ -120,18 +126,20 @@ namespace QLSVHTC
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if(bdsSinhVien.Count == 0)
+                if(bdsSinhVien.Count == 0)
             {
                 MessageBox.Show("Lớp học này không tồn tại sinh viên", "", MessageBoxButtons.OK);
                 return;
             }
-            vitri = bdsSinhVien.Position;
+            vitri = bdsLop.Position;
+            sub_vitri = bdsSinhVien.Position;
             _flagOptionSinhVien = "UPDATE";
             _oldMaSV = txbMaSV.Text.Trim();
             _oldMaLop = txbMaLop.Text.Trim();
 
             beforeButton();
             txbMaSV.Enabled = false;
+            txbMaLop.Enabled = true;
         }
        
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -332,8 +340,6 @@ namespace QLSVHTC
                     return;
                 }
                 afterButton();
-                txbMaLop.Enabled = true;
-                txbMaSV.Enabled = true; 
             }
         }
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -341,7 +347,8 @@ namespace QLSVHTC
             bdsSinhVien.CancelEdit();
             afterButton();
             frmSinhVien_Load(sender, e);
-            if (vitri > 0) bdsLop.Position = vitri;
+            bdsLop.Position = vitri;
+            bdsSinhVien.Position = sub_vitri;
         }
 
         private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

@@ -274,5 +274,10 @@ namespace QLSVHTC
             cmbTenMH.SelectedIndex = 0;
             beforeButton();
         }
+
+        private void LOPTINCHIGridControl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

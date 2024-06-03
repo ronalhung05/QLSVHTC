@@ -411,7 +411,6 @@
         private DevExpress.XtraBars.BarButtonItem btnDanhSachLopTC;
         private DevExpress.XtraBars.BarButtonItem btnSinhVienDangKyLopTC;
         private DevExpress.XtraBars.BarButtonItem btnPhieuDiem;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarButtonItem btnInHocPhi;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
