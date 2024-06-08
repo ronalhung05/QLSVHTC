@@ -22,13 +22,13 @@ namespace QLSVHTC
                 case "PGV":
                     btnInHocPhi.Enabled = false;
                     btnHocPhi.Enabled = false;
+                    btnDangKyLTC.Enabled = false;
                     break;
 
                 case "KHOA":
                     btnInHocPhi.Enabled = false;
                     btnHocPhi.Enabled = false;
                     btnDangKyLTC.Enabled = false;
-                    btnTaoTaiKhoan.Enabled = false;
                     break;
 
                 case "PKT":
@@ -45,8 +45,6 @@ namespace QLSVHTC
                     btnSinhVienDangKyLopTC.Enabled = false;
                     btnPhieuDiem.Enabled = false;
                     btnBangDiemTongKet.Enabled = false;
-
-                    btnTaoTaiKhoan.Enabled = false;
                     break;
                 case "SV":
                     btnLopHoc.Enabled = false;

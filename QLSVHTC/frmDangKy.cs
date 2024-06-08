@@ -21,7 +21,8 @@ namespace QLSVHTC
         {
             InitializeComponent();
         }
-
+        //SP: SP_getInfoSVDKI - SP_LIST_SVHUYDANGKY - GetAllNienKhoa - GetAllHocKy - SP_InDanhSachLopTinChi
+        //SP_XULY_LTC
         private void btnTimMSSV_Click(object sender, EventArgs e)
         {
             if (txbMaSV.Text.Trim() == "")

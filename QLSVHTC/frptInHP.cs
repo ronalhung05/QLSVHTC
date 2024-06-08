@@ -143,12 +143,21 @@ namespace QLSVHTC
             string tenkhoa = reader.GetString(0);
             reader.Close();
 
+            // Execute the stored procedure to get the total tuition fee
             string cmd1 = "EXEC [dbo].[SP_TongTienHocPhi] '" + malop + "', '" + nienkhoa + "', " + hocky;
             SqlDataReader reader1 = Program.ExecSqlDataReader(cmd1);
-            reader1.Read();
-            tongtien = reader1.GetInt32(0).ToString();
-            reader1.Close();
+            if (reader1.HasRows)
+            {
+                reader1.Read();
+                tongtien = reader1.GetInt32(0).ToString();
+            }
+            else
+            {
+                tongtien = "0";
+            }
+            reader1.Close(); // Make sure to close the reader
 
+            // If the total tuition fee is not zero, convert it to text
             if (tongtien != "0")
             {
                 tongtien = NumberToText(double.Parse(tongtien));

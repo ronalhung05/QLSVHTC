@@ -14,6 +14,7 @@ namespace QLSVHTC
 {
     public partial class frmLopHoc : DevExpress.XtraEditors.XtraForm
     {
+        //SP: SP_CheckID - SP_CheckName - SP_ChangeClass
         int vitri = 0; //selected row in the table 
         string macn = "";
         private string _flagOptionLop;
@@ -31,11 +32,11 @@ namespace QLSVHTC
             this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
             this.LOPTableAdapter.Fill(this.DS.LOP);
             macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
+            
             cmbKhoa.DataSource = Program.bds_dspm;
             cmbKhoa.DisplayMember = "TENKHOA";
             cmbKhoa.ValueMember = "TENSERVER";
             cmbKhoa.SelectedIndex = Program.mChinhanh;
-
 
             if (Program.mGroup == "KHOA")
             {
@@ -49,10 +50,18 @@ namespace QLSVHTC
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (cmbKhoa.SelectedValue.ToString().Equals("ASUS-VIVOBOOK15\\SQL3"))
+            {
+                cmbKhoa.SelectedIndex = Program.mChinhanh;
+                MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                return;
+            }
             if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
                 return;
+            
             Program.servername = cmbKhoa.SelectedValue.ToString();
+            
+
             if (cmbKhoa.SelectedIndex != Program.mChinhanh)
             {
                 Program.mlogin = Program.remotelogin;

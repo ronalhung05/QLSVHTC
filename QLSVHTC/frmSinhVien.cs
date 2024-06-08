@@ -14,6 +14,7 @@ namespace QLSVHTC
 {
     public partial class frmSinhVien : DevExpress.XtraEditors.XtraForm
     {
+        //SP: SP_Check_ID - SP_CheckName - SP_ChangeClassSV
         int vitri = 0;
         int sub_vitri = 0;
         string macn = "";
@@ -57,7 +58,7 @@ namespace QLSVHTC
             //===button===
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnGhi.Enabled = btnPhucHoi.Enabled = true;
-            
+
             //==grid==
             LOPGridControl.Enabled = SINHVIENGridControl.Enabled = false;
         }
@@ -69,7 +70,6 @@ namespace QLSVHTC
             //===btn===
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
             btnGhi.Enabled = btnPhucHoi.Enabled = false;
-            txbMaLop.Enabled = true;
             txbMaSV.Enabled = true;
             //==grid==
             LOPGridControl.Enabled = SINHVIENGridControl.Enabled = true;
@@ -81,7 +81,6 @@ namespace QLSVHTC
             _flagOptionSinhVien = "ADD";
             beforeButton();
             txbMaSV.Enabled = true;
-            txbMaLop.Enabled = false;
 
             bdsSinhVien.AddNew();
             txbMaLop.Text = ((DataRowView)bdsLop[bdsLop.Position])["MALOP"].ToString();
@@ -126,7 +125,7 @@ namespace QLSVHTC
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-                if(bdsSinhVien.Count == 0)
+            if(bdsSinhVien.Count == 0)
             {
                 MessageBox.Show("Lớp học này không tồn tại sinh viên", "", MessageBoxButtons.OK);
                 return;
@@ -139,7 +138,6 @@ namespace QLSVHTC
 
             beforeButton();
             txbMaSV.Enabled = false;
-            txbMaLop.Enabled = true;
         }
        
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -249,8 +247,9 @@ namespace QLSVHTC
                     return false;
                 }
             }
-            if (_flagOptionSinhVien == "UPDATE")
+            if (_flagOptionSinhVien == "UPDATE") //==không sửa mã sinh viên
             {
+                
                 //if (!this.txbMaSV.Text.Trim().ToString().Equals(_oldMaSV))
                 //{
                 //    string query2 = " DECLARE @return_value INT " +
@@ -284,6 +283,65 @@ namespace QLSVHTC
             }
             return true;
         }
+        //CHUYỂN SINH VIÊN SANG LỚP QUA KHOA KHÁC -> LỖI CÒN BẢN GHI 
+        //private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        //{
+        //    if (validatorSinhVien() == true)
+        //    {
+        //        try
+        //        {
+        //            bdsSinhVien.EndEdit();
+        //            bdsSinhVien.ResetCurrentItem();
+        //            this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+
+        //            string newClass = txbMaLop.Text.Trim();
+        //            bool isClassNotChange = _oldMaLop.Equals(newClass); // Check class change
+        //            if (isClassNotChange == false)
+        //            {
+        //                string query2 = " DECLARE @return_value INT " +
+
+        //                    " EXEC @return_value = [dbo].[SP_CHECKID] " +
+
+        //                    " @Code = N'" + newClass + "',  " +
+
+        //                    " @Type = N'MALOP' " +
+
+        //                    " SELECT  'Return Value' = @return_value ";
+        //                int resultMa = Program.CheckDataHelper(query2);
+
+        //                DateTime selectedDate = (DateTime)cmbNgaySinh.EditValue;
+        //                string formattedDate = selectedDate.ToString("dd-MM-yyyy");
+        //                if (_flagOptionSinhVien == "UPDATE" && resultMa == 0)
+        //                {
+        //                    XtraMessageBox.Show("Lớp bạn nhập không tồn tại trong các Khoa! ", "", MessageBoxButtons.OK);
+        //                    return;
+        //                }
+        //                if (resultMa == 2)
+        //                {
+        //                    // Department change confirmed 
+        //                    String query = "EXEC sp_ChangeClassSV \n"
+        //                               + "@MASV = N'" + txbMaSV.Text + "', @HO = N'" + txbHo.Text + "', @TEN = N'" + txbTen.Text + "', @PHAI = " + (cbPhai.Checked ? 1 : 0)
+        //                               + ",@DIACHI = N'" + txbDiaChi.Text + "', @NGAYSINH = N'" + formattedDate + "', @MALOP = N'" + txbMaLop.Text
+        //                               + "',@DANGHIHOC = " + (cbDangNghiHoc.Checked ? 1 : 0);
+        //                    if (Program.ExecSqlNonQuery(query) == 0)
+        //                    {
+        //                        MessageBox.Show("Chuyển lớp và cập nhật thành công!" + " " + macn + " " + newClass + " " + _oldMaLop);
+        //                    }
+        //                }
+        //            }
+        //            else
+        //            {
+        //                this.SINHVIENTableAdapter.Update(this.DS.SINHVIEN);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
+        //            return;
+        //        }
+        //        afterButton();
+        //    }
+        //}
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (validatorSinhVien() == true)
@@ -293,54 +351,20 @@ namespace QLSVHTC
                     bdsSinhVien.EndEdit();
                     bdsSinhVien.ResetCurrentItem();
                     this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
-
-                    string newClass = txbMaLop.Text.Trim();
-                    bool isClassNotChange = _oldMaLop.Equals(newClass); // Check class change
-                    if (isClassNotChange == false)
-                    {
-                        string query2 = " DECLARE @return_value INT " +
-
-                            " EXEC @return_value = [dbo].[SP_CHECKID] " +
-
-                            " @Code = N'" + newClass + "',  " +
-
-                            " @Type = N'MALOP' " +
-
-                            " SELECT  'Return Value' = @return_value ";
-                        int resultMa = Program.CheckDataHelper(query2);
-
-                        DateTime selectedDate = (DateTime)cmbNgaySinh.EditValue;
-                        string formattedDate = selectedDate.ToString("dd-MM-yyyy");
-                        if (_flagOptionSinhVien == "UPDATE" && resultMa == 0)
-                        {
-                            XtraMessageBox.Show("Lớp bạn nhập không tồn tại trong các Khoa! ", "", MessageBoxButtons.OK);
-                            return;
-                        }
-                        if (resultMa == 2)
-                        {
-                            // Department change confirmed 
-                            String query = "EXEC sp_ChangeClassSV \n"
-                                       + "@MASV = N'" + txbMaSV.Text + "', @HO = N'" + txbHo.Text + "', @TEN = N'" + txbTen.Text + "', @PHAI = " + (cbPhai.Checked ? 1 : 0)
-                                       + ",@DIACHI = N'" + txbDiaChi.Text + "', @NGAYSINH = N'" + formattedDate + "', @MALOP = N'" + txbMaLop.Text
-                                       + "',@DANGHIHOC = " + (cbDangNghiHoc.Checked ? 1 : 0);
-                            if (Program.ExecSqlNonQuery(query) == 0)
-                            {
-                                MessageBox.Show("Chuyển lớp và cập nhật thành công!" + " " + macn + " " + newClass + " " + _oldMaLop);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        this.SINHVIENTableAdapter.Update(this.DS.SINHVIEN);
-                    }
+                    this.SINHVIENTableAdapter.Update(this.DS.SINHVIEN);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi ghi lớp học: " + ex.Message, "", MessageBoxButtons.OK);
+                    MessageBox.Show("Lỗi ghi sinh viên: " + ex.Message, "", MessageBoxButtons.OK);
                     return;
                 }
                 afterButton();
             }
+            else
+            {
+                return;
+            }
+
         }
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

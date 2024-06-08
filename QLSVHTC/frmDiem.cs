@@ -14,6 +14,10 @@ namespace QLSVHTC
 {
     public partial class frmDiem : DevExpress.XtraEditors.XtraForm
     {
+        //SP sử dụng
+        //GetAllNienKhoa - GetAllHocKy - GetAllNhom
+        //SP_BDMH - SP_UpdateDiem
+
         private BindingSource bdsDiem = new BindingSource();
         public frmDiem()
         {
@@ -79,8 +83,15 @@ namespace QLSVHTC
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbKhoa.SelectedValue.ToString().Equals("ASUS-VIVOBOOK15\\SQL3"))
+            {
+                cmbKhoa.SelectedIndex = Program.mChinhanh;
+                MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                return;
+            }
             if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
                 return;
+            
             Program.servername = cmbKhoa.SelectedValue.ToString();
             if (cmbKhoa.SelectedIndex != Program.mChinhanh)
             {

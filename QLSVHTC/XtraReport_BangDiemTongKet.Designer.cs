@@ -172,7 +172,7 @@
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 182.0556F;
+            this.BottomMargin.HeightF = 182F;
             this.BottomMargin.Name = "BottomMargin";
             // 
             // sqlDataSource1
@@ -366,7 +366,7 @@
             this.sqlDataSource1});
             this.Font = new System.Drawing.Font("Arial", 9.75F);
             this.HorizontalContentSplitting = DevExpress.XtraPrinting.HorizontalContentSplitting.Smart;
-            this.Margins = new System.Drawing.Printing.Margins(121, 179, 168, 182);
+            this.Margins = new System.Drawing.Printing.Margins(121, 0, 168, 182);
             this.ScriptsSource = "\r\n\r\nprivate void crossTab1_BeforePrint(object sender, System.Drawing.Printing.Pri" +
     "ntEventArgs e) {\r\n    \r\n}\r\n";
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {

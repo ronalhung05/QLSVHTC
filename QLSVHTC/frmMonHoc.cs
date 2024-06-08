@@ -13,6 +13,10 @@ namespace QLSVHTC
 {
     public partial class frmMonHoc : DevExpress.XtraEditors.XtraForm
     {
+        //SP
+        //SP_CHECKID
+        //SP_CHECKNAME
+
         int vitri = 0;
         private string _flagOption;
         private string oldMaMonHoc = "";

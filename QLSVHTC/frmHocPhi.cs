@@ -16,6 +16,10 @@ namespace QLSVHTC
 {
     public partial class frmHocPhi : DevExpress.XtraEditors.XtraForm
     {
+        //SP sử dụng
+        //SP_GetInfoSV_HP - SP_GetDSHP_SV - SV_DONGTIEN
+        //TAO_THONGTINHOCPHI - SP_GetCTHP_SV
+
         BindingSource bdsHocPhi = new BindingSource(); //sử dụng cho binding tự định nghĩa 
         BindingSource bdsCTHP = new BindingSource();
 

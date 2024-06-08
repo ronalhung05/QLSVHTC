@@ -39,9 +39,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(76, 115);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 16);
+            this.label1.Size = new System.Drawing.Size(83, 16);
             this.label1.TabIndex = 0;
-            this.label1.Text = "MASINHVIEN:";
+            this.label1.Text = "Mã sinh viên:";
             // 
             // txbMaSV
             // 

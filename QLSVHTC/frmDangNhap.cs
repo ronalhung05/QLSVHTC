@@ -7,6 +7,11 @@ namespace QLSVHTC
 {
     public partial class frmDangNhap : DevExpress.XtraEditors.XtraForm
     {
+        //SP được sử dụng
+        //[dbo].[Get_Subscribers] 
+        //SP_Lay_Thong_Tin_GV_Tu_Login 
+        //SP_LayThongTinSV_DangNhap
+
         private bool isSinhVien = false;
         private SqlConnection conn_publisher = new SqlConnection();
         public frmDangNhap()
@@ -46,7 +51,7 @@ namespace QLSVHTC
         private void Login_Load(object sender, EventArgs e)
         {
             if (KetNoi_CSDLGOC() == 0) return;
-            LayDSPM("SELECT * FROM [dbo].[Get_Subscribers]");
+            LayDSPM("SELECT * FROM [dbo].[Get_Subscribers]"); 
             cmbChiNhanh.SelectedIndex = 1;
             cmbChiNhanh.SelectedIndex = 0;
         }

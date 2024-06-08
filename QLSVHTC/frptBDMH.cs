@@ -84,6 +84,12 @@ namespace QLSVHTC
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbKhoa.SelectedValue.ToString().Equals("ASUS-VIVOBOOK15\\SQL3"))
+            {
+                cbKhoa.SelectedIndex = Program.mChinhanh;
+                MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                return;
+            }
             if (cbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
                 return;
             Program.servername = cbKhoa.SelectedValue.ToString();

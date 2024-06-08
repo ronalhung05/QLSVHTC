@@ -21,7 +21,10 @@ namespace QLSVHTC
 
         private void frmDiemSV_Load(object sender, EventArgs e)
         {
-
+            if (Program.mGroup.Equals("SV"))
+            {
+                txbMaSV.Text = Program.username;
+            }
         }
 
         private bool ValidatorSV()
@@ -77,13 +80,9 @@ namespace QLSVHTC
             {
                 string msv = txbMaSV.Text.Trim();
                 int type = 0;
-                if (Program.mGroup.Equals("KHOA"))
+                if (Program.mGroup.Equals("KHOA") || Program.mGroup.Equals("SV"))
                 {
                     type = 1;
-                }
-                if (Program.mGroup.Equals("PGV"))
-                {
-                    type = 0;
                 }
                 XtraReport_PhieuDiemSV rpt = new XtraReport_PhieuDiemSV(msv, type);
                 rpt.lbMaSV.Text = msv;
