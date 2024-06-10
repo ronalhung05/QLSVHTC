@@ -468,6 +468,7 @@
             // txbMaKhoa
             // 
             this.txbMaKhoa.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsLop, "MAKHOA", true));
+            this.txbMaKhoa.Enabled = false;
             this.txbMaKhoa.Location = new System.Drawing.Point(108, 545);
             this.txbMaKhoa.Margin = new System.Windows.Forms.Padding(4);
             this.txbMaKhoa.MenuManager = this.barManager1;

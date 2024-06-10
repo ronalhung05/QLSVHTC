@@ -245,16 +245,16 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4);
             this.barDockControlTop.Size = new System.Drawing.Size(1192, 30);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 776);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 509);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4);
             this.barDockControlBottom.Size = new System.Drawing.Size(1192, 20);
             // 
             // barDockControlLeft
@@ -263,8 +263,8 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 30);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 746);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 479);
             // 
             // barDockControlRight
             // 
@@ -272,8 +272,8 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1192, 30);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 746);
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 479);
             // 
             // btnHuy
             // 
@@ -293,7 +293,7 @@
             this.panelControl1.Controls.Add(this.MONHOCGridControl);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 30);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1192, 464);
             this.panelControl1.TabIndex = 44;
@@ -302,10 +302,10 @@
             // 
             this.MONHOCGridControl.DataSource = this.bdsMonHoc;
             this.MONHOCGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MONHOCGridControl.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MONHOCGridControl.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.MONHOCGridControl.Location = new System.Drawing.Point(2, 2);
             this.MONHOCGridControl.MainView = this.gridView1;
-            this.MONHOCGridControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MONHOCGridControl.Margin = new System.Windows.Forms.Padding(4);
             this.MONHOCGridControl.MenuManager = this.barManager1;
             this.MONHOCGridControl.Name = "MONHOCGridControl";
             this.MONHOCGridControl.Size = new System.Drawing.Size(1188, 460);
@@ -385,7 +385,7 @@
             // 
             this.txbMaMh.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsMonHoc, "MAMH", true));
             this.txbMaMh.Location = new System.Drawing.Point(104, 567);
-            this.txbMaMh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbMaMh.Margin = new System.Windows.Forms.Padding(4);
             this.txbMaMh.MenuManager = this.barManager1;
             this.txbMaMh.Name = "txbMaMh";
             this.txbMaMh.Size = new System.Drawing.Size(227, 22);
@@ -395,7 +395,7 @@
             // 
             this.txbTenMH.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsMonHoc, "TENMH", true));
             this.txbTenMH.Location = new System.Drawing.Point(104, 599);
-            this.txbTenMH.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbTenMH.Margin = new System.Windows.Forms.Padding(4);
             this.txbTenMH.MenuManager = this.barManager1;
             this.txbTenMH.Name = "txbTenMH";
             this.txbTenMH.Size = new System.Drawing.Size(227, 22);
@@ -410,7 +410,7 @@
             0,
             0});
             this.speSoTietLT.Location = new System.Drawing.Point(104, 631);
-            this.speSoTietLT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.speSoTietLT.Margin = new System.Windows.Forms.Padding(4);
             this.speSoTietLT.MenuManager = this.barManager1;
             this.speSoTietLT.Name = "speSoTietLT";
             this.speSoTietLT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -432,7 +432,7 @@
             0,
             0});
             this.speSoTietTH.Location = new System.Drawing.Point(104, 663);
-            this.speSoTietTH.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.speSoTietTH.Margin = new System.Windows.Forms.Padding(4);
             this.speSoTietTH.MenuManager = this.barManager1;
             this.speSoTietTH.Name = "speSoTietTH";
             this.speSoTietTH.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -469,7 +469,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1192, 796);
+            this.ClientSize = new System.Drawing.Size(1192, 529);
             this.Controls.Add(this.label1);
             this.Controls.Add(sOTIET_THLabel);
             this.Controls.Add(this.speSoTietTH);
@@ -484,7 +484,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMonHoc";
             this.Text = "Môn học";
             this.Load += new System.EventHandler(this.frmMonHoc_Load);

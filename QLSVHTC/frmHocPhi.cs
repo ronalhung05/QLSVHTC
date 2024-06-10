@@ -26,9 +26,6 @@ namespace QLSVHTC
         int vitri_HP = 0;
         int vitri_CTHP = 0;
 
-        DataTable dtOriginalHocPhi;
-        DataTable dtOriginalCTHP;
-
         public frmHocPhi()
         {
             InitializeComponent();
@@ -55,7 +52,6 @@ namespace QLSVHTC
             this.bdsHocPhi.DataSource = tableHocPhi;
             this.gridHocPhi.DataSource = this.bdsHocPhi; //grid là về giao diện, bds là về dữ liệu 
 
-            dtOriginalHocPhi = tableHocPhi.Copy();
         }
 
         private void btnTim_Click(object sender, EventArgs e)
@@ -76,7 +72,7 @@ namespace QLSVHTC
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri_HP = bdsHocPhi.Position;
-            vitri_CTHP = bdsCTHP.Position;
+            gridCTHP.Enabled = false;
             bdsHocPhi.AddNew();
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
             btnPhucHoi.Enabled = btnGhi.Enabled = true;
@@ -131,7 +127,7 @@ namespace QLSVHTC
             bdsHocPhi.EndEdit(); //commit change made to the current row
             bdsHocPhi.ResetCurrentItem(); //refresh current row
             SqlConnection conn = new SqlConnection(Program.connstr);
-            // bắt đầu transaction
+            
             string cmd = "EXEC [dbo].[TAO_THONGTINHOCPHI] '" + msv + "' , '" + nienkhoa + "', " + hocki + " , " + hocphi;
             if (Program.ExecSqlNonQuery(cmd) == 0)
             {
@@ -141,18 +137,22 @@ namespace QLSVHTC
             {
                 MessageBox.Show("Thêm học phí thất bại!");
             }
+
+            //LOAD lại 
+            loadHP();
+            gridCTHP.Enabled = true;
+            btnThem.Enabled = true;
+            btnPhucHoi.Enabled = btnGhi.Enabled = false;
         }
 
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsHocPhi.CancelEdit();
-            bdsHocPhi.DataSource = dtOriginalHocPhi.Copy();
             gridHocPhi.Enabled = true;
             gridCTHP.Enabled = true;
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
             btnGhi.Enabled = btnPhucHoi.Enabled = false;
             bdsHocPhi.Position = vitri_HP;
-            bdsCTHP.Position = vitri_CTHP;
         }
 
         private void frmHocPhi_Load(object sender, EventArgs e)
@@ -165,6 +165,7 @@ namespace QLSVHTC
 
         private void btnThemCTHP_Click(object sender, EventArgs e)
         {
+            gridHocPhi.Enabled = false;
             vitri_CTHP = bdsCTHP.Position;
             bdsCTHP.AddNew();
         }
@@ -202,7 +203,6 @@ namespace QLSVHTC
             bdsCTHP.EndEdit();
             bdsCTHP.ResetCurrentItem();
             SqlConnection conn = new SqlConnection(Program.connstr);
-            // bắt đầu transaction
             string cmd = "EXEC [dbo].[SV_DONGTIEN] '" + msv + "' , '" + nienkhoa + "', " + hocki + " , " + sotiendong;
             if (Program.ExecSqlNonQuery(cmd) == 0)
             {
@@ -212,17 +212,17 @@ namespace QLSVHTC
             {
                 MessageBox.Show("Lỗi thêm chi tiết học phí!");
             }
+            //LOAD LẠI 
+            loadLaiCTHP();
+            gridHocPhi.Enabled = true;
+            loadHP();
         }
 
         private void btnPhucHoiCTHP_Click(object sender, EventArgs e)
         {
             bdsCTHP.CancelEdit();
-            bdsCTHP.DataSource = dtOriginalCTHP.Copy();
             gridHocPhi.Enabled = true;
-            gridCTHP.Enabled = true;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
-            btnGhi.Enabled = btnPhucHoi.Enabled = false;
-            bdsHocPhi.Position = vitri_HP;
+            loadLaiCTHP();
             bdsCTHP.Position = vitri_CTHP;
         }
 
@@ -230,19 +230,21 @@ namespace QLSVHTC
         {
             if (bdsHocPhi.Count > 0)
             {
-                string nienkhoa = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["NIENKHOA"].ToString();
-                string hocki = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["HOCKY"].ToString();
-                string msv = txbMaSV.Text;
-
-                string cmd = "EXEC dbo.SP_GetCTHP_SV '" + msv + "', '" + nienkhoa + "', '" + hocki + "'";
-                DataTable tableCTHP = Program.ExecSqlDataTable(cmd);
-                this.bdsCTHP.DataSource = tableCTHP;
-                this.gridCTHP.DataSource = this.bdsCTHP;
-
-                dtOriginalCTHP = tableCTHP.Copy();
+                loadLaiCTHP();
             }
         }
 
+        private void loadLaiCTHP()
+        {
+            string nienkhoa = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["NIENKHOA"].ToString();
+            string hocki = ((DataRowView)bdsHocPhi[bdsHocPhi.Position])["HOCKY"].ToString();
+            string msv = txbMaSV.Text;
+
+            string cmd = "EXEC dbo.SP_GetCTHP_SV '" + msv + "', '" + nienkhoa + "', '" + hocki + "'";
+            DataTable tableCTHP = Program.ExecSqlDataTable(cmd);
+            this.bdsCTHP.DataSource = tableCTHP;
+            this.gridCTHP.DataSource = this.bdsCTHP;
+        }
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.Close();

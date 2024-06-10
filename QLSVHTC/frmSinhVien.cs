@@ -36,7 +36,10 @@ namespace QLSVHTC
             this.LOPTableAdapter.Fill(this.DS.LOP);
             this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
 
-            macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
+            if (bdsLop.Count > 0)
+            {
+                macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
+            }
             cmbKhoa.DataSource = Program.bds_dspm;
             cmbKhoa.DisplayMember = "TENKHOA";
             cmbKhoa.ValueMember = "TENSERVER";
@@ -48,6 +51,8 @@ namespace QLSVHTC
 
             btnGhi.Enabled = false; 
             btnPhucHoi.Enabled = false;
+
+            btnLamMoi.PerformClick();
         }
 
         private void beforeButton()
@@ -89,8 +94,17 @@ namespace QLSVHTC
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
+            // Thêm kiểm tra để tránh lỗi khi cmbKhoa chưa load hoàn toàn
+            if (cmbKhoa.SelectedValue == null || cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
                 return;
+
+            if (cmbKhoa.SelectedValue.ToString().Equals("ASUS-VIVOBOOK15\\SQL3"))
+            {
+                cmbKhoa.SelectedIndex = Program.mChinhanh;
+                MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                return;
+            }
+
             Program.servername = cmbKhoa.SelectedValue.ToString();
             if (cmbKhoa.SelectedIndex != Program.mChinhanh)
             {
@@ -118,7 +132,10 @@ namespace QLSVHTC
                 this.DANGKYTableAdapter.Fill(this.DS.DANGKY);
 
 
-                macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
+                if (bdsLop.Count > 0)
+                {
+                    macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
+                }
             }
         }
 

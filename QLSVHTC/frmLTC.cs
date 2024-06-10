@@ -40,11 +40,15 @@ namespace QLSVHTC
             this.LOPTINCHITableAdapter.Fill(this.DS.LOPTINCHI);
             this.LOPTINCHITableAdapter.Connection.ConnectionString = Program.connstr;
 
-            macn = ((DataRowView)bdsLTC[0])["MAKHOA"].ToString();
+            if (bdsLTC.Count > 0)
+            {
+                macn = ((DataRowView)bdsLTC[0])["MAKHOA"].ToString();
+            }
             cmbKhoa.DataSource = Program.bds_dspm;
             cmbKhoa.DisplayMember = "TENKHOA";
             cmbKhoa.ValueMember = "TENSERVER";
             cmbKhoa.SelectedIndex = Program.mChinhanh;
+
             if (Program.mGroup == "KHOA")
             {
                 cmbKhoa.Enabled = false;
@@ -60,6 +64,7 @@ namespace QLSVHTC
             cmbTenGV.DataSource = bdsGV;
 
             btnGhi.Enabled = btnPhucHoi.Enabled = false;
+            btnLamMoi.PerformClick();
         }
         private void beforeButton()
         {
@@ -86,15 +91,17 @@ namespace QLSVHTC
 
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Thêm kiểm tra để tránh lỗi khi cmbKhoa chưa load hoàn toàn
+            if (cmbKhoa.SelectedValue == null || cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
+                return;
+
             if (cmbKhoa.SelectedValue.ToString().Equals("ASUS-VIVOBOOK15\\SQL3"))
             {
                 cmbKhoa.SelectedIndex = Program.mChinhanh;
                 MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
                 return;
             }
-            if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
-                return;
-            
+
             Program.servername = cmbKhoa.SelectedValue.ToString();
             if (cmbKhoa.SelectedIndex != Program.mChinhanh)
             {
@@ -116,7 +123,9 @@ namespace QLSVHTC
                 this.LOPTINCHITableAdapter.Fill(this.DS.LOPTINCHI);
                 this.GIANGVIENTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.GIANGVIENTableAdapter.Fill(this.DS.GIANGVIEN);
-                macn = ((DataRowView)bdsLTC[0])["MAKHOA"].ToString();
+                if(bdsLTC.Count > 0) {
+                    macn = ((DataRowView)bdsLTC[0])["MAKHOA"].ToString();
+                }
             }
         }
         private void cmbTenMH_SelectedIndexChanged(object sender, EventArgs e)

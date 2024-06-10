@@ -27,12 +27,18 @@ namespace QLSVHTC
         private void frmClassRoom_Load(object sender, EventArgs e)
         {
             DS.EnforceConstraints = false;
-            this.SINHVIENTableAdapter.Fill(this.DS.SINHVIEN);
+
             this.SINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+            this.SINHVIENTableAdapter.Fill(this.DS.SINHVIEN);
+
             this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
             this.LOPTableAdapter.Fill(this.DS.LOP);
-            macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
-            
+
+            if (bdsLop.Count > 0)
+            {
+                macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
+            }
+
             cmbKhoa.DataSource = Program.bds_dspm;
             cmbKhoa.DisplayMember = "TENKHOA";
             cmbKhoa.ValueMember = "TENSERVER";
@@ -42,25 +48,26 @@ namespace QLSVHTC
             {
                 cmbKhoa.Enabled = false;
             }
-            txbMaKhoa.Enabled = false;
 
             btnGhi.Enabled = false;
             btnPhucHoi.Enabled = false;
         }
 
+
         private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Thêm kiểm tra để tránh lỗi khi cmbKhoa chưa load hoàn toàn
+            if (cmbKhoa.SelectedValue == null || cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
+                return;
+
             if (cmbKhoa.SelectedValue.ToString().Equals("ASUS-VIVOBOOK15\\SQL3"))
             {
                 cmbKhoa.SelectedIndex = Program.mChinhanh;
                 MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
                 return;
             }
-            if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
-                return;
-            
+
             Program.servername = cmbKhoa.SelectedValue.ToString();
-            
 
             if (cmbKhoa.SelectedIndex != Program.mChinhanh)
             {
@@ -72,6 +79,7 @@ namespace QLSVHTC
                 Program.mlogin = Program.mloginDN;
                 Program.password = Program.passwordDN;
             }
+
             if (Program.KetNoi() == 0)
             {
                 MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
@@ -84,9 +92,13 @@ namespace QLSVHTC
                 this.LOPTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.LOPTableAdapter.Fill(this.DS.LOP);
 
-                macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
+                if (bdsLop.Count > 0)
+                {
+                    macn = ((DataRowView)bdsLop[0])["MAKHOA"].ToString().Trim();
+                }
             }
         }
+
         private void beforeButton()
         {
             //===cmb===
@@ -107,7 +119,6 @@ namespace QLSVHTC
             btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = true;
             btnGhi.Enabled = btnPhucHoi.Enabled = false;
             txbMaLop.Enabled = true;
-            txbMaKhoa.Enabled = false;
             //==grid==
             lOPGridControl.Enabled = true;
         }
@@ -275,7 +286,6 @@ namespace QLSVHTC
         {
             vitri = bdsLop.Position;
             beforeButton();
-            txbMaKhoa.Enabled = true;
             txbMaLop.Enabled = false;
             _flagOptionLop = "UPDATE";
             _oldTenLop = this.txbTenLop.Text.Trim();
